@@ -1,0 +1,73 @@
+﻿@model Penates.Models.ViewModels.ABMs.ABMViewModel
+@using Penates.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <meta charset=utf-8 />
+    
+    <script>
+        $(document).ready(function () {
+            $("#tableRefresh").click(function (e) {
+                refreshTable();
+            });
+
+            $("#SelectedValue").change(function (e) {
+                refreshTable();
+            });
+
+            sessionStorage.clear();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h3>@Html.Resource("Title")</h3>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "") {
+                if (@Model.Error == true) {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                } else {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <a class="btn btn-success btn-lg btn-xs" onclick="location.href='@Url.Action("Index", "ContainerTypeForms")'">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                            <a id="tableRefresh" class="btn btn-default btn-lg btn-xs">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @{Html.RenderPartial("~/Views/DistributionCenter/Tables/_ContainerTypesTable.cshtml", new TableAjaxViewModel(@Model.tableID) { 
+                  AjaxRequest = @Url.Action("GetTable","ContainerTypesABM"),
+                  DeleteAction = "Delete",
+                  DeleteController = "ContainerTypesABM",
+                  DeleteText = Resources.FormsResources.Delete,
+                  DeleteConfirmMessage = String.Format(Resources.Messages.SureToDelete, Resources.Resources.BoxesWArt),
+                  RefreshFunction = "refreshTable",
+                  ServerProcessing = false
+              });}
+        </div>
+    </div>
+</body>
+</html>

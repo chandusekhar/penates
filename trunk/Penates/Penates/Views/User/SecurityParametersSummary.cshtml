@@ -1,0 +1,160 @@
+﻿@model Penates.Models.ViewModels.Users.SecurityParametersViewModel
+@{
+    ViewBag.Title = @Html.Resource("Title");
+}
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+
+        <div class = "form-horizontal">
+            @Html.ValidationMessageFor(m => m.error)
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.SessionTime):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.SessionTime</p>
+                    </div>
+                </div>
+                <fieldset>
+                    <legend>@Html.Resource("UsernameRules")</legend>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.UsernameMax):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasUsernameMax) {
+                                <p>@Model.UsernameMax</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.UsernameMin):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasUsernameMin) {
+                                <p>@Model.UsernameMin</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.UsernameLower):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasUsernameLower) {
+                                <p>@Model.UsernameLower</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.UsernameUpper):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasUsernameUpper) {
+                                <p>@Model.UsernameUpper</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.UsernameDigits):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasUsernameDigits) {
+                                <p>@Model.UsernameDigits</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.UsernameSymbols):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasUsernameSymbols) {
+                                <p>@Model.UsernameSymbols</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                </fieldset>
+                <br />
+                <br />
+                <fieldset>
+                    <legend>@Html.Resource("PasswordRules")</legend>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.PasswordMax):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasPasswordMax) {
+                                <p>@Model.PasswordMax</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.PasswordMin):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasPasswordMin) {
+                                <p>@Model.PasswordMin</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.PasswordLower):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasPasswordLower) {
+                                <p>@Model.PasswordLower</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.PasswordUpper):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasPasswordUpper) {
+                                <p>@Model.PasswordUpper</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.PasswordDigits):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasPasswordDigits) {
+                                <p>@Model.PasswordDigits</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.PasswordSymbols):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasPasswordSymbols) {
+                                <p>@Model.PasswordSymbols</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+            <br>
+            <div class="btn-toolbar center-block">
+                @Html.ActionLink(@Resources.FormsResources.Ok, "HomeDashboards", "Home", null, new { @class = "btn btn-primary", @id = "Ok" })
+                @Html.ActionLink(@Resources.FormsResources.Edit, "Index", "Security", null, new { @class = "btn btn-default", @id = "Edit" })
+            </div>
+        </div>
+    </div>
+</body>

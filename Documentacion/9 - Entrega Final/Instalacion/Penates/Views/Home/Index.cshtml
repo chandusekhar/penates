@@ -1,0 +1,144 @@
+﻿@model Penates.Models.ViewModels.Users.Login
+@using Penates.Helpers
+
+@{
+    ViewBag.Title = "Página principal";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="@Html.getUICulture()">
+<head>
+    <!-----Meta----->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="login form, psd, html, css3, jquery, tutorial" />
+
+    <!--Stylesheets-->
+    <link href="~/Content/css/home-style.css" rel="stylesheet" />
+    <link href="~/Content/css/dzyngiri.css" rel="stylesheet" />
+    <link href="~/fonts/pacifico/stylesheet.css" rel="stylesheet" />
+
+    <!--Scripts-->
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/Home/blockUI.js"></script>
+
+    <!--Sliding icons-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".username").focus(function () {
+                $(".user-icon").css("left", "-48px");
+            });
+            $(".username").blur(function () {
+                $(".user-icon").css("left", "0px");
+            });
+
+            $(".password").focus(function () {
+                $(".pass-icon").css("left", "-48px");
+            });
+            $(".password").blur(function () {
+                $(".pass-icon").css("left", "0px");
+            });
+        });
+
+        $(function () {
+            $('#login').click(function () {
+                var user = $("#Username").val();
+                var captcha = $("#CaptchaText");
+                if (user != null && user != "") {
+                    if (captcha != undefined && captcha != null && captcha.val() != null && captcha.val() != "") {
+                        $.blockUI({
+                            css: {
+                                padding: 0,
+                                margin: 0,
+                                width: '30%',
+                                top: '40%',
+                                left: '35%',
+                                textAlign: 'center',
+                                color: '#000000',
+                                border: '3px solid #aaa',
+                                backgroundColor: '#ffffff',
+                                cursor: 'wait'
+                            },
+                            // styles for the overlay
+                            overlayCSS: {
+                                backgroundColor: '#000',
+                                opacity: 0.6
+                            },
+                            message: '<b>@Resources.Messages.LoggingIn</b>',
+                            bindEvents: true
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" title="SessionStorage Clear">
+        $(document).ready(function () {
+            sessionStorage.clear();
+        });
+    </script>
+</head>
+<body>
+
+    <div class="heading">
+        Penates Inventory System
+        <div class="warning">
+            <noscript>@Resources.Errors.JavascriptDisabled</noscript>
+        </div>
+    </div>
+
+
+    <div id="wrapper">
+        <!--Sliding icons-->
+        <br />
+        <br />
+        <div class="user-icon"></div>
+        <div class="pass-icon"></div>
+        <!--END Sliding icons-->
+        <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "login-form" }))
+        {
+            <div class="header">
+                <h1>@Resources.Menu.LogIn</h1>
+                <span class="warning">@Html.ValidationSummary()</span>
+                @if (!String.IsNullOrWhiteSpace(Model.ErrorMessage))
+                {
+                    <span class="warning">@Model.ErrorMessage</span>
+                }
+            </div>
+
+            <!--Input fields-->
+            <div class="content">
+                @Html.TextBoxFor(m => m.Username, new { @type = "text", @class = "input username", @placeholder = @Resources.FormsResources.UserName, required = "required" })
+                @Html.ValidationMessageFor(m => m.Username, null, new { @style = "color:red; font-weight:bold;" })
+
+                @Html.TextBoxFor(m => m.Password, new { @type = "password", @class = "input password", @placeholder = @Resources.FormsResources.Password, required = "required" })
+                @Html.ValidationMessageFor(m => m.Password, null, new { @style = "color:red; font-weight:bold;" })
+            </div>
+            <!--END Input fields-->           
+            
+                if (Model.CaptchaAttempts >= 3)
+                { 
+                <div class="content">
+                    <p><img src="@Url.Content("/home/ShowCaptchaImage")" /></p>
+                    <h5>Please enter the string as shown above:</h5>
+                    <p>@Html.TextBoxFor(m => m.CaptchaText, new { @type = "text", @class = "input", required = "required" })</p>
+                </div>
+                }
+            <!--Buttons-->
+            <div class="footer">
+                <input id="login" type="submit" name="Login" value="@Resources.Menu.LogIn" class="button" />
+            </div>
+            <!--END Buttons-->
+        }
+        <!--end login form-->
+
+    </div>
+
+    <!--bg gradient--><div class="gradient"></div><!--END bg gradient-->
+</body>
+</html>

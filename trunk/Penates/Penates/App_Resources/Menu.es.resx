@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddDeposit" xml:space="preserve">
+    <value>Agregar Deposito</value>
+  </data>
+  <data name="AddHall" xml:space="preserve">
+    <value>Agregar Pasillo</value>
+  </data>
+  <data name="AddItemStates" xml:space="preserve">
+    <value>Agregar Estado de un Item</value>
+  </data>
+  <data name="AddPack" xml:space="preserve">
+    <value>Agregar un Lote</value>
+  </data>
+  <data name="AddRack" xml:space="preserve">
+    <value>Agregar Rack</value>
+  </data>
+  <data name="AddSector" xml:space="preserve">
+    <value>Agregar Sector</value>
+  </data>
+  <data name="AddTemporaryDeposit" xml:space="preserve">
+    <value>Agregar Deposito Temporal</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Crear Usuario</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Administración</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Busqueda</value>
+  </data>
+  <data name="AsignSuppliers" xml:space="preserve">
+    <value>Asignar Proveedores a un Producto</value>
+  </data>
+  <data name="AssignToDistributionCenter" xml:space="preserve">
+    <value>Assignar a Centro de Distribución</value>
+  </data>
+  <data name="CategoryAdmin" xml:space="preserve">
+    <value>Administración de Categorias</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar Mi Contraseña</value>
+  </data>
+  <data name="CreateInventory" xml:space="preserve">
+    <value>Crear Inventario</value>
+  </data>
+  <data name="Deposits" xml:space="preserve">
+    <value>Depositos</value>
+  </data>
+  <data name="DepositsABM" xml:space="preserve">
+    <value>Administración de Depositos</value>
+  </data>
+  <data name="DetailsPerDC" xml:space="preserve">
+    <value>Detalles por Centro de Distribución</value>
+  </data>
+  <data name="DistributionCenterABM" xml:space="preserve">
+    <value>Administración de Centros de Distribuciones</value>
+  </data>
+  <data name="DistributionCenters" xml:space="preserve">
+    <value>Centros de Distribuciones</value>
+  </data>
+  <data name="EditLastInventory" xml:space="preserve">
+    <value>Editar último Inventario</value>
+  </data>
+  <data name="EditRoles" xml:space="preserve">
+    <value>Modificar Roles</value>
+  </data>
+  <data name="Halls" xml:space="preserve">
+    <value>Pasillos</value>
+  </data>
+  <data name="HallsABM" xml:space="preserve">
+    <value>Administración de Pasillos</value>
+  </data>
+  <data name="Inventories" xml:space="preserve">
+    <value>Inventarios</value>
+  </data>
+  <data name="ItemsStatesABM" xml:space="preserve">
+    <value>Administración de Estados de los Items</value>
+  </data>
+  <data name="ItemStates" xml:space="preserve">
+    <value>Estados de los Items</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Desloguarse</value>
+  </data>
+  <data name="Me" xml:space="preserve">
+    <value>Yo</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Ordenes de Compra</value>
+  </data>
+  <data name="Packs" xml:space="preserve">
+    <value>Lotes</value>
+  </data>
+  <data name="PacksABM" xml:space="preserve">
+    <value>Administración de Lotes</value>
+  </data>
+  <data name="ProductAdmin" xml:space="preserve">
+    <value>Administración de Productos</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Productos</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="Racks" xml:space="preserve">
+    <value>Racks</value>
+  </data>
+  <data name="RacksABM" xml:space="preserve">
+    <value>Administración de Racks</value>
+  </data>
+  <data name="Receptions" xml:space="preserve">
+    <value>Ingreso de Mercaderia</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Reportes</value>
+  </data>
+  <data name="RoleAsignation" xml:space="preserve">
+    <value>Asignación de Roles</value>
+  </data>
+  <data name="RolesAdmin" xml:space="preserve">
+    <value>Administración de Roles</value>
+  </data>
+  <data name="Sales" xml:space="preserve">
+    <value>Ventas</value>
+  </data>
+  <data name="Sectors" xml:space="preserve">
+    <value>Sectores</value>
+  </data>
+  <data name="SectorsABM" xml:space="preserve">
+    <value>Administración de Sectores</value>
+  </data>
+  <data name="SupplierAdmin" xml:space="preserve">
+    <value>Administración de Proveedores</value>
+  </data>
+  <data name="TemporalDepositsABM" xml:space="preserve">
+    <value>Administración de Depositos Temporales</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transacciones</value>
+  </data>
+  <data name="Transfers" xml:space="preserve">
+    <value>Transferencias</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Usuarios</value>
+  </data>
+  <data name="UsersAdmin" xml:space="preserve">
+    <value>Administración de Usuarios</value>
+  </data>
+  <data name="UsersRolesAdmin" xml:space="preserve">
+    <value>Asignación de Roles</value>
+  </data>
+  <data name="ViewLastInventory" xml:space="preserve">
+    <value>Ver último Inventario</value>
+  </data>
+  <data name="AddBox" xml:space="preserve">
+    <value>Agregar Cajas</value>
+  </data>
+  <data name="Boxes" xml:space="preserve">
+    <value>Cajas</value>
+  </data>
+  <data name="BoxesAdmin" xml:space="preserve">
+    <value>Administración de Cajas</value>
+  </data>
+  <data name="AddContainer" xml:space="preserve">
+    <value>Agregar Contenedor</value>
+  </data>
+  <data name="AddContainerType" xml:space="preserve">
+    <value>Agregar Tipo de Contenedor</value>
+  </data>
+  <data name="Containers" xml:space="preserve">
+    <value>Contenedores</value>
+  </data>
+  <data name="ContainersAdmin" xml:space="preserve">
+    <value>Administración de Contenedores</value>
+  </data>
+  <data name="ContainersTypesAdmin" xml:space="preserve">
+    <value>Administración de Tipos de Contenedores</value>
+  </data>
+  <data name="AddExternalDistributionCenter" xml:space="preserve">
+    <value>Agregar Centro de Distribuciones Externo</value>
+  </data>
+  <data name="AddInternalDistributionCenter" xml:space="preserve">
+    <value>Agregar Centro de Distribuciones Interno</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>Asignar Roles</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="ViewRoles" xml:space="preserve">
+    <value>Ver Roles</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categorias</value>
+  </data>
+  <data name="AddCategory" xml:space="preserve">
+    <value>Agregar Categoria</value>
+  </data>
+  <data name="AddSupplier" xml:space="preserve">
+    <value>Agregar Proveedor</value>
+  </data>
+  <data name="Suppliers" xml:space="preserve">
+    <value>Proveedores</value>
+  </data>
+  <data name="ChangeUserPassword" xml:space="preserve">
+    <value>Cambiar Contraseña de Usuario</value>
+  </data>
+  <data name="AddProduct" xml:space="preserve">
+    <value>Agregar Producto</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Iniciar Sesión</value>
+  </data>
+  <data name="AddClient" xml:space="preserve">
+    <value>Agregar Cliente</value>
+  </data>
+  <data name="Clients" xml:space="preserve">
+    <value>Clientes</value>
+  </data>
+  <data name="ClientsAdmin" xml:space="preserve">
+    <value>Administración de Clientes</value>
+  </data>
+  <data name="SecurityPolicies" xml:space="preserve">
+    <value>Politicas de Seguridad</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
+  <data name="FixMenu" xml:space="preserve">
+    <value>Fijar Menu</value>
+  </data>
+  <data name="UnfixMenu" xml:space="preserve">
+    <value>Desfijar Menu</value>
+  </data>
+  <data name="Assignations" xml:space="preserve">
+    <value>Asignaciones</value>
+  </data>
+  <data name="AddValueSecurity" xml:space="preserve">
+    <value>Agregar Regla de Seguridad por Valor</value>
+  </data>
+  <data name="Security" xml:space="preserve">
+    <value>Seguridad</value>
+  </data>
+  <data name="ValueSecurity" xml:space="preserve">
+    <value>Seguridad por Valor</value>
+  </data>
+</root>

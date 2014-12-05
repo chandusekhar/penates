@@ -1,0 +1,120 @@
+﻿@model Penates.Models.ViewModels.Users.RegisterViewModel
+@{
+    ViewBag.Title = @Html.Resource("Title");
+}
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+
+    <script type="text/javascript" title="Save Form Data">
+    $(document).ready(function () {
+        $(window).on('beforeunload', function () {
+            sessionStorage.setItem('FileNumber', $('#FileNumber').val());
+            sessionStorage.setItem('FirstName', $('#FirstName').val());
+            sessionStorage.setItem('LastName', $('#LastName').val());
+            sessionStorage.setItem('UserName', $('#UserName').val());
+            sessionStorage.setItem('Address', $('#Address').val());
+            sessionStorage.setItem('Email', $('#Email').val());
+            sessionStorage.setItem('Telephone', $('#Telephone').val());
+        });
+    });
+    </script>
+
+    <script type="text/javascript" title="Load Form Data">
+    $(document).ready(function () {
+        var aux = sessionStorage.getItem('FileNumber');
+        if (aux != null && aux != "") $('#FileNumber').val(aux);
+        aux = sessionStorage.getItem('FirstName');
+        if (aux != null && aux != "") $('#FirstName').val(aux);
+        aux = sessionStorage.getItem('LastName');
+        if (aux != null && aux != "") $('#LastName').val(aux);
+        aux = sessionStorage.getItem('UserName');
+        if (aux != null && aux != "") $('#UserName').val(aux);
+        aux = sessionStorage.getItem('Address');
+        if (aux != null && aux != "") $('#Address').val(aux);
+        aux = sessionStorage.getItem('Email');
+        if (aux != null && aux != "") $('#Email').val(aux);
+        aux = sessionStorage.getItem('Telephone');
+        if (aux != null && aux != "") $('#Telephone').val(aux);
+    });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+
+        @using (Html.BeginForm("Register", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+            @Html.AntiForgeryToken()
+            <p class="text-danger">@Html.ValidationSummary()</p>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">* @Html.DisplayNameFor(m => m.FileNumber):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.FileNumber, new { required = "required", @class = "form-control" })
+                    </div>
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.FileNumber)</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">* @Html.DisplayNameFor(m => m.FirstName):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.FirstName, new { required = "required", @class = "form-control" })
+                    </div>
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.FirstName)</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">* @Html.DisplayNameFor(m => m.LastName):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.LastName, new { required = "required", @class = "form-control" })
+                    </div>
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.LastName)</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">* @Html.DisplayNameFor(m => m.UserName):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.UserName, new { required = "required", @class = "form-control" })
+                    </div>
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.UserName)</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">* @Html.DisplayNameFor(m => m.Password):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Password, new { type = "password", required = "required", @class = "form-control" })
+                    </div>
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.Password)</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">* @Html.DisplayNameFor(m => m.ConfirmPassword):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.ConfirmPassword, new { type = "password", required = "required", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.Address):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">* @Html.DisplayNameFor(m => m.Email):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Email, new { required = "required", @class = "form-control" })
+                    </div>
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.Email)</p>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.Telephone):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control" })
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+            <div class="btn-toolbar">
+                <button type="submit" class="btn btn-success" id="Save">@Resources.FormsResources.Save</button>
+                @Html.ActionLink(@Resources.FormsResources.Cancel, "Index", "User", null, new { @class = "btn btn-default", @id = "Cancel" })
+            </div>
+        }
+    </div>
+</body>

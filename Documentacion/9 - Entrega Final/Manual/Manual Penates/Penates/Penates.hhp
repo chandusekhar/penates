@@ -1,0 +1,41 @@
+﻿[OPTIONS]
+Compiled File=Penates.chm
+Title=Penates
+Contents File=Penates.hhc
+Index File=Penates.hhk
+Default topic=
+Default Window=
+Error log file=
+Display compile progress=No
+Display compile notes=No
+Full-text search=Yes
+Binary Index=Yes
+Auto Index=No
+Enhanced decompilation=No
+Binary TOC=No
+Flat=No
+LANG_ID=3082
+LANG_NAME=Spanish (Spain)
+
+[WINDOWS]
+
+[FILES]
+PENATES_INVENTORY_SYSTEM_new.htm
+!ScreenLayout!\Penates\jquery.js
+!ScreenLayout!\Penates\jqueryui-custom.js
+!ScreenLayout!\Penates\layout.js
+!ScreenLayout!\Penates\overthrow.min.js
+!ScreenLayout!\Penates\overthrow.sidescroller.min.js
+
+Penates.glo
+Penates.brs
+[ALIAS]
+#include Penates.ali
+
+[MAP]
+#include BSSCDefault.h
+
+[TEXT POPUPS]
+BSSCDefault.h
+
+

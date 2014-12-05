@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><index>  <chunkinfo url=\"idata1.js\" first=\"Administración\" last=\"Lotes\" num=\"19\" />  <chunkinfo url=\"idata2.js\" first=\"mercadería\" last=\"roles\" num=\"10\" />  <chunkinfo url=\"idata3.js\" first=\"Sectores\" last=\"Ventas\" num=\"9\" />  </index>";

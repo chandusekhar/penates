@@ -1,0 +1,155 @@
+﻿@model Penates.Models.ViewModels.Forms.CategoryViewModel
+@using Penates.Models.ViewModels
+
+@{
+    ViewBag.Title = "Product Category";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+
+    <script type="text/javascript" title="Form Jquery">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToDelete, Resources.Resources.CategoryWArt, Model.ProductCategoriesID)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+
+            $("#showAddParentDiv").click(function () {
+                $("#product-form-parentAdd").show();
+                $("#showAddParentDiv").hide();
+                $("#objectSearchCategoryTable").focus();
+            });
+
+            $("#hideAddParentCategory").click(function () {
+                $("#product-form-parentAdd").hide();
+                $("#showAddParentDiv").show();
+                $("#Description").focus();
+            });
+
+            $("#showAddChildDiv").click(function () {
+                $("#product-form-childAdd").show();
+                $("#showAddChildDiv").hide();
+                $("#objectSearchCategoryTable2").focus();
+            });
+
+            $("#hideAddChildCategory").click(function () {
+                $("#product-form-childAdd").hide();
+                $("#showAddChildDiv").show();
+                $("#Description").focus();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+@if (@Model.ProductCategoriesID != null && @Model.ProductCategoriesID > 0) {
+            <fieldset id="showAddParentDiv">
+                <legend></legend>
+                <div class="col-sm-2">
+                    <a id="showAddParentCategory" class="btn btn-default">@Html.Resource("ShowParents")</a>
+                </div>
+                <br />
+            </fieldset>
+            <fieldset id="product-form-parentAdd" hidden="hidden">
+                <legend>@Html.Resource("Parents"):</legend>
+                @{Html.RenderPartial("~/Views/ABMs/_SearchAndAdd.cshtml", new SearchAndAddViewModel("CategoryTable") {
+                    TablePartialView = "~/Views/ABMs/Tables/_CategoryTable.cshtml",
+                    TableAjaxRequest = Url.Action("ParentsLoad", "CategoryABM"),
+                    Params = new { CategoryID = Model.ProductCategoriesID },
+                    AjaxRequest = @Url.Action("Autocomplete", "CategoryABM"),
+                    SubmitAction = "AssignParent",
+                    SubmitController = "CategoryABM",
+                    TableDeleteAction = "UnassignParent",
+                    TableDeleteController = "CategoryABM",
+                    TableDeleteText = @Resources.FormsResources.Unassign,
+                    TableServerProcessing = false
+                });}
+                <div class="row">
+                    <div class="col-sm-2">
+                        <a id="hideAddParentCategory" class="btn btn-default">@Html.Resource("HideParents")</a>
+                    </div>
+                </div>
+            </fieldset>
+            <br />
+}
+            <form class="form-horizontal" id="category-form" action="/CategoryForm/SubmitCategory" autocomplete="on" method="post" enctype="multipart/form-data">
+                @Html.ValidationMessageFor(m => m.error)
+                <fieldset>
+                    <legend></legend>
+                    @if (Model.ProductCategoriesID != null && Model.ProductCategoriesID > 0) {
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ProductCategoriesID, new { @class = "col-lg-2 control-label" })
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(m => m.ProductCategoriesID, new {@class = "form-control", disabled = "disabled" })
+                                <div hidden>
+                                    @Html.TextBoxFor(m => m.ProductCategoriesID, new { @class = "form-control"})
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.ProductCategoriesID)
+                        </div>
+                    }
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.Description):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Description, new { @class = "form-control", autofocus = "autofocus", required = "required" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Description)
+                    </div>
+                    <fieldset>
+                        <label></label>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-success" id="Save" value="SubmitCategory" name="action:Save">@Resources.FormsResources.Save</button>
+                                @Html.ActionLink(@Resources.FormsResources.Cancel, "Index", "CategoryABM", null, new { @class = "btn btn-default", @id = "Cancel" })
+                                @if (@Model.ProductCategoriesID != null && @Model.ProductCategoriesID > 0) {
+                                    <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "CategoryForm", new { categoryID = Model.ProductCategoriesID })">@Resources.FormsResources.Delete</button>
+                                    @Html.ActionLink(@Html.Resource("ShowHierarchy"), "ShowHierarchy", "CategoryForm", new { categoryID = Model.ProductCategoriesID }, new { @class = "btn btn-primary", @id = "ShowHierarchy"})
+                                }
+                            </div>
+                        </div>
+                    </fieldset>
+                </fieldset>
+            </form>
+            @if (@Model.ProductCategoriesID != null && @Model.ProductCategoriesID > 0) {
+                <fieldset id="showAddChildDiv">
+                    <legend></legend>
+                    <div class="col-sm-2">
+                        <a id="showAddChildCategory" class="btn btn-default">@Html.Resource("ShowChildren")</a>
+                    </div>
+                    <br />
+                </fieldset>
+                <fieldset id="product-form-childAdd" hidden="hidden">
+                    <legend>@Html.Resource("Children"):</legend>
+                    @{Html.RenderPartial("~/Views/ABMs/_SearchAndAdd.cshtml", new SearchAndAddViewModel("CategoryTable2") {
+                        TablePartialView = "~/Views/ABMs/Tables/_CategoryTable.cshtml",
+                        TableAjaxRequest = Url.Action("ChildrenLoad", "CategoryABM"),
+                        Params = new {CategoryID = Model.ProductCategoriesID},
+                        AjaxRequest = @Url.Action("Autocomplete", "CategoryABM"),
+                        SubmitAction = "AssignChild",
+                        SubmitController = "CategoryABM",
+                        TableDeleteAction = "UnassignChild",
+                        TableDeleteController = "CategoryABM",
+                        TableDeleteText = @Resources.FormsResources.Unassign,
+                        TableServerProcessing = false
+                    });}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <a id="hideAddChildCategory" class="btn btn-default">@Html.Resource("HideChildren")</a>
+                        </div>
+                    </div>
+                </fieldset>
+                <br />
+            }
+    </div>
+</body>
+</html>

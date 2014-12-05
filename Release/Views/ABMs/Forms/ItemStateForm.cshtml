@@ -1,0 +1,89 @@
+﻿@model Penates.Models.ViewModels.Forms.StatusViewModel
+@{
+
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+
+    <script type="text/javascript" title="Form Jquery">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToDelete, Resources.Resources.ItemStateWArt, Model.StatusID)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Save Form Data">
+    $(document).ready(function () {
+        $(window).on('beforeunload', function () {
+            sessionStorage.setItem('StatusID', $('#StatusID').val());
+            sessionStorage.setItem('Description', $('#Description').val());
+        });
+    });
+    </script>
+
+    <script type="text/javascript" title="Load Form Data">
+        $(document).ready(function () {
+            aux = sessionStorage.getItem('StatusID');
+            if (aux != null && aux != "") $('#StatusID').val(aux);
+            aux = sessionStorage.getItem('Description');
+            if (aux != null && aux != "") $('#Description').val(aux);
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <form class="form-horizontal" id="category-form" action="@Url.Action("Save", "ItemStatesForms")" autocomplete="on" method="post" enctype="multipart/form-data">
+            @Html.ValidationMessageFor(m => m.error)
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend></legend>
+                @if (Model.StatusID.HasValue) {
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.StatusID, new { @class = "col-lg-2 control-label" })
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.StatusID, new { @class = "form-control", disabled = "disabled" })
+                            <div hidden="hidden">
+                                @Html.TextBoxFor(m => m.StatusID, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.StatusID)
+                    </div>
+                }
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.Description):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control", required = "required", autofocus = "autofocus" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Description)
+                </div>
+                <fieldset>
+                    <label></label>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" class="btn btn-success" id="Save" value="SubmitCategory" name="action:Save">@Resources.FormsResources.Save</button>
+                            @Html.ActionLink(@Resources.FormsResources.Cancel, "Index", "ItemStatesABM", null, new { @class = "btn btn-default", @id = "Cancel" })
+                            @if (@Model.StatusID != null && @Model.StatusID > 0) {
+                                <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "ItemStatesForms", new { StatusID = Model.StatusID })">@Resources.FormsResources.Delete</button>
+                            }
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+﻿@model Penates.Models.ViewModels.Transactions.ProductsReceptions.FinishReceptionModel
+@using Penates.Helpers
+@using Penates.Models.ViewModels
+@using Penates.Models.ViewModels.Forms
+@using Penates.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+
+    <script type="text/javascript" title="Autocomplete">
+    $(document).ready(function () {
+        $("#DistributionCenterCode").autocompletar({
+            url: '@Url.Action("Autocomplete", "DistributionCenterABM")',
+            seleccion: function (event, ui) {
+                $('#DistributionCenterCode').val(ui.item.id);
+            },           
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>@Html.Resource("Title")</h2>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "")
+            {
+                if (@Model.Error == true)
+                {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <form class="form-horizontal" action="@Url.Action("VerifyDistributionCenterProductCategories", "ProductsReceptions")" method="post">
+                <fieldset>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <label class="col-sm-2 col-sm-offset-3 control-label">@Html.Resource("SelectDC"):</label>
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(model => model.DistributionCenterCode, new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <label class="col-sm-2 col-sm-offset-3 control-label">@Html.Resource("COT"):</label>
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(model => model.COT, new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <label class="col-sm-2 col-sm-offset-3 control-label"></label>
+                                <div class="col-lg-4">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.IsPurchase) @Html.Resource("IsPurchase")?
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <label class="col-sm-2 col-sm-offset-3 control-label"></label>
+                                <div class="col-lg-4">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.LeaveInTemporaryDeposit) @Html.Resource("LeaveInTemporaryDeposit")?
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="form-group" hidden>
+                            @Html.TextBoxFor(m => m.OrderID, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control" })
+                        </div>
+                    </div>
+            </fieldset>
+                <div class="col-lg-offset-5">
+                    <div class="btn-toolbar">
+                        <button class="btn btn-success" id="finish" value="finishOrder" type="submit">@Resources.FormsResources.Next</button>
+                    </div>
+                </div>
+            </form>
+        </div><br>
+</body>
+</html>

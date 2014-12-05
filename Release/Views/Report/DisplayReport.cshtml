@@ -1,0 +1,109 @@
+﻿@model  Penates.Models.ViewModels.Reports.DisplayReportViewModel
+
+@{
+    ViewBag.Title = "Distribution Center Report";
+}
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <div class="form-horizontal" id="distribution-center-report">
+            <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DistributionCenterAddress):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.DistributionCenterAddress</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DistributionCenterCity):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.DistributionCenterCity</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DistributionCenterCountry):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.DistributionCenterCountry</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DistributionCenterCtype):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.DistributionCenterCtype</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DistributionCenterValuation): $</label>
+                    <div class="col-lg-4">
+                        <p>@Model.DistributionCenterValuation</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Deposits):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Deposits</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Sectors):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Sectors</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Halls):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Halls</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Racks):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Racks</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Shelfs):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Shelfs</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.AmountOfProducts):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.AmountOfProducts</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.AmountOfProductsTypes):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.AmountOfProductsTypes</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.AverageOfSpaceCovered):</label>
+                    <div class="col-lg-4">
+                        <p>@Html.DisplayFor(m => m.AverageOfSpaceCovered) %</p>
+                    </div>
+                </div>                         
+            </fieldset>
+            <fieldset><legend> </legend></fieldset>
+            <div class="btn-toolbar center-block">
+                @Html.ActionLink(@Resources.FormsResources.Ok, "Index", "DistributionCenterReport", null, new { @class = "btn btn-primary", @id = "Ok" })
+            </div>
+        </div>
+    </div>
+</body>
+</html>

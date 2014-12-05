@@ -1,0 +1,123 @@
+﻿@model Penates.Models.ViewModels.DC.DepositViewModel
+
+@{
+    ViewBag.Title = "Product Form";
+}
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <div class="form-horizontal" id="deposit-form">
+            <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DepositID):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.DepositID</p>
+                    </div>
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Description):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Description</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DistributionCenterID):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.DistributionCenterID</p>
+                    </div>
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Floor):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Floor</p>
+                    </div>
+                </div>
+                
+                <!-- Size Info -->
+                <fieldset id="product-form-sizeinfo" name="product-form-sizeinfo">
+                    <legend>@Resources.FormsResources.SizeInfo:</legend>
+                    <div class="form-group">
+                        <label class="col-lg-1 control-label">* @Resources.FormsResources.Depth:</label>
+                        <div class="col-lg-3">
+                                <p>@Html.DisplayFor(m => m.Depth) m</p>
+                        </div>
+                        <label class="col-lg-1 control-label">* @Resources.FormsResources.Width:</label>
+                        <div class="col-lg-3">
+                                <p>@Html.DisplayFor(m => m.Width) m</p>
+                        </div>
+                        <label class="col-lg-1 control-label">* @Resources.FormsResources.Height:</label>
+                        <div class="col-lg-3">
+                                <p>@Html.DisplayFor(m => m.Height) m</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-lg-offset-3 control-label">* @Resources.FormsResources.Size:</label>
+                        <div class="col-lg-4">
+                                <p>@Html.DisplayFor(m => m.Size) m3</p>
+                        </div>
+                    </div>
+                    <br>
+                </fieldset>
+
+                <!-- Capacity Info -->
+                <fieldset id="product-form-sizeinfo" name="product-form-sizeinfo">
+                    <legend>@Resources.FormsResources.CapacityInfo:</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Resources.FormsResources.Capacity:</label>
+                        <div class="col-lg-2">
+                                <p>@Html.DisplayFor(m => m.Size) m3</p>
+                        </div>
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.UsedSpace):</label>
+                        <div class="col-lg-2">
+                                <p>@Html.DisplayFor(m => m.UsedSpace) m3</p>
+                        </div>
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.UsedPercentage):</label>
+                        <div class="col-lg-2">
+                                <p>@Html.DisplayFor(m => m.UsedPercentage) %</p>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.UsableSpace):</label>
+                        <div class="col-lg-2">
+                            <p>@Html.DisplayFor(m => m.UsableSpace) m3</p>
+                        </div>
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.UsableUsedSpace):</label>
+                        <div class="col-lg-2">
+                            <p>@Html.DisplayFor(m => m.UsableUsedSpace) m3</p>
+                        </div>
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.UsableSpacePercentage):</label>
+                        <div class="col-lg-2">
+                            <p>@Html.DisplayFor(m => m.UsableSpacePercentage) %</p>
+                        </div>
+                    </div>
+                </fieldset>
+                <br/>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Categories):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Categories</p>
+                    </div>
+                </div>
+                <br>
+                <div class="btn-toolbar center-block">
+                    @Html.ActionLink(@Resources.FormsResources.Ok, "Index", "DepositsABM", new {SelectedValue = Model.DistributionCenterID }, new { @class = "btn btn-primary", @id = "Ok" })
+                    @Html.ActionLink(@Resources.FormsResources.Edit, "FormEdit", "DepositsForms", new { DepositID = Model.DepositID }, new { @class = "btn btn-default", @id = "Edit" })
+                    @Html.ActionLink(@Html.Resource("EditDistributionCenter"), "FormEdit", "DistributionCenterForms", new { id = Model.DistributionCenterID }, new { @class = "btn btn-default", @id = "EditDistributionCenter" })
+                    @Html.ActionLink(@Html.Resource("AddSector"), "Index", "SectorsForms", new { DepositID = Model.DepositID }, new { @class = "btn btn-default", @id = "AddSector", @onclick = "sessionStorage.clear();" })
+                    @Html.ActionLink(@Html.Resource("ViewSectors"), "Index", "SectorsABM", new { DepositID = Model.DepositID }, new { @class = "btn btn-default", @id = "ViewSectors" })
+                </div>
+
+            </fieldset>
+        </div>
+    </div>
+</body>
+</html>

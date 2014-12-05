@@ -1,0 +1,204 @@
+﻿@model Penates.Interfaces.Models.ITableViewModel
+
+<html>
+<head>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/DT_bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTables/plugins/dataTables.fnSetFilteringDelay.js"></script>
+    <script src="~/Scripts/DataTables/plugins/dataTables.bootstrapPagination.js"></script>
+    <script src="~/Scripts/DataTables/plugins/dataTables.fnReloadAjax.js"></script>
+    <script src="~/Scripts/DataTables/aoDataManagment.js"></script>
+    <style>
+        .table-responsive.foo {
+            overflow-x: visible !important;
+            overflow-y: visible !important;
+        }
+    </style>
+    <script>
+        eval("var "+'@Model.concatWithID("editTable")');
+        $(document).ready(function(){
+            if (typeof @Model.concatWithID("editTable") == 'undefined' || !$.isFunction(@Model.concatWithID("editTable"))) {
+                @Model.concatWithID("editTable") = function (id) {
+                    var param = {
+                        UserID: id
+                    };
+                    window['@Model.JQueryEditFunction'](param);
+                }
+            }
+        });
+    </script>
+    <script title="Delete Product Function">
+    eval("var delete"+'@Model.tableID');
+    @Model.concatWithID("delete") = function(id){
+        var conf = true;
+        if('@Model.DeleteConfirmMessage' != '' && '@Model.DeleteConfirmMessage' != 'null'){
+            conf = confirm('@Model.DeleteConfirmMessage');
+        }
+            if (conf) {
+                $("#divProcessing").show();
+                var del = @Html.Raw(Json.Encode(Model.Params));
+        if(del == null){
+            del = {};
+        }
+        del["RoleID"] = id;
+        $.ajax({
+            url: '@Url.Action(@Model.DeleteAction, @Model.DeleteController)',
+            data: del,
+            dataType: 'json',
+            type: 'GET',
+            success: function (data) {
+                $("#divProcessing").hide();
+                alert(data.title + ": \"" + data.message + "\"");
+                window['@Model.RefreshFunction']();
+            },
+            error: function (xhr) {
+                $("#divProcessing").hide();
+                var er = xhr.status;
+                er = er + " - " + xhr.statusText;
+                er = er + ": \"" + xhr.responseText + "\"";
+                alert(er);
+            }
+        })
+    }
+    }
+    </script>
+    <script>
+    //Obtengo si proceso en el servidor o de forma local
+    function getServerProcessing() {
+        var compare = "@Model.ServerProcessing"
+        if (compare == "False" || compare == "false") {
+            return false;
+        }
+        return true;
+    }
+    eval("var "+'@Model.RefreshFunction');
+
+    $(document).ready(function () {
+        var id = "#"+'@Model.tableID';
+        eval("var "+'@Model.tableID');
+        @Model.tableID = $(id).dataTable({
+            "bServerSide": getServerProcessing(),
+            "sAjaxSource": '@Model.AjaxRequest',
+            // Server Parameters
+            "fnServerParams": function (aoData) {
+                try {
+                    try{
+                        addGlobalParameters(aoData, globalParams.array);
+                    }catch(err){
+                        console.log("No hay parametros globales");
+                    }
+                    var p = @Html.Raw(Json.Encode(Model.Params));
+                    if(p != null){
+                        var nam = '';
+                        for (var i in p) {
+                            nam = i;
+                            aoData.push({ name: i, value: p[i] });
+                        }
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            },
+            "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+                oSettings.jqXHR = $.ajax({
+                    "dataType": 'json',
+                    "type": "GET",
+                    "url": sSource,
+                    "data": aoData,
+                    "success": fnCallback,
+                    "error": function (xhr, textStatus, error) {
+                        $("body").html(xhr.responseText);
+                    }
+                })
+            },
+            "bProcessing": true,
+            "aLengthMenu": [[10, 20, 30, 50], [10, 20, 30, 50]],
+            "sPaginationType": "bootstrap",
+            "autoWidth": true,
+            //"sScrollX": "100%",
+            //"bScrollCollapse": true,
+            //"sPaginationType": "full_numbers",
+            "aoColumns": [
+                            {
+                                "sName": "RoleID",
+                                "mData": "RoleID",
+                                "bSearchable": false,
+                                "bSortable": true,
+                                "mRender": function (ID, log, obj) {
+                                    // Armo el Html del boton con opciones
+                                    var a = "<div class=\"btn-toolbar bs-component\" style=\"margin: 0;\">\n";
+                                    a = a + "<div class=\"btn-group\">\n";
+                                    a = a + "<button type=\"button\" style=\"padding-right: 5px; padding-left: 5px;\" class=\"btn btn-default btn-xs dropdown-toggle\" data-toggle=\"dropdown\">" + obj.RoleID + "<span class=\"caret\"></span></button>\n";
+                                    a = a + "<ul class=\"dropdown-menu stay-open pull-left\" role=\"menu\">\n";
+                                    var useJqueryEdit = '@Model.useJQueryEditFunction';
+                                    var link;
+                                    if(useJqueryEdit.toLowerCase() == 'false'){
+                                        if('@Model.EditController' == '' || '@Model.EditController' == 'null'){
+                                            link = '@Html.ActionLink(@Resources.FormsResources.Edit, "FormEdit", "RoleForm", new { RoleID = -1 }, null)';
+                                        }else{
+                                            link = '@Html.ActionLink(@Resources.FormsResources.Edit, Model.EditAction, Model.EditController, new { RoleID = -1 }, null)';
+                                        }
+                                    }else{
+                                        link = "<a style=\"cursor: pointer\" class = \"table-edit-action\", onclick = \"-2('-1')\" >" + '@Resources.FormsResources.Edit' + "</a>";
+                                        link = link.replace(-2, '@Model.concatWithID("editTable")'); //Reemplazo los objetos que tomo de MVC
+                                        link = link.replace("-2", '@Model.concatWithID("editTable")'); //Reemplazo los objetos que tomo de MVC
+                                    }
+                                    link = link.replace(-1, obj.RoleID);
+                                    link = link.replace("-1", obj.RoleID); //Reemplazo los objetos que tomo de MVC
+                                    a = a + "<li>" + link + "</li>\n";
+                                    var action = "@Html.Raw(Model.DeleteAction)";
+                                    if(action != null && action != "" && action != "null"){
+                                        a = a + "<li class=\"divider\"></li>\n";
+                                        link = "<a style=\"cursor: pointer\" class = \"table-delete-action\", onclick = \"-2('-1')\" >" + '@Model.DeleteText' + "</a>";
+                                        link = link.replace(-1, obj.RoleID); //Reemplazo los objetos que tomo de MVC
+                                        link = link.replace("-1", obj.RoleID); //Reemplazo los objetos que tomo de MVC
+                                        link = link.replace(-2, '@Model.concatWithID("delete")'); //Reemplazo los objetos que tomo de MVC
+                                        link = link.replace("-2", '@Model.concatWithID("delete")'); //Reemplazo los objetos que tomo de MVC
+                                        a = a + "<li>" + link + "</li>\n";
+                                    }
+                                    a = a + "</ul>\n";
+                                    a = a + "</div>\n";
+                                    a = a + "</div>";
+                                    return a;
+                                }
+                            },
+                            { "sName": "Description", "mData": "Description", }
+            ]
+        }).fnSetFilteringDelay();
+
+        @Model.RefreshFunction = function () {
+            if (getServerProcessing()) {
+                eval('@Model.tableID'+".fnDraw()");
+            } else {
+                eval('@Model.tableID'+".fnReloadAjax()")
+            }
+
+        }
+    });
+</script>
+</head>
+<body>
+    <div class="row">
+        <div id="divProcessing" class="row text-center" hidden="hidden">
+            <p>@Resources.Resources.Processing<img src="../../Content/images/ajax-loader.gif"></p>
+        </div>
+        <table id="@Model.tableID" class="display">
+            <!--class="table table-striped table-hover ">-->
+            <thead>
+                <tr>
+                    <th>@Penates.App_GlobalResources.Forms.ModelFormsResources.ID</th>
+                    <th>@Penates.App_GlobalResources.Forms.ModelFormsResources.Description</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

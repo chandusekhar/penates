@@ -1,0 +1,65 @@
+﻿@model Penates.Models.ViewModels.Forms.PackViewModel
+
+@{
+}
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <div class="form-horizontal" id="deposit-form">
+            <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.PackID):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.PackID</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.SerialNumber):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.SerialNumber</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Description):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Description</p>
+                    </div>
+                </div>
+                @if (Model.HasExpirationDate || Model.ExpirationDate.HasValue) {
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.ExpirationDate):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.ExpirationDate</p>
+                        </div>
+                    </div>
+                } else {
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.ExpirationDate):</label>
+                        <div class="col-lg-4">
+                            <p>@Html.Resource("NoExpirationDate")</p>
+                        </div>
+                    </div>
+                }
+                <br>
+                <div class="btn-toolbar center-block">
+                    @Html.ActionLink(@Resources.FormsResources.Ok, "Index", "PacksABM", null, new { @class = "btn btn-primary", @id = "Ok" })
+                    @Html.ActionLink(@Resources.FormsResources.Edit, "FormEdit", "PackForm", new { PackID = Model.PackID }, new { @class = "btn btn-default", @id = "Edit" })
+                </div>
+
+            </fieldset>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,243 @@
+﻿@model Penates.Models.ViewModels.Forms.ClientViewModel
+@{
+    ViewBag.Title = "Product Category";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+
+    <script type="text/javascript" title="Form Jquery">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                    window.location.href = $(this).data('url');
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Save Form Data">
+    $(document).ready(function () {
+        $(window).on('beforeunload', function () {
+            sessionStorage.setItem('Country', $('#CountryID').val());
+            sessionStorage.setItem('State', $('#StateSelectList').val());
+            sessionStorage.setItem('City', $('#CityID').val());
+            sessionStorage.setItem('Address', $('#Address').val());
+            sessionStorage.setItem('Name', $('#Name').val());
+            sessionStorage.setItem('CUIT', $('#CUIT').val());
+            sessionStorage.setItem('Phone', $('#Phone').val());
+            sessionStorage.setItem('Email', $('#Email').val());
+            sessionStorage.setItem('ContactName', $('#ContactName').val());
+        });
+    });
+    </script>
+
+    <script type="text/javascript" title="Load Form Data">
+        $(document).ready(function () {
+            var aux = sessionStorage.getItem('Country');
+            if (aux != null && aux != "") {
+                $('#CountryID').val(aux);
+                var selectedVal = $("#CountryID").val();
+                $.getJSON('@Url.Action("GetStates", "Geography")', { countryID: selectedVal }, function (states) {
+                    var list = $('select#StateSelectList');
+                    list.find('option').remove();
+                    list.append('<option value="-1">@Resources.Messages.SelectState</option>');
+                    $(states).each(function (index, state) {
+                        list.append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                    });
+
+                    aux = sessionStorage.getItem('State');
+                    if (aux != null && aux != "") {
+                        $('#StateSelectList').val(aux);
+                        var selectedState = $("#StateSelectList").val();
+                        $.getJSON('@Url.Action("GetCities", "Geography")', { stateID: selectedState }, function (cities) {
+                            var list = $('select#CityID');
+                            list.find('option').remove();
+                            list.append('<option value="-1">@Resources.Messages.SelectCity</option>');
+                            $(cities).each(function (index, city) {
+                                list.append('<option value="' + city.Value + '">' + city.Text + '</option>');
+                            });
+
+
+                            aux = sessionStorage.getItem('City');
+                            if (aux != null && aux != "") $('#CityID').val(aux);
+                        }).fail(function () {
+                            alert("Error loading state");
+                        });
+                    }
+                }).fail(function () {
+                    alert("Error loading state");
+                });
+            }
+
+            aux = sessionStorage.getItem('Address');
+            if (aux != null && aux != "") $('#Address').val(aux);
+            aux = sessionStorage.getItem('Name');
+            if (aux != null && aux != "") $('#Name').val(aux);
+            var dep = sessionStorage.getItem('CUIT');
+            if (dep != null && dep != "") $('#CUIT').val(dep);
+            var heigh = sessionStorage.getItem('Phone');
+            if (heigh != null && heigh != "") $('#Phone').val(heigh);
+            var wid = sessionStorage.getItem('Email');
+            if (wid != null && wid != "") $('#Email').val(wid);
+            aux = sessionStorage.getItem('ContactName');
+            if (aux != null && aux != "") $('#ContactName').val(aux);
+        });
+    </script>
+
+    <script type="text/javascript" title="Geography Data">
+    $(document).ready(function () {
+        $("#CountryID").change(function (e) {
+            var selectedVal = $("#CountryID").val();
+            $.getJSON('@Url.Action("GetStates", "Geography")', { countryID: selectedVal }, function (states) {
+                var list = $('select#StateSelectList');
+                list.find('option').remove();
+                list.append('<option value="0">@Resources.Messages.SelectState</option>');
+                $(states).each(function (index, state) {
+                    list.append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                });
+            }).fail(function () {
+                alert("Error loading state");
+            });
+        });
+
+        $("#StateSelectList").change(function (e) {
+            var selectedState = $("#StateSelectList").val();
+            $.getJSON('@Url.Action("GetCities", "Geography")', { stateID: selectedState }, function (cities) {
+                var list = $('select#CityID');
+                list.find('option').remove();
+                list.append('<option value="-1">@Resources.Messages.SelectCity</option>');
+                $(cities).each(function (index, city) {
+                    list.append('<option value="' + city.Value + '">' + city.Text + '</option>');
+                });
+            }).fail(function () {
+                alert("Error loading state");
+            });
+        });
+    });
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <form class="form-horizontal" id="category-form" action="@Url.Action("Save", "ClientForms")" autocomplete="on" method="post" enctype="multipart/form-data">
+            @Html.ValidationMessageFor(m => m.error)
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend></legend>
+                @if (Model.ClientID != null && Model.ClientID != 0) {
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ClientID, new { @class = "col-lg-2 control-label" })
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.ClientID, new { @class = "form-control", disabled = "disabled" })
+                            <div hidden="hidden">
+                                @Html.TextBoxFor(m => m.ClientID, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.ClientID)
+                    </div>
+                }
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.Name):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", required = "required", autofocus = "autofocus" })
+                        @Html.ValidationMessageFor(m => m.Name)
+                    </div>
+                    <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.CUIT):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.CUIT, new { @class = "form-control", required = "required" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.CUIT)
+                </div>
+                <br />
+                <fieldset>
+                    <legend>@Html.Resource("ContactInfo")</legend>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Phone, new { @class = "col-lg-2 control-label" })
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Phone)
+                        </div>
+                        @Html.LabelFor(m => m.Email, new { @class = "col-lg-2 control-label" })
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ContactName, new { @class = "col-lg-2 control-label" })
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.ContactName, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.ContactName)
+                    </div>
+                </fieldset>
+                <br />
+                <fieldset>
+                    <legend>@Html.Resource("LocationInfo")</legend>
+                    <!-- City -->
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.Resource("Country"):</label>
+                        <div class="col-lg-4">
+                            @Html.DropDownListFor(model => model.CountryID, Model.CountryList, new { @class = "form-control input-sm" })
+                        </div>
+                        <label class="col-lg-2 control-label">* @Html.Resource("State"):</label>
+                        <div class="col-lg-4">
+                            @Html.DropDownList("StateSelectList", Model.StateList, new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.CityID):</label>
+                        <div class="col-lg-4">
+                            @Html.DropDownListFor(model => model.CityID, Model.CityList, new { @class = "form-control input-sm" })
+                        </div>
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Address):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Address)
+                        </div>
+                    </div>
+                </fieldset>
+                <br />
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"></label>
+                    <div class="col-lg-4">
+                        @if (Model.ClientID != null && Model.ClientID != 0) { 
+                            if (Model.Active) {
+                                <p class="text-success">@Html.Resource("ClientActive")</p>
+                            } else {
+                                <p class="text-danger">@Html.Resource("ClientDeactive")</p>
+                            }
+                        }
+                    </div>
+                </div>
+                <br />
+                <fieldset>
+                    <label></label>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" class="btn btn-success" id="Save" value="SubmitClient" name="action:Save">@Resources.FormsResources.Save</button>
+                            @Html.ActionLink(@Resources.FormsResources.Cancel, "Index", "ClientsABM", null, new { @class = "btn btn-default", @id = "Cancel" })
+                            @if (@Model.ClientID != null && @Model.ClientID > 0) {
+                                if(Model.Active){
+                                    <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "ClientForms", new { ClientID = Model.ClientID })">@Resources.FormsResources.Deactivate</button>
+                                } else {
+                                    <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "ClientForms", new { ClientID = Model.ClientID })">@Resources.FormsResources.Activate</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

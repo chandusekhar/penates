@@ -1,0 +1,83 @@
+﻿@model Penates.Models.ViewModels.Users.UserViewModel
+@{
+    ViewBag.Title = @Html.Resource("Title");
+}
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+
+        <div class = "form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.FileNumber):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.FileNumber</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.FirstName):</label>
+                    <div class="col-md-4">
+                        <p>@Model.FirstName</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.LastName):</label>
+                    <div class="col-md-4">
+                        <p>@Model.LastName</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.UserName):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.UserName</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.Address):</label>
+                    <div class="col-md-4">
+                        <p>@Model.Address</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.Email):</label>
+                    <div class="col-md-4">
+                        <p>@Model.Email</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.Telephone):</label>
+                    <div class="col-md-4">
+                        <p>@Model.Telephone</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.LastLoginDate):</label>
+                    <div class="col-md-4">
+                        <p>@Model.LastLoginDate</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2 control-label"></div>
+                    <div class="col-md-6">
+                        @if (Model.Active) {
+                            <h3 class="text-success"><strong>@Resources.Resources.User @Penates.App_GlobalResources.Forms.ModelFormsResources.Active</strong></h3>
+                        } else {
+                            <h3 class="text-danger"><strong>@Resources.Resources.User @Penates.App_GlobalResources.Forms.ModelFormsResources.Inactive</strong></h3>
+                        }
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+            <div class="btn-toolbar center-block">
+                @Html.ActionLink(@Resources.FormsResources.Ok, "Index", "User", null, new { @class = "btn btn-primary", @id = "Ok" })
+                @Html.ActionLink(@Resources.FormsResources.Edit, "FormEdit", "User", new { UserID = Model.FileNumber }, new { @class = "btn btn-default", @id = "Edit" })
+            </div>
+        </div>
+    </div>
+</body>

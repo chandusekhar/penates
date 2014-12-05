@@ -1,0 +1,76 @@
+﻿@model Penates.Models.ViewModels.Transactions.ProductsReceptions.ExternalLocationAssignationModel       
+@using Penates.Helpers
+@using Penates.Models.ViewModels
+@using Penates.Models.ViewModels.Forms
+@using Penates.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+        
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>@Html.Resource("Title")</h2>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "")
+            {
+                if (@Model.Error == true)
+                {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            </div>
+
+            <h3>@Html.Resource("ExternalDCTitle")</h3>
+            <p class="lead">@String.Format(@Html.Resource("ExternalDCMessage"), Model.DistributionCenterDestiny)</p>
+            <br />
+            <br />
+
+            <h3>@Html.Resource("BoxesIdsTitle")</h3>
+            <p class="lead">@Html.Resource("BoxesIdsMessage")</p>
+            <ul>
+                @foreach ( var product in Model.boxesIdsPerProductName)
+                {
+                   <li><b>@product.Key</b></li>
+                   <ul>
+                    @foreach (var boxId in product.Value)
+                    {
+                        <li>@boxId</li>
+                    }
+                    </ul>
+                }
+            </ul>
+        <fieldset><legend> </legend></fieldset>
+        <div class="btn-toolbar center-block">
+            @Html.ActionLink(@Resources.FormsResources.Ok, "Index", "ProductsReceptions", null, new { @class = "btn btn-primary", @id = "Ok" })
+        </div>
+        </div>
+
+</body>
+</html>

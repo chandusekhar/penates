@@ -1,0 +1,108 @@
+﻿@model Penates.Models.ViewModels.Forms.SupplierViewModel
+@using Penates.Helpers
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../../Scripts/ABMs/calculateSizes.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.1.min.js"></script>
+    <script src="~/Scripts/ABMs/Forms/imageLoad.js"></script>
+    <script src="~/Scripts/ABMs/Forms/productCategoryDialog.js"></script>
+    <script src="~/Scripts/ABMs/Forms/productEditCategoryDialog.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToDelete, Resources.Resources.SupplierWArt, Model.SupplierID)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <noscript>
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <p class="text-danger"><strong>@Resources.Messages.JavascriptDeactivated</strong></p>
+            </div>
+        </noscript>
+            <h2>@Html.Resource("Title")</h2>
+            <form class="form-horizontal" id="supplier-form" name="supplier-form" action="/SupplierForms/Save" autocomplete="on" method="post" enctype="multipart/form-data">
+                @Html.ValidationMessageFor(m => m.error)
+                <fieldset>
+                    <legend></legend>
+                    @if (@Model.SupplierID != null && @Model.SupplierID > 0) {
+                        <div class="form-group">
+                            <label for="ProductID" class="col-lg-2 control-label">* @Penates.App_GlobalResources.Forms.ModelFormsResources.SupplierID:</label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(m => m.SupplierID, new { disabled = "disabled", @class = "form-control" })
+                                <div class="form-group" hidden>
+                                    @Html.TextBoxFor(m => m.SupplierID, new {@class = "form-control" })
+                                </div>
+                                    @Html.ValidationMessageFor(m => m.SupplierID)
+                                </div>
+                        </div>
+                    } else {
+                        <div class="form-group" hidden>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(m => m.SupplierID, new { disabled = "disabled", @class = "form-control" })
+                            </div>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Penates.App_GlobalResources.Forms.ModelFormsResources.Name:</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Name, new { required = "required", @class = "form-control", autofocus = "autofocus" })
+                            @Html.ValidationMessageFor(m => m.Name)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Penates.App_GlobalResources.Forms.ModelFormsResources.Address:</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Address, new {@class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Address)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Penates.App_GlobalResources.Forms.ModelFormsResources.Email:</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control"})
+                        </div>
+                            @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Penates.App_GlobalResources.Forms.ModelFormsResources.Phone:</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Phone)
+                    </div>
+
+                    <div class="btn-toolbar">
+                        <button type="submit" class="btn btn-success" id="Save" value="Save">@Resources.FormsResources.Save</button>
+                        @Html.ActionLink(@Resources.FormsResources.Cancel, "Index", "SupplierABM", null, new { @class = "btn btn-default" })
+                        @if (@Model.SupplierID != null && @Model.SupplierID > 0) {
+                            <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "SupplierForms", new { id = Model.SupplierID })">@Resources.FormsResources.Delete</button>
+                            @Html.ActionLink(@Html.Resource("ViewProducts"), "ViewProducts", "SupplierForms", new { id = Model.SupplierID }, new { @class = "btn btn-default" })
+                        }
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    <script src="~/Scripts/ABMs/Forms/imageLoad.js"></script>
+</body>
+</html>

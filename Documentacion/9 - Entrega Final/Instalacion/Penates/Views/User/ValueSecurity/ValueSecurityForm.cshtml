@@ -1,0 +1,337 @@
+﻿@model Penates.Models.ViewModels.Users.ValSecurityViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/css/select2.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/select2.min.js"></script>
+    <script type="text/javascript" src="../../../Scripts/ABMs/calculateSizes.js"></script>
+    <script src="~/Scripts/ABMs/calculateCapacity.js"></script>
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <script src="~/Scripts/Plugins/autocompleteMultiple.js"></script>
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToDelete, Resources.Resources.RuleWArt)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Initialize">
+        var globalParams = new ParametrosGlobales;
+    </script>
+
+    <script type="text/javascript" title="Save Form Data">
+        $(document).ready(function () {
+            $(window).on('beforeunload', function () {
+                sessionStorage.setItem('Username', $('#Username').val());
+                sessionStorage.setItem('FileNumber', $('#FileNumber').val());
+                //Products
+                if ($("#HasMaxProductPrice").is(':checked')) {
+                    sessionStorage.setItem('MaxProductPrice', $('#MaxProductPrice').val());
+                } else {
+                    sessionStorage.removeItem('MaxProductPrice');
+                }
+                if ($("#HasMinProductPrice").is(':checked')) {
+                    sessionStorage.setItem('MinProductPrice', $('#MinProductPrice').val());
+                } else {
+                    sessionStorage.removeItem('MinProductPrice');
+                }
+                //Orders
+                if ($("#HasMaxOrderTotal").is(':checked')) {
+                    sessionStorage.setItem('MaxOrderTotal', $('#MaxOrderTotal').val());
+                } else {
+                    sessionStorage.removeItem('MaxOrderTotal');
+                }
+                if ($("#HasMinOrderTotal").is(':checked')) {
+                    sessionStorage.setItem('MinOrderTotal', $('#MinOrderTotal').val());
+                } else {
+                    sessionStorage.removeItem('MinOrderTotal');
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Load Form Data">
+    $(document).ready(function () {
+        var aux = sessionStorage.getItem('Username');
+        if (aux != null && aux != "") $('#Username').val(aux);
+        var aux = sessionStorage.getItem('FileNumber');
+        if (aux != null && aux != ""){
+            $('#FileNumber').val(aux);
+            $('#FileNumberAux').val(aux);
+            var link1 = "<button hidden=\"hidden\" type=\"button\" class=\"btn btn-danger\" id=\"Delete\" data-url=\"@Url.Action("Delete", "ValueSecurity" , new { UserID = -1 })\">@Resources.FormsResources.Delete</button>";
+            var link2 = '@Html.ActionLink(@Html.Resource("EditUser"), "FormEdit", "User", new { UserID = -1 }, new { @id = "EditUser", @class = "btn btn-default", @onclick = "sessionStorage.clear();", hidden = "hidden" })';
+            link1 = link1.replace(-1, aux);
+            link1 = link1.replace("-1", aux);
+            link2 = link2.replace(-1, aux);
+            link2 = link2.replace("-1", aux);
+            $("#Delete").replaceWith(link1);
+            $("#EditUser").replaceWith(link2);
+            $("#Delete").show();
+            $("#EditUser").show();
+        }else{
+            aux = @Html.Raw(Json.Encode(Model.FileNumber));
+            if(aux != null && aux!="" && aux!="null"){
+                $("#Delete").show();
+                $("#EditUser").show();
+            }
+        }
+        //Products
+        aux = sessionStorage.getItem('MaxProductPrice');
+        if (aux != null && aux != "") {
+            $("#HasMaxProductPrice").attr("checked", "checked");
+            $("#MaxProductPrice").removeAttr("disabled");
+            $('#MaxProductPrice').val(aux);
+        }
+        aux = sessionStorage.getItem('MinProductPrice');
+        if (aux != null && aux != "") {
+            $("#HasMinProductPrice").attr("checked", "checked");
+            $("#MinProductPrice").removeAttr("disabled");
+            $('#MinProductPrice').val(aux);
+        }
+
+        //Orders
+        aux = sessionStorage.getItem('MaxOrderTotal');
+        if (aux != null && aux != "") {
+            $("#HasMaxOrderTotal").attr("checked", "checked");
+            $("#MaxOrderTotal").removeAttr("disabled");
+            $('#MaxOrderTotal').val(aux);
+        }
+        aux = sessionStorage.getItem('MinOrderTotal');
+        if (aux != null && aux != "") {
+            $("#HasMinOrderTotal").attr("checked", "checked");
+            $("#MinOrderTotal").removeAttr("disabled");
+            $('#MinOrderTotal').val(aux);
+        }
+    });
+</script>
+    <script type="text/javascript" title="Form Jquery">
+        $(document).ready(function () {
+            $("#HasMaxProductPrice").click(function () {
+                if ($("#HasMaxProductPrice").is(':checked')) {
+                    $("#MaxProductPrice").removeAttr("disabled");
+                } else {
+                    $("#MaxProductPrice").attr("disabled", "disabled");
+                }
+            });
+
+            $("#HasMinProductPrice").click(function () {
+                if ($("#HasMinProductPrice").is(':checked')) {
+                    $("#MinProductPrice").removeAttr("disabled");
+                } else {
+                    $("#MinProductPrice").attr("disabled", "disabled");
+                }
+            });
+
+            $("#HasMaxOrderTotal").click(function () {
+                if ($("#HasMaxOrderTotal").is(':checked')) {
+                    $("#MaxOrderTotal").removeAttr("disabled");
+                } else {
+                    $("#MaxOrderTotal").attr("disabled", "disabled");
+                }
+            });
+
+            $("#HasMinOrderTotal").click(function () {
+                if ($("#HasMinOrderTotal").is(':checked')) {
+                    $("#MinOrderTotal").removeAttr("disabled");
+                } else {
+                    $("#MinOrderTotal").attr("disabled", "disabled");
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Autocomplete">
+    $(document).ready(function () {
+        $("#Username").autocompletar({
+            url: '@Url.Action("Autocomplete", "User")',
+            seleccion: function (event, ui) {
+                $("#Username").val(ui.item.label);
+                $('#FileNumber').val(ui.item.id);
+                $('#FileNumberAux').val(ui.item.id);
+                sessionStorage.setItem("Username",ui.item.label);
+                sessionStorage.setItem("FileNumber", ui.item.id);
+                var link1 = "<button hidden=\"hidden\" type=\"button\" class=\"btn btn-danger\" id=\"Delete\" data-url=\"@Url.Action("Delete", "ValueSecurity" , new { UserID = -1 })\">@Resources.FormsResources.Delete</button>";
+                var link2 = '@Html.ActionLink(@Html.Resource("EditUser"), "FormEdit", "User", new { UserID = -1 }, new { @id = "EditUser", @class = "btn btn-default", @onclick = "sessionStorage.clear();", hidden = "hidden" })';
+                link1 = link1.replace(-1, ui.item.id);
+                link1 = link1.replace("-1", ui.item.id);
+                link2 = link2.replace(-1, ui.item.id);
+                link2 = link2.replace("-1", ui.item.id);
+                //FIXME: hola
+                $("#Delete").replaceWith(link1);
+                $("#EditUser").replaceWith(link2);
+                $("#Delete").show();
+                $("#EditUser").show();
+                return false;
+            },
+            keyup: function (event, ui) {
+                var valor = $("#Username").val();
+                if (valor == null || valor == "") {
+                    $("#FileNumber").val("");
+                    $("#FileNumberAux").val("");
+                    sessionStorage.setItem("Username","");
+                    sessionStorage.setItem("FileNumber", "");
+                    $("#Delete").hide();
+                    $("#EditUser").hide();
+                }
+            }
+        });
+    });
+    </script>
+
+    <script type="text/javascript" title="AutocompleteMultiple">
+        $(document).ready(function () {
+            $("#Categories").autocompletarMultiple({
+                url: '@Url.Action("Autocomplete", "CategoryABM")',
+                initSelection: function(element, callback){
+                    var data = @Html.Raw(Json.Encode(Model.initialCategories));
+                    callback(data);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <form class="form-horizontal" id="deposit-form" name="deposit-form" action="@Url.Action("Save","ValueSecurity")" autocomplete="on" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            @Html.ValidationMessageFor(m => m.error)
+            <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Username):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.Username, new {@class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Username)
+                    </div>
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.FileNumber):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.FileNumber, new {@id = "FileNumberAux", disabled = "disabled", @class = "form-control" })
+                        <div class="form-group" hidden>
+                            @Html.TextBoxFor(m => m.FileNumber, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.FileNumber)
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <fieldset id="product-form-sizeinfo" name="product-form-sizeinfo">
+                    <legend>@Html.Resource("ProductsSecurity"):</legend>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasMaxProductPrice) @Html.DisplayNameFor(m => m.HasMaxProductPrice):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                @if (Model.HasMaxProductPrice) {
+                                    @Html.TextBoxFor(m => m.MaxProductPrice, new { @class = "form-control form-number-input" })
+                                } else {
+                                    @Html.TextBoxFor(m => m.MaxProductPrice, new { @class = "form-control form-number-input", disabled = "disabled" })
+                                }
+                            </div>
+                                @Html.ValidationMessageFor(m => m.MaxProductPrice)
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasMinProductPrice) @Html.DisplayNameFor(m => m.HasMinProductPrice):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                @if (Model.HasMinProductPrice) {
+                                    @Html.TextBoxFor(m => m.MinProductPrice, new { @class = "form-control form-number-input" })
+                                } else {
+                                    @Html.TextBoxFor(m => m.MinProductPrice, new { @class = "form-control form-number-input", disabled = "disabled" })
+                                }
+                                @Html.ValidationMessageFor(m => m.MinProductPrice)
+                            </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Categories):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Categories, new { @class = "select2-container select2-container-multi populate", style = "width:100%" })
+                            @Html.ValidationMessageFor(m => m.Categories)
+                        </div>
+                        <p class="col-lg-3">@Resources.FormsResources.CategoriesInfo</p>
+                    </div>
+                </fieldset>
+
+                <!-- Ordenes -->
+                <fieldset id="product-form-sizeinfo" name="product-form-sizeinfo">
+                    <legend>@Html.Resource("OrdersSecurity"):</legend>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasMaxOrderTotal) @Html.DisplayNameFor(m => m.HasMaxOrderTotal):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                @if (Model.HasMaxOrderTotal) {
+                                    @Html.TextBoxFor(m => m.MaxOrderTotal, new { @class = "form-control form-number-input" })
+                                } else {
+                                    @Html.TextBoxFor(m => m.MaxOrderTotal, new { @class = "form-control form-number-input", disabled = "disabled" })
+                                }
+                                @Html.ValidationMessageFor(m => m.MaxOrderTotal)
+                            </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasMinOrderTotal) @Html.DisplayNameFor(m => m.HasMinOrderTotal):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                @if (Model.HasMinOrderTotal) {
+                                    @Html.TextBoxFor(m => m.MinOrderTotal, new { @class = "form-control form-number-input" })
+                                } else {
+                                    @Html.TextBoxFor(m => m.MinOrderTotal, new { @class = "form-control form-number-input", disabled = "disabled" })
+                                }
+                                @Html.ValidationMessageFor(m => m.MinOrderTotal)
+                            </div>
+                            </div>
+                    </div>
+                </fieldset>
+                <div class="btn-toolbar">
+                    <button type="submit" class="btn btn-success" id="Save" value="SubmitProduct">@Resources.FormsResources.Save</button>
+                    @Html.ActionLink(@Resources.FormsResources.Cancel, "Index", "ValueSecurity", new { }, new { @class = "btn btn-default", @id = "Cancel" })
+                    <button hidden="hidden" type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "ValueSecurity" , new { UserID = Model.FileNumber })">@Resources.FormsResources.Delete</button>
+                    @Html.ActionLink(@Html.Resource("EditUser"), "FormEdit", "User", new { UserID = Model.FileNumber }, new { @id = "EditUser", @class = "btn btn-default", @onclick = "sessionStorage.clear();", hidden = "hidden" })
+                    @Html.ActionLink(@Html.Resource("EditSecurity"), "Index", "Security", null, new { @id = "EditSecurity", @class = "btn btn-default", @onclick = "sessionStorage.clear();"})
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+
+
+
+</html>

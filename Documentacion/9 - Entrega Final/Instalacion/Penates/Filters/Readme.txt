@@ -1,0 +1,1 @@
+﻿Aca se ponen clases que hacen logica de filtrado o validacion. Se usa para simplificar los controladores y abstraer codigo

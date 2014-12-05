@@ -1,0 +1,160 @@
+﻿@model Penates.Models.ViewModels.Transactions.OrderItemsViewModel
+@using Penates.Helpers
+
+@{
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-modal-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script type="text/javascript" title="Delete Confirm">
+    $(document).ready(function () {
+        $('@Model.getJqueryID("Delete")').click(function () {
+            if (confirm('@String.Format(Resources.Messages.SureToUnassign, Resources.Resources.ProductWArt, Model.OrderID)')) {
+                var ur = $(this).data('url');
+                var param = {};
+                var params = [];
+                var p = '@Model.OrderID';
+                param = {
+                    name: "OrderID",
+                    value: p
+                }
+                params.push(param);
+                var p = '@Model.SupplierID';
+                param = {
+                    name: "SupplierID",
+                    value: p
+                }
+                params.push(param);
+                p = '@Model.ProductID';
+                param = {
+                    name: "ProductID",
+                    value: p
+                }
+                params.push(param);
+                window['@Model.concatWithID("modalFormAjax")'](ur, params);
+            }
+        });
+    });
+    </script>
+
+    <script type="text/javascript" title="FormAjax">
+    $(document).ready(function () {
+        $("#" + "@Model.concatWithID("modalSave")").click(function () {
+            var params = $("#" + '@Model.concatWithID("modalForm")' + " :input").serialize() + "&ViewId=" + '@Model.ViewId';
+            window['@Model.concatWithID("modalFormAjax")']('@Url.Action("AddProduct","OrderItemsForm")', params);
+        });
+
+        $('@Model.getJqueryID("modalCancel")').click(function () {
+            $('@Model.getJqueryID("modal")').modal("hide");
+        });
+    });
+</script>
+
+    <script type="text/javascript" title="AjaxCall">
+        eval("var " + '@Model.concatWithID("modalFormAjax")');
+        @Model.concatWithID("modalFormAjax") = function(ur, params){
+            $.ajax({
+                type: "POST",
+                url: ur,
+                data: params,
+                beforeSend : function(){
+                    $("@Model.getJqueryID("formProcessing")").show();
+                },
+                success: function (response) {
+                    if (typeof @Model.concatWithID("formSubmitSuccess") == 'undefined' || !$.isFunction(@Model.concatWithID("formSubmitSuccess"))) {
+                        var message = response.title;
+                        message = message + ": " + response.message;
+                        $("@Model.getJqueryID("formProcessing")").hide();
+                        alert(message);
+                        $('@Model.getJqueryID("modal")').modal("hide");
+                    }else{
+                        $("@Model.getJqueryID("formProcessing")").hide();
+                        window['@Model.concatWithID("formSubmitSuccess")'](response.title, response.message);
+                    }
+                },
+                error: function (obj, textStatus, errorThrown) {
+                    if(obj.status == 550){
+                        $('@Model.getJqueryID("modalContent")').empty();
+                        $('@Model.getJqueryID("modalContent")').html(obj.responseText);
+                    }else{
+                        var m = '<button type="button" class="close" data-dismiss="alert">×</button>\n';
+                        m = m + '<h4><strong>' + errorThrown + '</strong></h4>';
+                        m = m + '<p>' + obj.responseText + '</p>';
+                        $('@Model.getJqueryID("addFormErrorText")').html(m);
+                        $('@Model.getJqueryID("addFormErrorText")').show();
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">@Html.Resource("Title")</h4>
+    </div>
+    <div class="modal-body">
+        <div id="@Model.concatWithID("addFormErrorText")" class="alert alert-dismissable alert-danger" hidden="hidden">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4><strong id="@Model.concatWithID("addFormErrorHeading")"></strong></h4>
+            <div id="@Model.concatWithID("addFormErrorText")"></div>
+        </div>
+        <div id="@Model.concatWithID("formProcessing")" class="row text-center" hidden="hidden">
+            <p><img src="../../Content/images/ajax-loader.gif">@Resources.Resources.Processing</p>
+        </div>
+        <div id="@Model.concatWithID("modalForm")" class="form-horizontal">
+            @Html.AntiForgeryToken()
+            @Html.ValidationMessageFor(m => m.error)
+            <div class="form-group">
+                <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.ProductID):</label>
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.ProductID, new { disabled = "disabled", @class = "form-control" })
+                    <div hidden>
+                        @Html.TextBoxFor(m => m.OrderID, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.ProductID, new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ProductID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.ProductName):</label>
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.ProductName, new { disabled = "disabled", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ProductName)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">@Html.DisplayNameFor(m => m.SupplierProductID):</label>
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.SupplierProductID, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.SupplierProductID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.Boxes):</label>
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.Boxes, new { required = "required", @class = "form-control form-number-input" })
+                    @Html.ValidationMessageFor(m => m.Boxes)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="btn-toolbar">
+            <button type="button" class="btn btn-success" id="@Model.concatWithID("modalSave")">@Resources.FormsResources.Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="@Model.concatWithID("modalCancel")">@Resources.FormsResources.Cancel</button>
+            @if (@Model.edit) {
+                <button type="button" class="btn btn-danger" id="@Model.concatWithID("Delete")" data-url="@Url.Action("UnassignProduct", "OrderItemsForm", new { id = Model.SupplierID })">@Resources.FormsResources.Unassign</button>
+                @Html.ActionLink(@Html.Resource("ViewProduct"), "ProductFormUpdate", "Forms", new { ProductID = Model.ProductID }, new { @class = "btn btn-default"})
+            }
+        </div>
+    </div>
+</body>
+</html>

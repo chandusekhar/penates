@@ -1,0 +1,134 @@
+﻿@model Penates.Models.ViewModels.Transactions.ProductsReceptions.SelectContainerModel
+
+@{
+    ViewBag.Title = "PackAssignation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <script src="~/Scripts/Plugins/jQueryListIDs.js"></script>
+
+    <script type="text/javascript" title="Autocomplete">
+    $(document).ready(function () {
+        $(".ContainerTypeAutocomplete").autocompletar({
+            url: '@Url.Action("ContainerTypeAutocomplete", "ProductsReceptions")'
+        });
+    });
+    </script>
+
+
+
+    <script type="text/javascript" title="Autocomplete">
+        $(document).ready(function () {
+            $(".LoteAutocomplete").autocompletar({
+                url: '@Url.Action("Autocomplete", "PacksABM")'
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Autocomplete">
+        $(document).ready(function () {
+            $('input[type="checkbox"]').click(function () {
+                var index = getListIndex(this.id);
+                if ($(this).is(':checked')) {
+                    $("#ContainerRow_" + index).hide();
+                } else {
+                    $("#ContainerRow_" + index).show();
+                }
+            });
+        });
+    </script>
+
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>@Html.Resource("Title")</h2>
+            <br />
+            <br />
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "")
+            {
+                if (@Model.Error == true)
+                {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+
+            <form class="form-horizontal" action="@Url.Action("requestContainersTempDeposit", "ProductsReceptions")" method="get">
+                <fieldset>
+                    <div class="panel panel-default">
+                        @for (int i = 0; i < Model.ProductBoxes.Count; i++) {
+                            <fieldset>
+                                <legend class="text-center" style="font-size: 20px">@Model.ProductBoxes[i].ProvidedBy.Product.Name:</legend>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <label class="col-sm-4 col-sm-offset-1 control-label"></label>
+                                        <div class="col-lg-4">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.Transitory[i], new { @class = "" }) @Html.Resource("IsTransitory")
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="ContainerRow_@i">
+                                        <label class="col-sm-4 col-sm-offset-1 control-label">@Html.Resource("Container"):</label>
+                                        <div class="col-sm-3">
+                                            @Html.TextBoxFor(m => m.ContainersNames[i], new { @class = "form-control input-sm ContainerTypeAutocomplete" })
+                                            @Html.TextBoxFor(m => m.Containers[i], new { type = "hidden" })
+                                            @Html.TextBoxFor(m => m.ProductBoxes[i].ProvidedBy.IDProduct, new { type = "hidden", name = "ProductIDs[" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-sm-4 col-sm-offset-1 control-label">@Html.Resource("Lote"):</label>
+                                        <div class="col-sm-3">
+                                            @Html.TextBoxFor(m => m.PackSerialNumber[i], new { @class = "form-control input-sm LoteAutocomplete" })
+                                            @Html.TextBoxFor(m => m.PackID[i], new { type = "hidden" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <br/>
+                        }
+                        <div hidden="hidden">
+                            @Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.OrderID, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.COT, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.DistributionCenterID, new { @class = "form-control" })
+                            @Html.CheckBoxFor(m => m.IsPurchase)
+                            @Html.CheckBoxFor(m => m.LeaveInTemporaryDeposit )
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="col-lg-offset-5">
+                    <div class="btn-toolbar">
+                        <button class="btn btn-success" id="finish" value="finishOrder" type="submit">@Resources.FormsResources.Next</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        </div>
+</body>
+</html> 

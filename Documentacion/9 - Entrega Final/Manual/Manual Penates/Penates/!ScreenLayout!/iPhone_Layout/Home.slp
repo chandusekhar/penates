@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Home</title>
+<link rel="StyleSheet" href="mobile.css" type="text/css" />
+</head>
+
+<body>
+<div class="searchholder">
+		<table class="searchholdertable">
+			<tr>
+				<td class="home"><a href="Home.slp"><img src="home_default.png" 
+														 alt="" style="border: none;" 
+														 border="0" /></a></td>
+				<td class="searchfield">
+				<div class="wSearchField"><?rh-msp-search-text-box id="searchBox" 
+				 widgettype="searchfield" placeholder="{{Search}}" class="wSearchField" 
+				 type="search" ?><?rh-msp-search-link-start class="wSearchLink" 
+				 widgettype="navlinksearch" related-id="searchBox" ?><img 
+				 src="Search.png" alt="" class="wSearchLink" border="0" /><?rh-msp-search-link-end ?></div></td>
+			</tr>
+		</table>
+</div>
+<div class="contentholderlight">
+	<div class="optionsholderlight">
+		<table class="optionslight">
+			<tr>
+				<td class="title"><?rh-variable_start name="project-title" 
+														 format="default" 
+														 value="Lorem Ipsum" ?>Lorem Ipsum<?rh-variable_end ?></td>
+			</tr>
+		</table>
+	</div>
+	<ol class="homepagelinks">
+		<li class="homepagelink"><a href="Table_of_Contents.slp"><?rh-lng-string 
+		 lngname="Contents" lngvalue="Contents" ?><img src="toc.png" alt="" 
+														 style="border: none;" 
+														 border="0" /></a></li>
+		<li class="homepagelink"><a href="Index_rh.slp"><?rh-lng-string 
+		 lngname="Index" lngvalue="Index" ?><img src="index.png" alt="" 
+												 style="border: none;" 
+												 border="0" /></a></li>
+		<li class="homepagelink"><a href="Glossary.slp"><?rh-lng-string 
+		 lngname="Glossary" lngvalue="Glossary" ?><img src="glossary.png" 
+														 alt="" style="border: none;" 
+														 border="0" /></a></li>
+	</ol>
+</div>
+</body>
+</html>

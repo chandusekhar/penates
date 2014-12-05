@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="04cb7339799a405a8b502ce0ccc92ca4" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="PenatesModel.Box" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Client" Width="1.5" PointX="7.5" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.CommercialAgreement" Width="1.5" PointX="19.375" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Container" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.ContainerType" Width="1.5" PointX="0.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Deposit" Width="1.5" PointX="12" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.DistributionCenter" Width="1.5" PointX="7.5" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Hall" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.InternalDistributionCenter" Width="1.5" PointX="9.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Inventory" Width="1.5" PointX="9.75" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.ItemsState" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.NotificationType" Width="1.5" PointX="10.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Pack" Width="1.5" PointX="19.375" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Policy" Width="1.5" PointX="9.75" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.ProductCategory" Width="1.5" PointX="9.75" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Product" Width="1.5" PointX="12" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.ReceivedProduct" Width="1.5" PointX="10.5" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Reception" Width="1.5" PointX="9.75" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Role" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Sale" Width="1.5" PointX="9.75" PointY="33.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Sector" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Shelf" Width="1.5" PointX="9.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Stock_Invented" Width="1.5" PointX="12" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Supplier" Width="1.5" PointX="17.125" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.TemporaryDeposit" Width="1.5" PointX="12" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PenatesModel.Transfer" Width="1.5" PointX="9.75" PointY="16.875" IsExpanded="true" />
+        <AssociationConnector Association="PenatesModel.FK_Items_ItemsStates" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_Items_Pack" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_ReceivedProducts_Box" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_CommercialAgreement_Supliers" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_Containers_ContainerTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_Deposits_InternalDistributionCenter" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_Inventory_DistributionCenter" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_Order_DistributionCenter" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_Sale_DistributionCenter" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_Transfers_DistributionCenter" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_Transfers_DistributionCenter1" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_Hall_Sectors" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_TemporaryDeposits_InternalDistributionCenter" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_Stock_Invented_Inventory" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.FK_Products_ProductCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.Agreed" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.DistributionCenter_Policies" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.Policies_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.ProductCategoryHierarchy" ManuallyRouted="false" />
+        <AssociationConnector Association="PenatesModel.TransferedItems" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="PenatesModel.InternalDistributionCenter" />
+        <AssociationConnector Association="PenatesModel.BoxProduct" />
+        <EntityTypeShape EntityType="PenatesModel.ExternalDistributionCenter" Width="1.5" PointX="9.75" PointY="8.625" />
+        <InheritanceConnector EntityType="PenatesModel.ExternalDistributionCenter" />
+        <EntityTypeShape EntityType="PenatesModel.ExternalBox" Width="1.5" PointX="2.625" PointY="23.5" />
+        <InheritanceConnector EntityType="PenatesModel.ExternalBox" />
+        <EntityTypeShape EntityType="PenatesModel.ShelfsSubdivision" Width="1.5" PointX="12.125" PointY="4.125" />
+        <AssociationConnector Association="PenatesModel.FK_ShelfsSubdivitions_Shelfs1" />
+        <EntityTypeShape EntityType="PenatesModel.ProvidedBy" Width="1.5" PointX="14.625" PointY="26" />
+        <AssociationConnector Association="PenatesModel.ProvidedBySupplier" />
+        <AssociationConnector Association="PenatesModel.ProvidedByProduct" />
+        <AssociationConnector Association="PenatesModel.ExternalBoxExternalDistributionCenter" />
+        <EntityTypeShape EntityType="PenatesModel.ID" Width="1.5" PointX="3.375" PointY="8.75" />
+        <EntityTypeShape EntityType="PenatesModel.SupplierOrder" Width="1.5" PointX="16.625" PointY="33.625" />
+        <AssociationConnector Association="PenatesModel.FK_OrderedProducts_Order1" />
+        <AssociationConnector Association="PenatesModel.FK_Reception_SupplierOrders" />
+        <AssociationConnector Association="PenatesModel.SupplierOrderSupplier" />
+        <EntityTypeShape EntityType="PenatesModel.City" Width="1.5" PointX="5.25" PointY="24.75" />
+        <EntityTypeShape EntityType="PenatesModel.Country" Width="1.5" PointX="0.75" PointY="26" />
+        <EntityTypeShape EntityType="PenatesModel.Province" Width="1.5" PointX="3" PointY="25.875" />
+        <AssociationConnector Association="PenatesModel.FK_City_Province" />
+        <AssociationConnector Association="PenatesModel.FK_Clients_City" />
+        <AssociationConnector Association="PenatesModel.FK_DistributionCenter_City" />
+        <AssociationConnector Association="PenatesModel.FK_Province_Country" />
+        <AssociationConnector Association="PenatesModel.FK_Box_Sale" />
+        <AssociationConnector Association="PenatesModel.DepositSector" />
+        <AssociationConnector Association="PenatesModel.DepositProductCategory" />
+        <AssociationConnector Association="PenatesModel.SectorProductCategory" />
+        <AssociationConnector Association="PenatesModel.HallProductCategory" />
+        <EntityTypeShape EntityType="PenatesModel.Notification" Width="1.5" PointX="15" PointY="11.875" />
+        <EntityTypeShape EntityType="PenatesModel.User" Width="1.5" PointX="17.25" PointY="15.375" />
+        <AssociationConnector Association="PenatesModel.FK_Notifications_DistributionCenter" />
+        <AssociationConnector Association="PenatesModel.FK_Notifications_NotificationType" />
+        <AssociationConnector Association="PenatesModel.FK_Notifications_Policies" />
+        <AssociationConnector Association="PenatesModel.Administred" />
+        <AssociationConnector Association="PenatesModel.Receives" />
+        <AssociationConnector Association="PenatesModel.UserRole" />
+        <AssociationConnector Association="PenatesModel.FK_Users_Users1" />
+        <AssociationConnector Association="PenatesModel.FK_Containers_TemporaryDeposits" />
+        <AssociationConnector Association="PenatesModel.SaleClient" />
+        <AssociationConnector Association="PenatesModel.FK_Containers_ShelfsSubdivisions" />
+        <EntityTypeShape EntityType="PenatesModel.Rack" Width="1.5" PointX="7.5" PointY="3.5" />
+        <AssociationConnector Association="PenatesModel.FK_Racks_Hall" />
+        <AssociationConnector Association="PenatesModel.FK_Shelfs_Racks" />
+        <AssociationConnector Association="PenatesModel.RackProductCategory" />
+        <EntityTypeShape EntityType="PenatesModel.SupplierOrderItem" Width="2.625" PointX="18.875" PointY="29.75" />
+        <AssociationConnector Association="PenatesModel.FK_SupplierOrderItems_ProvidedBy" />
+        <AssociationConnector Association="PenatesModel.FK_SupplierOrderItems_SupplierOrders" />
+        <EntityTypeShape EntityType="PenatesModel.InternalBox" Width="1.5" PointX="0.625" PointY="23.625" />
+        <InheritanceConnector EntityType="PenatesModel.InternalBox" />
+        <AssociationConnector Association="PenatesModel.InternalBoxContainer" />
+        <EntityTypeShape EntityType="PenatesModel.CartItem" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="PenatesModel.ProductCartItem" />
+        <EntityTypeShape EntityType="PenatesModel.OrdersValueSecurity" Width="1.5" PointX="19.5" PointY="15.375" />
+        <EntityTypeShape EntityType="PenatesModel.ProductsValueSecurity" Width="1.5" PointX="19.5" PointY="17.875" />
+        <AssociationConnector Association="PenatesModel.FK_OrdersValueSecurity_Users" />
+        <AssociationConnector Association="PenatesModel.FK_ProductsValueSecurity_Users" />
+        <AssociationConnector Association="PenatesModel.ProductsValueSecurityProductCategory" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,72 @@
+﻿@model Penates.Models.ViewModels.Home.DashBoardViewModel
+@using Penates.Models
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html lang="en-us" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+</head>
+
+
+
+<body>
+    <div class="container">
+        <h3 class="text-center">@Penates.App_GlobalResources.Forms.ModelFormsResources.Welcome @Model.UserName!</h3>
+        @if (@Model.Message != null && @Model.Message != "") {
+            if (@Model.Error == null || @Model.Error == false) {
+                <div class="alert alert-dismissable alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    @Model.Message
+                </div>
+            } else {
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    @Model.Message
+                </div>
+            }
+        }
+        @if (!String.IsNullOrWhiteSpace(Model.Warning)) {
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                @Model.Warning
+            </div>
+        }
+        <div class="row">       
+            <div id="bloc2" class="col-lg-6">
+                <h3>@Penates.App_GlobalResources.Forms.ModelFormsResources.Notifications</h3>
+                @{Html.RenderPartial("~/Views/Home/Tables/_NotificationsTable.cshtml", new TableAjaxViewModel("NotificationsTableId")
+                {
+                    AjaxRequest = @Url.Action("GetNotifications", "Notifications"),
+                    DeleteAction = "DeleteNotification",
+                    DeleteController = "Notifications",
+                    Params = new { UserName = Model.UserName },
+                    RefreshFunction = "TableRefresh",
+                    useDefault = true,
+                    ServerProcessing = false
+                });}
+            </div>                       
+            <div id="padding" class="col-lg-1"  style="width:1px"></div>                  
+            <div id="bloc1" class="col-lg-5">
+                <h3>@Penates.App_GlobalResources.Forms.ModelFormsResources.ActivityStream</h3>
+                @{Html.RenderPartial("~/Views/Home/Tables/_ActivityStreamTable.cshtml", new TableAjaxViewModel("ActivityStreamTableId")
+                {
+                    AjaxRequest = @Url.Action("GetUpdates", "ActivityStream"),
+                    Params = new { UserName = Model.UserName },
+                    RefreshFunction = "TableRefreshActivityStream",
+                    useDefault = true,
+                    ServerProcessing = false
+                });}
+            </div>
+
+
+            
+        </div>
+    </div>
+</body>
+</html>

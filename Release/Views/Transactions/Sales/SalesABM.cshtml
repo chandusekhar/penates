@@ -1,0 +1,133 @@
+﻿@model Penates.Models.ViewModels.ABMs.ABMViewModel
+@using Penates.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#addSale').click(function () {
+                var value = $("#SelectedValue").val();
+                if (value == undefined || value == null || value == "") {
+                    alert("@String.Format(Resources.FormsErrors.RequiredError, Resources.Resources.DistributionCenterWArt)");
+                } else {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+
+
+
+    <script type="text/javascript" title="Autocomplete">
+    $(document).ready(function () {
+        $("#SelectedValue").autocompletar({
+            url: '@Url.Action("Autocomplete", "DistributionCenterABM")',
+            seleccion: function (event, ui) {
+                $('#SelectedValue').val(ui.item.id);
+                globalParams.addParam("DistributionCenterID", ui.item.id);
+                $("#salesTable").show();
+                window["@Model.tableRefresh"]();
+                var link = "@Url.Action("Index", "SaleProcess", new {DistributionCenterID = -1})";
+                link = link.replace("-1", ui.item.id);
+                $("#addSale").data('url') = link;
+                $("#addSale").show();
+                sessionStorage.setItem("FilterID",ui.item.id);
+                return false;
+            },
+            keyup: function (event, ui) {
+                var valor = $("#SelectedValue").val();
+                if (valor == null || valor == "") {
+                    $("#salesTable").hide();
+                    $("#addSale").show();
+                }
+            }
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h3>@Html.Resource("Title")</h3>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "") {
+                if (@Model.Error == true) {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                } else {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            @if (Model.SelectedValue == null || Model.SelectedValue == 0) {
+                                <button type="button" class="btn btn-success btn-xsr" id="addSale" data-url="@Url.Action("Index", "SalesProcess", new { DistributionCenterID = Model.SelectedValue })">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            } else {
+                                <button type="button" class="btn btn-success btn-xsr" id="addSale" hidden="hidden" data-url="@Url.Action("Index", "SalesProcess", new { DistributionCenterID = Model.SelectedValue })">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            }
+                            <a id="tableRefresh" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        </div>
+                        <label class="col-sm-2 col-sm-offset-3 control-label">@Html.Resource("SelectDC"):</label>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.SelectedValue, new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="salesTable" hidden="hidden">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <a class="btn btn-success btn-lg btn-xs" data-toggle="modal" data-target="#OrderFormModal">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                                <a id="tableRefresh" class="btn btn-default btn-lg btn-xs">
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                </a>
+                            </div>
+                            <label class="col-sm-2 control-label">@Html.Resource("SelectDC"):</label>
+                            <div class="col-sm-3">
+                                @Html.TextBoxFor(model => model.SelectedValue, new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @{Html.RenderPartial("~/Views/Transactions/Tables/_SaleTable.cshtml", new TableAjaxViewModel("Order") {
+                    AjaxRequest = Url.Action("ABMAjax", "OrdersABM"),
+                    RefreshFunction = @Model.tableRefresh,
+                    ServerProcessing = true
+                });}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

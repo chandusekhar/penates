@@ -1,0 +1,142 @@
+﻿@model Penates.Models.ViewModels.Inventory.CreateInventoryViewModel
+@using Penates.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <meta charset=utf-8 />
+    
+    <script type="text/javascript" title="Global Parameters">
+    var globalParams = new ParametrosGlobales();
+    </script>
+
+    <script type="text/javascript" title="Clear Form Data">
+    $(document).ready(function () {
+        sessionStorage.clear();
+    });
+    </script>
+
+    <script type="text/javascript" title="Autocomplete">
+        $(document).ready(function () {
+            $("#SelectedValue").autocompletar({
+                url: '@Url.Action("Autocomplete", "DistributionCenterABM")',
+                seleccion: function (event, ui) {
+                    $('#SelectedValue').val(ui.item.id);
+                    globalParams.addParam("DistributionCenterID", ui.item.id);
+                    $("#temporaryDepositsTable").show();
+                    //window["@Model.tableRefresh"]();
+                    var link = "<a id=\"addTemporalDeposit\" class=\"btn btn-success btn-lg btn-xs\" href = \"@Url.Action("Index", "DistributionCenterReport", new {DistributionCenterID = -1})\"><span class=\"glyphicon glyphicon-plus\"></span</a>";
+                    link = link.replace("-1", ui.item.id);
+                    $("#addTemporalDeposit").replaceWith(link);
+                    sessionStorage.setItem("FilterID",ui.item.id);
+                    return false;
+                },
+                keyup: function (event, ui) {
+                    var valor = $("#SelectedValue").val();
+                    if (valor == null || valor == "") {
+                        $("#temporaryDepositsTable").hide();
+                    }
+                }
+            });
+        });
+    </script>
+
+
+</head>
+<body>
+    <div id="modalDiv">
+        <div class="modal fade" id="DistributionCenterModal" tabindex="-1" role="dialog" aria-labelledby="DistributionCenterModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">@Html.Resource("Title")</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row span7 text-center">
+                                <a class="btn btn-group-lg btn-info" href="@Url.Action("AddInternalForm","DistributionCenterForms")">@Html.Resource("AddInternalDC")</a>
+                                <a class="btn btn-group-lg btn-info" href="@Url.Action("AddExternalForm", "DistributionCenterForms")">@Html.Resource("AddExternalDC")</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <h1>@Html.Resource("Title")</h1>
+            <br />
+            <br />
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "") {
+                if (@Model.Error == true) {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                } else {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <form class="form-horizontal" action="@ViewBag.Action" method="get">
+                <fieldset>
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <label class="col-sm-2 control-label">@Html.Resource("Code"):</label>
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(model => model.Code, new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-2 control-label">@Html.Resource("InventoryName"):</label>
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(model => model.InventoryName, new { @class = "form-control input-sm" })
+                                </div>
+                            </div>  
+                            <div class="row">
+                                <label class="col-sm-2 control-label">@Html.Resource("SelectDC"):</label>
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(model => model.SelectedValue, new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <label class="col-sm-2 control-label">@Html.Resource("TypeList"):</label>
+                                <div class="col-sm-2">
+                                    @Html.DropDownList("TypeSelectList", new SelectList(ViewBag.TypeList, "Value", "Text"), new { @class = "form-control input-sm" })
+                                </div>
+
+                            <div class="col-sm-1">
+                                <button id="showInventory" type="submit" class="btn btn-default btn-lg btn-xs">
+                                    <span class="glyphicon glyphicon-stats"></span>
+                                </button>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div><br>
+    </div>
+</body>
+</html>

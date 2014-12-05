@@ -1,0 +1,243 @@
+﻿@model Penates.Models.ViewModels.ABMs.ABMViewModel
+@using Penates.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <meta charset=utf-8 />
+
+    <script>
+        $(document).ready(function () {
+            $("#tableRefresh").click(function (e) {
+                window["@Model.tableRefresh"]();
+            });
+        });
+    </script>
+    <script type="text/javascript" title="Initialize">
+    var globalParams = new ParametrosGlobales;
+    $(document).ready(function(){
+        var iniVal = @Html.Raw(Json.Encode(Model.SelectedValue));
+        var link = "<a id=\"addSectors\" class=\"btn btn-success btn-lg btn-xs\" href = \"@Url.Action("Index", "SectorsForms", new { param=-1})\"><span class=\"glyphicon glyphicon-plus\"></span</a>";
+        var parametros;
+        if(iniVal == null || iniVal == 0){
+            var aux = sessionStorage.getItem("FilterID");
+            if(aux == null || aux == ""){
+                $("#SelectedValue").val("");
+                $("#sectorsTable").hide();
+            }else{
+                $("#SelectedValue").val(aux);
+                globalParams.addParam("DistributionCenterID", aux);
+                parametros = "DistributionCenterID=" + aux;
+                $("#sectorsTable").show();
+            }
+        }else{
+            globalParams.addParam("DistributionCenterID", iniVal);
+            parametros = "DistributionCenterID=" + iniVal;
+            $("#sectorsTable").show();
+        }
+        iniVal = @Html.Raw(Json.Encode(ViewBag.DepositID));
+        if(iniVal == null){
+            var aux = sessionStorage.getItem("DepositID");
+            var aux2 = sessionStorage.getItem("DepositName");
+            if(aux != null && aux != "" && aux2 != null && aux2 != ""){
+                globalParams.addParam("DepositID", aux);
+                $('#DepositFilter').val(aux2);
+                $('#DepositID').val(aux);
+                if(parametros != null && parametros != ""){
+                    parametros = parametros + "&";
+                }
+                parametros = parametros + "DepositID=" + aux;
+                $("#sectorsTable").show();
+            }
+        }else{
+            globalParams.addParam("DepositID", iniVal);
+            if(parametros != null && parametros != ""){
+                parametros = parametros + "&";
+            }
+            parametros = parametros + "DepositID=" + iniVal;
+            $("#sectorsTable").show();
+        }
+        if(parametros != null && parametros != ""){
+            link = link.replace("param=-1", parametros);
+            $("#addSectors").replaceWith(link);
+        }
+    });
+    </script>
+
+    <script type="text/javascript" title="Clear Form Data">
+        $(document).ready(function () {
+            var aux = sessionStorage.getItem("FilterID");
+            var auxDepoID = sessionStorage.getItem("DepositID");
+            var auxDepoName = sessionStorage.getItem("DepositName");
+            sessionStorage.clear();
+            if(aux != null && aux != ""){
+                sessionStorage.setItem("FilterID", aux);
+            }
+            if(auxDepoID != null && auxDepoID != "" && auxDepoName != null && auxDepoName != ""){
+                sessionStorage.setItem("DepositID", auxDepoID);
+                sessionStorage.setItem("DepositName", auxDepoName);
+            }
+        });
+    </script>
+
+    <script type="text/javascript" title="Autocomplete">
+        $(document).ready(function () {
+            $("#SelectedValue").autocompletar({
+                url: '@Url.Action("DistributionCenterAutocomplete", "DepositsABM")',
+                seleccion: function (event, ui) {
+                    $('#SelectedValue').val(ui.item.id);
+                    globalParams.addParam("DistributionCenterID", ui.item.id);
+                    globalParams.deleteParam("DepositID");
+                    $("#DepositFilter").val("");
+                    var link = "<a id=\"addSectors\" class=\"btn btn-success btn-lg btn-xs\" href = \"@Url.Action("Index", "SectorsForms", new {DistributionCenterID = -1})\"><span class=\"glyphicon glyphicon-plus\"></span</a>";
+                    $("#sectorsTable").show();
+                    window["@Model.tableRefresh"]();
+                    link = link.replace("-1", ui.item.id);
+                    $("#addSectors").replaceWith(link);
+                    sessionStorage.setItem("FilterID",ui.item.id);
+                    return false;
+                },
+                keyup: function (event, ui) {
+                    var valor = $("#SelectedValue").val();
+                    if (valor == null || valor == "") {
+                        globalParams.deleteParam("DistributionCenterID");
+                        valor = $("#DepositFilter").val();
+                        sessionStorage.setItem("FilterID","");
+                        if(valor == null || valor == ""){
+                            $("#sectorsTable").hide();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" title="Autocomplete">
+        $(document).ready(function () {
+            $("#DepositFilter").autocompletar({
+                url: '@Url.Action("Autocomplete", "DepositsABM")',
+                params: globalParams.array,
+                seleccion: function (event, ui) {
+                    $('#DepositFilter').val(ui.item.label);
+                    $('#DepositID').val(ui.item.id);
+                    globalParams.addParam("DepositID", ui.item.id);
+                    var link = "<a id=\"addSectors\" class=\"btn btn-success btn-lg btn-xs\" href = \"@Url.Action("Index", "SectorsForms", new {DistributionCenterID = -1, DepositID = -2})\"><span class=\"glyphicon glyphicon-plus\"></span</a>";
+                    if(ui.item.aux != undefined && ui.item.aux.DistributionCenterID != null && ui.item.aux.DistributionCenterID != ""){
+                        $('#SelectedValue').val(ui.item.aux.DistributionCenterID);
+                        link = link.replace("-1", ui.item.aux.DistributionCenterID);
+                        sessionStorage.setItem("FilterID",ui.item.aux.DistributionCenterID);
+                    }else{
+                        link = link.replace("-1","null");
+                        sessionStorage.setItem("FilterID","");
+                    }
+                    $("#sectorsTable").show();
+                    window["@Model.tableRefresh"]();
+                    link = link.replace("-2", ui.item.id);
+                    $("#addSectors").replaceWith(link);
+                    sessionStorage.setItem("DepositID",ui.item.id);
+                    sessionStorage.setItem("DepositName",ui.item.label);
+                    return false;
+                },
+                keyup: function (event, ui) {
+                    var valor = $("#DepositFilter").val();
+                    if (valor == null || valor == "") {
+                        $("#DepositID").val("");
+                        globalParams.deleteParam("DepositID");
+                        sessionStorage.setItem("DepositID", "");
+                        sessionStorage.setItem("DepositName", "");
+                        valor = $("#SelectedValue").val();
+                        if(valor == null || valor == ""){
+                            $("#sectorsTable").hide();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h3>@Html.Resource("Title")</h3>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "") {
+                if (@Model.Error == true) {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                } else {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            @if (Model.SelectedValue == null || Model.SelectedValue == 0) {
+                                if (ViewBag.DepositID == null || ViewBag.DepositID == 0) {
+                                    <a class="btn btn-success btn-xs" id="addSectors" href="@Url.Action("Index", "SectorsForms")">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </a>
+                                } else {
+                                    <a class="btn btn-success btn-xs" id="addSectors" href="@Url.Action("Index", "SectorsForms", new { DepositID = ViewBag.DepositID })">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </a>
+                                }
+                            } else {
+                                if (ViewBag.DepositID == null || ViewBag.DepositID == 0) {
+                                    <a class="btn btn-success btn-xs" id="addSectors" href="@Url.Action("Index", "SectorsForms", new { DistributionCenterID = Model.SelectedValue })">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </a>
+                                } else {
+                                    <a class="btn btn-success btn-xs" id="addSectors" href="@Url.Action("Index", "SectorsForms", new { DistributionCenterID = Model.SelectedValue, DepositID = ViewBag.DepositID })">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </a>
+                                }
+                            }
+                            <a id="tableRefresh" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        </div>
+                        <label class="col-sm-2 control-label">@Html.Resource("SelectDC"):</label>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.SelectedValue, new { @class = "form-control input-sm" })
+                        </div>
+                        <label class="col-sm-2 control-label">@Html.Resource("SelectDeposit"):</label>
+                        <div class="col-sm-3">
+                            <input id="DepositFilter" class="form-control input-sm" value="@ViewBag.DepositFilter" />
+                            <div hidden="hidden">
+                                <input id="DepositID" value="@ViewBag.DepositID" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sectorsTable" hidden="hidden">
+            @{Html.RenderPartial("~/Views/DistributionCenter/Tables/_SectorsTable.cshtml", new TableAjaxViewModel(@Model.tableID) {
+                AjaxRequest = @Url.Action("GetTable", "SectorsABM"),
+                DeleteAction = "Delete",
+                DeleteController = "SectorsABM",
+                DeleteText = Resources.FormsResources.Delete,
+                DeleteConfirmMessage = String.Format(Resources.Messages.SureToDelete, Resources.Resources.SectorWArt),
+                RefreshFunction = @Model.tableRefresh,
+                ServerProcessing = false
+            });}
+        </div>
+    </div>
+</body>
+</html>

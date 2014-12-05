@@ -1,0 +1,116 @@
+﻿[Target:WebHelp Pro]
+ResultFileName=!SSL!\WebHelp_Pro\Penates.htm
+SSLayoutType=32
+ServerProjectName=Penates
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:WebHelp]
+ResultFileName=!SSL!\WebHelp\Penates.htm
+SSLayoutType=2
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:Microsoft HTML Help]
+ResultFileName=!SSL!\Microsoft_HTML_Help\Penates.chm
+SSLayoutType=1
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:FlashHelp]
+ResultFileName=!SSL!\FlashHelp\Penates.htm
+SSLayoutType=2
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:Printed Documentation]
+ResultFileName=!SSL!\Printed_Documentation\Penates.doc
+SSLayoutType=7
+[Target:XML Output]
+ResultFileName=!SSL!\XML_Output\Penates.xml
+SSLayoutType=8129
+[Target:FlashHelp Pro]
+ResultFileName=!SSL!\FlashHelp_Pro\Penates.htm
+SSLayoutType=2
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:Adobe AIR]
+ResultFileName=!SSL!\Adobe_AIR\Penates.air
+SSLayoutType=512
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:Multiscreen HTML5]
+ResultFileName=!SSL!\Multiscreen_HTML5\index.htm
+SSLayoutType=2
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+ActionID For Generation=1003
+Remove Folder with prompt=1
+ViewFileName=!SSL!\Multiscreen_HTML5\index.htm
+[Target:eBook]
+ResultFileName=!SSL!\eBook\Penates.epub
+SSLayoutType=2
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+ActionID For Generation=1001
+Remove Folder with prompt=1
+[Target:Responsive HTML5]
+ResultFileName=!SSL!\Responsive_HTML5\index.htm
+SSLayoutType=2
+CreateProjectTime=00:19, December 02, 2014
+CreateProjectUser=Santy
+SupportMas_MPJ=1
+ActionID For Generation=1003
+Remove Folder with prompt=1
+ViewFileName=!SSL!\Responsive_HTML5\index.htm
+ResultStatus=0
+ResultStatusSharePoint=2
+Enable Result Dialog=1
+BuildTimeHi=30412254
+BuildTimeLow=-674558211
+[PreSingleSource]
+Html Help Project=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.hhp
+Table Of Content=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.hhc
+Index=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.hhk
+Topic Index=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\RHTopicKeyword$.hhk
+See Also Index=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.hha
+Browse Sequence=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.brs
+Glossary=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.glo
+Topic Properties=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.trs
+Active Folders=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.trf
+Baggage Files=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.trb
+Skin List=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.trk
+Active Layout Names=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.trl
+Template Files=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.trt
+Project TOC List=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.trtocl
+Project Index List=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.tridxl
+Project Glossary List=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.trglol
+Project CSS List=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.trcss
+Project Variable Set List=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.trvset
+External URL Settings=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\SearchOptions.xml
+Screen Template File Details=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\Penates.sctfdl
+CPSwfToHTML5Map=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\__cpSwf2HTML5ZipMap
+Default Topic=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\PENATES_INVENTORY_SYSTEM_new.htm
+Build Tags0=6127;Online | Print
+Build Tags=
+Build Expression=
+Language ID=3082
+Language Name=es_ES
+Language=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\!Language!\es_ES\RoboHHRE.lng
+Stop List=C:\Users\Santy\Documents\Varios Santiago\Repositories\Pegasus Enterprise Software\Documentacion\9 - Entrega Final\Manual\Manual Penates\Penates\!Language!\es_ES\Penates.stp
+[Target:Penates eBook]
+SSLayoutType=2
+ActionID For Generation=1003
+ResultFileName=!SSL!\Penates_eBook\Penates_Manual.epub
+Remove Folder with prompt=1
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+ViewFileName=!SSL!\Penates_eBook\Penates_Manual.epub
+ResultStatus=0
+BuildTimeHi=30412463
+BuildTimeLow=-296412030

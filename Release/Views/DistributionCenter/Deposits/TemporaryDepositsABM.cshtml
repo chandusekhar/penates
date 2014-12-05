@@ -1,0 +1,140 @@
+﻿@model Penates.Models.ViewModels.ABMs.ABMViewModel
+@using Penates.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <meta charset=utf-8 />
+    
+    <script>
+        $(document).ready(function () {
+            $("#tableRefresh").click(function (e) {
+                window["@Model.tableRefresh"]();
+            });
+        });
+    </script>
+    <script type="text/javascript" title="Initialize">
+        var globalParams = new ParametrosGlobales;
+        $(document).ready(function(){
+            var iniVal = @Html.Raw(Json.Encode(Model.SelectedValue));
+            if(iniVal == null || iniVal == 0){
+                var aux = sessionStorage.getItem("FilterID");
+                if(aux == null || aux == ""){
+                    $("#SelectedValue").val("");
+                    $("#temporaryDepositsTable").hide();
+                }else{
+                    $("#SelectedValue").val(aux);
+                    globalParams.addParam("DistributionCenterID", aux);
+                    $("#temporaryDepositsTable").show();
+                }
+            }else{
+                globalParams.addParam("DistributionCenterID", iniVal);
+                $("#temporaryDepositsTable").show();
+            }
+        });
+    </script>
+
+    <script type="text/javascript" title="Clear Form Data">
+        $(document).ready(function () {
+            var aux = sessionStorage.getItem("FilterID");
+            sessionStorage.clear();
+            if(aux != null && aux != ""){
+                sessionStorage.setItem("FilterID", aux);
+            }
+        });
+    </script>
+
+    <script type="text/javascript" title="Autocomplete">
+    $(document).ready(function () {
+        $("#SelectedValue").autocompletar({
+            url: '@Url.Action("DistributionCenterAutocomplete", "DepositsABM")',
+            seleccion: function (event, ui) {
+                $('#SelectedValue').val(ui.item.id);
+                globalParams.addParam("DistributionCenterID", ui.item.id);
+                $("#temporaryDepositsTable").show();
+                window["@Model.tableRefresh"]();
+                var link = "<a id=\"addTemporalDeposit\" class=\"btn btn-success btn-lg btn-xs\" href = \"@Url.Action("Index", "TemporaryDepositsForms", new { DistributionCenterID = -1 })\"><span class=\"glyphicon glyphicon-plus\"></span</a>";
+                link = link.replace("-1", ui.item.id);
+                $("#addTemporalDeposit").replaceWith(link);
+                sessionStorage.setItem("FilterID",ui.item.id);
+                return false;
+            },
+            keyup: function (event, ui) {
+                var valor = $("#SelectedValue").val();
+                if (valor == null || valor == "") {
+                    sessionStorage.setItem("FilterID","");
+                    $("#temporaryDepositsTable").hide();
+                }
+            }
+        });
+    });
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h3>@Html.Resource("Title")</h3>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "") {
+                if (@Model.Error == true) {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                } else {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            @if (Model.SelectedValue == null || Model.SelectedValue == 0) {
+                                <a class="btn btn-success btn-xs" id="addTemporalDeposit" href="@Url.Action("Index","TemporaryDepositsForms")">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                            } else {
+                                <a class="btn btn-success btn-xs" id="addTemporalDeposit" href="@Url.Action("Index", "TemporaryDepositsForms", new { DistributionCenterID = Model.SelectedValue })">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                            }
+                            <a id="tableRefresh" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        </div>
+                        <label class="col-sm-2 control-label">@Html.Resource("SelectDC"):</label>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.SelectedValue, new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="temporaryDepositsTable" hidden="hidden">
+            @{Html.RenderPartial("~/Views/DistributionCenter/Tables/_TemporaryDepositsTable.cshtml", new TableAjaxViewModel(@Model.tableID) {
+                AjaxRequest = @Url.Action("GetTable","TemporaryDepositsABM"),
+                DeleteAction = "Delete",
+                DeleteController = "TemporaryDepositsABM",
+                DeleteText = Resources.FormsResources.Delete,
+                DeleteConfirmMessage = String.Format(Resources.Messages.SureToDelete, Resources.Resources.TemporaryDepositWArt),
+                RefreshFunction = @Model.tableRefresh,
+                ServerProcessing = false
+            });}
+        </div>
+    </div>
+</body>
+</html>

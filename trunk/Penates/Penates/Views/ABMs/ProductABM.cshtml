@@ -1,0 +1,109 @@
+﻿@model Penates.Models.ViewModels.ABMs.ABMViewModel
+@using Penates.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <meta charset=utf-8 />
+    <script type="text/javascript" title="Global Parameters">
+        var globalParams = new ParametrosGlobales();
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#tableRefresh").click(function (e) {
+                window["@Model.tableRefresh"]();
+            });
+
+            $("#SelectedValue").change(function (e) {
+                globalParams.addParam("SelectedValue", $("#SelectedValue").val());
+                window["@Model.tableRefresh"]();
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Clear Form Data">
+    $(document).ready(function () {
+            sessionStorage.setItem('ID', "");
+            sessionStorage.setItem('Barcode', "");
+            sessionStorage.setItem('Name', "");
+            sessionStorage.setItem('SellPrice', "");
+            sessionStorage.setItem('Depth', "");
+            sessionStorage.setItem('Height', "");
+            sessionStorage.setItem('Width', "");
+            sessionStorage.setItem('Category', "");
+            if ($("#HasMinStock").is(':checked')) {
+                sessionStorage.setItem('MinStock', "");
+            } else {
+                sessionStorage.removeItem('MinStock');
+            }
+            sessionStorage.setItem('Description', "");
+    });
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <p class="text-danger"><strong>@Resources.Messages.JavascriptDeactivated</strong></p>
+            </div>
+        </noscript>
+        <div class="row">
+            <h3>@Html.Resource("Title")</h3>
+            @if (Model.filterID != null && Model.filterID != 0) {
+                <h1 style="font-size: 20px">@Resources.Resources.Supplier: @Model.filterID</h1>
+            }
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "") {
+                if (@Model.Error == true) {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                } else {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <a class="btn btn-success btn-lg btn-xs" href="@Url.Action("ProductForm", "Forms")">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                            <a id="tableRefresh" class="btn btn-default btn-lg btn-xs">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        </div>
+                        <label class="col-sm-2 control-label">@Html.Resource("CategoryList"):</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.SelectedValue, Model.List, new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @{Html.RenderPartial("~/Views/ABMs/Tables/_ProductTable.cshtml", new TableAjaxViewModel(@Model.tableID) {
+                  AjaxRequest = Model.AjaxRequest,
+                  Params = new{ID = Model.filterID},
+                  DeleteAction = "Delete",
+                  DeleteController = "ABMs",
+                  DeleteText = Resources.FormsResources.Delete,
+                  DeleteConfirmMessage = String.Format(Resources.Messages.SureToDelete, Resources.Resources.ProductWArt),
+                  tableID = @Model.tableID,
+                  RefreshFunction = @Model.tableRefresh
+              });}
+        </div>
+    </div>
+</body>
+</html>

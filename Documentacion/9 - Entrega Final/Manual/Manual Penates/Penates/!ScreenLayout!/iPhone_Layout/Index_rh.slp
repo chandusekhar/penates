@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Index</title>
+<link rel="StyleSheet" href="mobile.css" type="text/css" />
+</head>
+
+<body>
+<div class="searchholder">
+		<table class="searchholdertable">
+			<tr>
+				<td class="home"><a href="Home.slp"><img src="home_default.png" 
+														 alt="" style="border: none;" 
+														 border="0" /></a></td>
+				<td class="searchfield">
+				<div class="wSearchField"><?rh-msp-search-text-box id="searchBox" 
+				 widgettype="searchfield" placeholder="{{Search}}" class="wSearchField" 
+				 type="search" ?><?rh-msp-search-link-start class="wSearchLink" 
+				 widgettype="navlinksearch" related-id="searchBox" ?><img 
+				 src="Search.png" alt="" class="wSearchLink" border="0" /><?rh-msp-search-link-end ?></div></td>
+			</tr>
+		</table>
+</div>
+<div class="contentholderlight">
+	<div class="optionsholderlight">
+		<table class="optionslight">
+			<tr>
+				<td class="title"><?rh-lng-string lngname="Index" lngvalue="Index" ?></td>
+			</tr>
+		</table>
+	</div>
+	<?rh-msp-idx-start id="idx" class="wIndex" widgettype="indextree" ?>
+		<?rh-msp-filter-box class="wIdxFilter" widgettype="indexfilter" 
+							 placeholder="{{IndexFilterKewords}}" id="idxFilterBox" 
+							 type="text" ?>
+		<?rh-msp-idx-kw-start class="wIdxKeyword" classhover="wIdxKeywordHover" 
+								 classbookchilds="wIdxChildBlock" ?>
+			<?rh-msp-term class="wIdxKeywordText" ?> 
+		<?rh-msp-idx-kw-end ?>
+		<?rh-msp-idx-link-start class="wIdxLink" classhover="wIdxLinkHover" ?>
+			<?rh-msp-term class="wIdxLinkText" ?> 
+		<?rh-msp-idx-link-end ?>
+		<?rh-msp-category-start class="wIdxAlphabet" ?>
+			<?rh-msp-term class="wIdxAlphabetText" ?> 
+		<?rh-msp-category-end ?>
+	<?rh-msp-idx-end ?>
+</div>
+</body>
+</html>

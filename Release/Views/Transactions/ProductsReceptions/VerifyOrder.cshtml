@@ -1,0 +1,130 @@
+﻿@model Penates.Models.ViewModels.Transactions.ProductsReceptions.VerifyOrderModel
+@using Penates.Helpers
+@using Penates.Models.ViewModels
+@using Penates.Models.ViewModels.Forms
+@using Penates.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+   
+    <script type="text/javascript" title="Datepicker">
+        $(document).ready(function () {
+            $("#OrderDate").val('@Model.OrderDate.ToLongDateString()');
+            $("#OrderDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "DD, MM d, yy",
+                setDate: '@Model.OrderDate'
+            });
+            $("#OrderDate").datepicker("option", "showAnim", "fold");
+    });
+    </script>
+</head>
+
+
+<body>  
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>                
+        @if (@Model.Message != null && @Model.Error != null && @Model.Message != "")
+        {
+            if (@Model.Error == true)
+            {
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    @Model.Message
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-dismissable alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    @Model.Message
+                </div>
+            }
+        }
+        <form class="form-horizontal" action="@Url.Action("ProcessOrder", "ProductsReceptions")" autocomplete="on" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <div class="row">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.OrderID):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.OrderID, new { disabled = "disabled", @class = "form-control" })
+                        <div class="form-group" hidden>
+                            @Html.TextBoxFor(m => m.OrderID, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.SupplierID):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.SupplierID, new { disabled = "disabled", @class = "form-control" })
+                        <div class="form-group" hidden>
+                            @Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.SupplierName):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.SupplierName, new { disabled = "disabled", @class = "form-control" })
+                        <div class="form-group" hidden>
+                            @Html.TextBoxFor(m => m.SupplierName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.OrderDate):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.OrderDate, new { disabled = "disabled", @class = "form-control" })
+                        <div class="form-group" hidden>
+                            @Html.TextBoxFor(m => m.OrderDate, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend></legend>
+                @{Html.RenderPartial("~/Views/Transactions/ProductsReceptions/_OrderItemsTableWithVerification.cshtml", new TableAjaxViewModel("OrderTable")
+                {
+                AjaxRequest = Url.Action("ProductLoad", "ProductsReceptions"),
+                DeleteAction = "UnassignProduct",
+                DeleteController = "OrderItemsForm",
+                DeleteText = @Resources.FormsResources.Unassign,
+                DeleteConfirmMessage = String.Format(Resources.Messages.SureToUnassign, Resources.Resources.ProductWArt, Resources.Resources.OrderWArt),
+                ServerProcessing = false,
+                RefreshFunction = "RefreshTable",
+                Params = new { OrderID = Model.OrderID, SupplierID = Model.SupplierID },
+                useJQueryEditFunction = true,
+                JQueryEditFunction = @Model.concatWithId("getEditForm")
+                });}
+            </fieldset>
+            <br />
+            <br />
+            <div class="col-lg-offset-5">
+                <div class="btn-toolbar">
+                    <button class="btn btn-success" id="ProcessOrder" value="SubmitOrder" type="submit">@Resources.FormsResources.ProcessOrder</button>
+                </div>
+            </div>
+        </form>
+    </div>
+            
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+﻿@using Penates.Models.ViewModels
+@model Penates.Models.ViewModels.Inventory.InventoryViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <meta charset=utf-8 />
+    
+    <script type="text/javascript" title="Global Parameters">
+    var globalParams = new ParametrosGlobales();
+    </script>
+
+    <script type="text/javascript" title="Clear Form Data">
+    $(document).ready(function () {
+        sessionStorage.clear();
+    });
+    </script>
+
+    
+</head>
+    <body>
+
+        <div class="container">
+            <h2>@Html.Resource("Title")</h2>
+        @using(Html.BeginForm("Index", "ViewLast", FormMethod.Post, new { @class="form-horizontal", @id="supplier-form", autocomplete="on", @enctype="multipart/form-data" })){
+            @Html.AntiForgeryToken()    
+            @*@Html.ValidationMessageFor(m => m.Error)*@
+                <fieldset>
+                    <legend></legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.Code):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Code, new { required = "required", disabled = "disabled", @class = "form-control" })
+                            <div class="form-group" hidden>
+                                @Html.TextBoxFor(m => m.Code, new {@class = "form-control" })
+                            </div>
+                                @*@Html.ValidationMessageFor(m => m.Code)*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.InventoryDate):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.InventoryDate, new { required = "required", disabled = "disabled", @class = "form-control" })
+                            <div class="form-group" hidden>
+                                @Html.TextBoxFor(m => m.InventoryDate, new { @class = "form-control" })
+                            </div>
+                            @*@Html.ValidationMessageFor(m => m.InventoryDate)*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.InventoryName):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.InventoryName, new { required = "required", disabled = "disabled", @class = "form-control" })
+                        </div>
+                        @*@Html.ValidationMessageFor(m => m.InventoryName)*@
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.MethodType):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.MethodType, new { required = "required", disabled = "disabled", @class = "form-control" })
+                        </div>
+                        @*@Html.ValidationMessageFor(m => m.MethodType)*@
+                    </div>
+
+@*                    <div class="btn-toolbar">
+                        <button type="submit" class="btn btn-success" id="Save" value="Save">@Resources.FormsResources.Save</button>
+                        @Html.ActionLink(@Resources.FormsResources.Cancel, "Index", "OrdersABM", null, new { @class = "btn btn-default" })
+                        <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "SupplierForms", new { id = Model.SupplierID })">@Resources.FormsResources.Delete</button>
+                        @Html.ActionLink(@Html.Resource("ViewSupplier"), "", "SupplierForms", new { id = Model.SupplierID }, new { @class = "btn btn-default" })
+                    </div>*@
+                </fieldset>
+            }
+        </div>
+    </body>
+</html>

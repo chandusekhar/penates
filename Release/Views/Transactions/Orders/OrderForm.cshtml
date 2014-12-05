@@ -1,0 +1,144 @@
+﻿@model Penates.Models.ViewModels.Transactions.OrderViewModel
+@using Penates.Helpers
+@using Penates.Models.ViewModels
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToDelete, Resources.Resources.OrderWArt, Model.OrderID)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" title="Datepicker">
+        $(document).ready(function () {
+            $("#OrderDate").val('@Model.OrderDate.ToLongDateString()');
+        $("#OrderDate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "DD, MM d, yy",
+            setDate: '@Model.OrderDate'
+        });
+        $("#OrderDate").datepicker("option", "showAnim", "fold");
+    });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+            <h2>@Html.Resource("Title")</h2>
+        @using(Html.BeginForm("Save", "OrderForm", FormMethod.Post, new { @class="form-horizontal", @id="supplier-form", autocomplete="on", @enctype="multipart/form-data" })){
+            @Html.ValidationMessageFor(m => m.Error)
+                <fieldset>
+                    <legend></legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.OrderID):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.OrderID, new { required = "required", @class = "form-control" })
+                            <div class="form-group" hidden>
+                                @Html.TextBoxFor(m => m.OldOrderID, new {@class = "form-control" })
+                            </div>
+                                @Html.ValidationMessageFor(m => m.OrderID)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.SupplierName):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.SupplierName, new { required = "required", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SupplierName)
+                        </div>
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.SupplierID):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.SupplierID, new { required = "required", disabled = "disabled", @class = "form-control" })
+                            <div class="form-group" hidden>
+                                @Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.OldSupplierID, new { @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.SupplierID)
+                        </div>
+                    </div>
+                    @if (!String.IsNullOrEmpty(Model.OrderID)) {
+                        if (Model.Received) {
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.OrderDate):</label>
+                                <div class="col-lg-4">
+                                    @Html.TextBoxFor(m => m.OrderDate, new { required = "required", @class = "form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.OrderDate)
+                                <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.Received):</label>
+                                <div class="col-lg-4">
+                                    <h4 class="text-success text-center"><b>@Html.Resource("Received")</b></h4>
+                                </div>
+                            </div>
+                        } else {
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.OrderDate):</label>
+                                <div class="col-lg-4">
+                                    @Html.TextBoxFor(m => m.OrderDate, new { required = "required", @class = "form-control" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.OrderDate)
+                                <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.Received):</label>
+                                <div class="col-lg-4">
+                                    <h4 class="text-danger text-center"><b>@Html.Resource("NotReceived")</b></h4>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.Total):</label>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                @Html.TextBoxFor(m => m.Total, new { required = "required", disabled = "disabled", @class = "form-control form-number-input" })
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <fieldset>
+                        <legend>@Html.Resource("SearchAndAddProducts")</legend>
+                        @{Html.RenderPartial("~/Views/ABMs/_SearchAndAddModal.cshtml", new SearchAndAddViewModelWithModal() {
+                            TablePartialView = "~/Views/Transactions/Tables/_OrderItemsTable.cshtml",
+                            TableAjaxRequest = Url.Action("ProductLoad", "OrderForm"),
+                            AjaxRequest = @Url.Action("ProductAutocomplete", "OrderForm"),
+                            Params = new {OrderID = Model.OldOrderID, SupplierID = Model.OldSupplierID},
+                            SubmitAction = "AddProduct",
+                            SubmitController = "OrderItemsForm",
+                            ConfirmMessage = @String.Format(Resources.Messages.SureToAdd, Resources.Resources.Product),
+                            TableDeleteAction = "UnassignProduct",
+                            TableDeleteController = "OrderItemsForm",
+                            TableDeleteText = @Resources.FormsResources.Unassign,
+                            TableDeleteConfirmMessage = String.Format(Resources.Messages.SureToUnassign, Resources.Resources.ProductWArt, Resources.Resources.OrderWArt),
+                            TableServerProcessing = false,
+                            ModalURL = Url.Action("ItemsFormModal", "OrderItemsForm"),
+                            ModalEditURL = Url.Action("FormEdit", "OrderItemsForm")
+                        });}
+                    </fieldset>
+                    
+                    <div class="btn-toolbar">
+                        <button type="submit" class="btn btn-success" id="Save" value="Save">@Resources.FormsResources.Save</button>
+                        @Html.ActionLink(@Resources.FormsResources.Cancel, "Index", "OrdersABM", null, new { @class = "btn btn-default" })
+                        <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "SupplierForms", new { id = Model.SupplierID })">@Resources.FormsResources.Delete</button>
+                        @Html.ActionLink(@Html.Resource("ViewSupplier"), "FormEdit", "SupplierForms", new { id = Model.SupplierID }, new { @class = "btn btn-default" })
+                    </div>
+                </fieldset>
+            }
+        </div>
+    <script src="~/Scripts/ABMs/Forms/imageLoad.js"></script>
+</body>
+</html>

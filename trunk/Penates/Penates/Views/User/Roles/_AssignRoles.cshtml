@@ -1,0 +1,23 @@
+﻿@model Penates.Models.ViewModels.Users.AssignViewModel
+@using Penates.Models.ViewModels
+
+    <div class="container">
+        <h3>@Html.Resource("Title") @Model.UserName</h3>
+        <div class="row">
+            @{Html.RenderPartial("~/Views/ABMs/_SelectAndAdd.cshtml", new SelectAndAddViewModel("roleTable") {
+                TablePartialView = "~/Views/User/Tables/_RoleTable.cshtml",
+                TableAjaxRequest = Url.Action("UserRoles", "User"),
+                Params = new { UserID = Model.UserFileNumber },
+                SubmitAction = "AddRoleToUser",
+                SubmitController = "User",
+                TableDeleteAction = "UnassignRole",
+                TableDeleteController = "User",
+                TableDeleteText = @Resources.FormsResources.Unassign,
+                TableServerProcessing = false,
+                Selectlist = Model.Selectlist
+            });}
+        </div>
+        <div>
+            @Html.ActionLink(@Resources.Menu.AssignToDistributionCenter, "AssignDC", "User", new { FileNumber = Model.UserFileNumber }, new { @class = "btn btn-info" })
+        </div>
+    </div>

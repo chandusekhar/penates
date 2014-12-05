@@ -1,0 +1,1 @@
+gXMLBuffer="<?xml version=\"1.0\" encoding=\"UTF-8\"?><cki><ck fm=\"PENATES INVENTORY SYSTEM\" to=\"PENATES INVENTORY SYSTEM\" num=\"1\"/></cki>";

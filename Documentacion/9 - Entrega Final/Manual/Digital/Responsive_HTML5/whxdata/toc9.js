@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc.js\"  name=\"9. Inventarios\" url=\"PENATES_INVENTORY_SYSTEM_new.htm#9_Inventariosbc-42\"><item name=\"9.A. Generación de Inventario\" url=\"PENATES_INVENTORY_SYSTEM_new.htm#9_A_Generaci_n_debc-43\" /></data>";

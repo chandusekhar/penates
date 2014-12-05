@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActivateException" xml:space="preserve">
+    <value>Error when trying to activate {0} with ID: {1}</value>
+  </data>
+  <data name="AddException" xml:space="preserve">
+    <value>Error when trying to add a {0} to a {1}</value>
+  </data>
+  <data name="BoxAllreadySoldException" xml:space="preserve">
+    <value>The Box with ID: "{0}" has allready been sold</value>
+  </data>
+  <data name="DeactivateException" xml:space="preserve">
+    <value>Error when trying to deactivate {0} with ID: {1}</value>
+  </data>
+  <data name="DeleteConstraintMessage" xml:space="preserve">
+    <value>{0} still has {1} associated to it and can't be deleted. Delete {2} first in order to delete it successfully.</value>
+  </data>
+  <data name="DeleteException" xml:space="preserve">
+    <value>Error when trying to delete {0} with ID {1} from the database</value>
+  </data>
+  <data name="DeleteExceptionNoID" xml:space="preserve">
+    <value>Error when trying to delete {0} from the system</value>
+  </data>
+  <data name="ForeignKeyConstraintException" xml:space="preserve">
+    <value>The {0} with ID '{1}' does not exist as a valid {0} in the database.</value>
+  </data>
+  <data name="GetConstraintException" xml:space="preserve">
+    <value>Error when trying to get constrains for {0} with ID: '{1}'</value>
+  </data>
+  <data name="HierarchyChildExceptionCircularMessage" xml:space="preserve">
+    <value>{0} is a parent in the Hierarchy of {1}. This would form a cicular hierarchy dependency!</value>
+  </data>
+  <data name="HierarchyChildExceptionMessage" xml:space="preserve">
+    <value>{0} is already a child of {1}</value>
+  </data>
+  <data name="HierarchyExceptionTitle" xml:space="preserve">
+    <value>{0}: Hierarchy Exception</value>
+  </data>
+  <data name="HierarchyParentExceptionCircularMessage" xml:space="preserve">
+    <value>{0} is a child in the Hierarchy of {1}. This would form a cicular hierarchy dependency!</value>
+  </data>
+  <data name="HierarchyParentExceptionMessage" xml:space="preserve">
+    <value>{0} is already a parent of {1}</value>
+  </data>
+  <data name="IDNotFoundException" xml:space="preserve">
+    <value>Could not find {0} with ID {1} in the database.</value>
+  </data>
+  <data name="InvalidIdSearch" xml:space="preserve">
+    <value>Error when trying to retrieve {0} with ID {1} from the database</value>
+  </data>
+  <data name="InvalidSortException" xml:space="preserve">
+    <value>Invalid Sort Exception</value>
+  </data>
+  <data name="ItemAlreadyExist" xml:space="preserve">
+    <value>{0} already exists in the database</value>
+  </data>
+  <data name="ItemDeletedException" xml:space="preserve">
+    <value>You were trying to  bring the data of {0} with ID={1}, but that {2} was deleted</value>
+  </data>
+  <data name="ParametersNulls" xml:space="preserve">
+    <value>{0} or {1} should be set and should not be a null value.</value>
+  </data>
+  <data name="SaveException" xml:space="preserve">
+    <value>Error when trying to save {0} to the Database</value>
+  </data>
+  <data name="StoredProcedureException" xml:space="preserve">
+    <value>The Executed Stored Procedure returned an error state</value>
+  </data>
+  <data name="TemporaryDepositsOutOfSpace" xml:space="preserve">
+    <value>There is no room available in the Temporary Deposits for the Container with ID: {0} to move. The container is now empty and will remain on shelf {1}</value>
+  </data>
+  <data name="UnassignException" xml:space="preserve">
+    <value>Error when trying to unasigna a {0} from a {1}</value>
+  </data>
+  <data name="UniqueRestrictionException" xml:space="preserve">
+    <value>{0} should be a unique value in the database. The value '{1}' already exists.</value>
+  </data>
+</root>

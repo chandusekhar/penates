@@ -1,0 +1,247 @@
+﻿@model Penates.Interfaces.Models.ITableViewModel
+
+<html>
+<head>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="~/Content/DataTables/css/jquery.dataTablesWToolbar.min.css" rel="stylesheet" />
+    <link href="~/Content/DT_bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTables/plugins/dataTables.fnSetFilteringDelay.js"></script>
+    <script src="~/Scripts/DataTables/plugins/dataTables.bootstrapPagination.js"></script>
+    <script src="~/Scripts/DataTables/plugins/dataTables.fnReloadAjax.js"></script>
+    <script src="~/Scripts/DataTables/aoDataManagment.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.tableTools.min.js"></script>
+    <link href="~/Content/DataTables/css/dataTables.tableTools.min.css" rel="stylesheet" />
+    <style>
+        .table-responsive.foo {
+            overflow-x: visible !important;
+            overflow-y: visible !important;
+        }
+    </style>
+    <script>
+        eval("var "+'@Model.concatWithID("editTable")');
+        $(document).ready(function(){
+            if (typeof @Model.concatWithID("editTable") == 'undefined' || !$.isFunction(@Model.concatWithID("editTable"))) {
+                @Model.concatWithID("editTable") = function (id) {
+                    var param = {
+                        TemporaryDespositID: id
+                    };
+                    window['@Model.JQueryEditFunction'](param);
+                }
+            }
+        });
+    </script>
+    <script title="Delete Product Function">
+        eval("var delete"+'@Model.tableID');
+        @Model.concatWithID("delete") = function(id){
+            if (confirm('@Model.DeleteConfirmMessage')) {
+                $("#divProcessing").show();
+                var del = @Html.Raw(Json.Encode(Model.Params));
+                if(del == null){
+                    del = {};
+                }
+                try{
+                    var globParam = globalParams.array;
+                    if(globParam instanceof Array){
+                        for (var p in globalParams.array) {
+                            del[globParam[p].name] = globParam[p].value;
+                        }
+                    }else{
+                        for (var p in globalParams.array) {
+                            del[p] = globParam[p];
+                        }
+                    }
+                }catch(e){
+
+                }
+                del["TemporaryDepositID"] = id;
+                $.ajax({
+                    url: '@Url.Action(@Model.DeleteAction, @Model.DeleteController)',
+                    data: del,
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        $("#divProcessing").hide();
+                        alert(data.title + ": \"" + data.message + "\"");
+                        window['@Model.RefreshFunction']();
+                    },
+                    error: function (xhr) {
+                        $("#divProcessing").hide();
+                        if (xhr.status >= 600 && xhr.status < 700) {
+                            if (confirm('@Resources.Messages.ShowConstraintsOnPopup')){
+                                var x = window.open('_blank');
+                                x.document.open('_blank');
+                                x.document.write(xhr.responseText);
+                                x.document.close();
+                            } else {
+                                $("body").html(xhr.responseText);
+                            }
+                        } else {
+                            var er = xhr.status;
+                            er = er + " - " + xhr.statusText;
+                            er = er + ": \"" + xhr.responseText + "\"";
+                            alert(er);
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+    <script>
+    //Obtengo si proceso en el servidor o de forma local
+    function getServerProcessing() {
+        var compare = "@Model.ServerProcessing"
+        if (compare == "False" || compare == "false") {
+            return false;
+        }
+        return true;
+    }
+    eval("var "+'@Model.RefreshFunction');
+
+    $(document).ready(function () {
+        var id = "#"+'@Model.tableID';
+        eval("var "+'@Model.tableID');
+        @Model.tableID = $(id).dataTable({
+            "bServerSide": getServerProcessing(),
+            "sAjaxSource": '@Model.AjaxRequest',
+            // Server Parameters
+            "fnServerParams": function (aoData) {
+                try {
+                    try{
+                        addGlobalParameters(aoData, globalParams.array);
+                    }catch(err){
+                        console.log("No hay parametros globales");
+                    }
+                    var p = @Html.Raw(Json.Encode(Model.Params));
+                    if(p != null){
+                        var nam = '';
+                        for (var i in p) {
+                            nam = i;
+                            aoData.push({ name: i, value: p[i] });
+                        }
+                        console.log(aoData);
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            },
+            "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+                oSettings.jqXHR = $.ajax({
+                    "dataType": 'json',
+                    "type": "GET",
+                    "url": sSource,
+                    "data": aoData,
+                    "success": fnCallback,
+                    "error": function (xhr, textStatus, error) {
+                        $("body").html(xhr.responseText);
+                    }
+                })
+            },
+            "bProcessing": true,
+            "aLengthMenu": [[10, 20, 30, 50], [10, 20, 30, 50]],
+            "sPaginationType": "bootstrap",
+            "dom": 'lTfrtip',
+            "tableTools": {
+                "sSwfPath": "@Url.Content("~/Content/DataTables/swf/copy_csv_xls_pdf.swf")",
+                "aButtons": [
+                    {
+                        "sExtends": "copy",
+                        "sButtonText": "@Resources.DataTables.ToolbarCopy"
+                    },
+                    {
+                        "sExtends": "collection",
+                        "sButtonText": "@Resources.DataTables.ToolbarSave",
+                        "aButtons":    [ "csv", "xls", "pdf" ]
+                    },
+                    {
+                        "sExtends": "print",
+                        "sButtonText": "@Resources.DataTables.ToolbarPrint"
+                    }
+                ]
+    },
+            "aoColumns": [
+                            {
+                                "sName": "DepositID",
+                                "mData": "DepositID",
+                                "bSearchable": false,
+                                "bSortable": true,
+                                "mRender": function (oObj) {
+                                    // Armo el Html del boton con opciones
+                                    var a = "<div class=\"btn-toolbar bs-component\" style=\"margin: 0;\">\n";
+                                    a = a + "<div class=\"btn-group\">\n";
+                                    a = a + "<button type=\"button\" style=\"padding-right: 5px; padding-left: 5px;\" class=\"btn btn-default btn-xs dropdown-toggle\" data-toggle=\"dropdown\">" + oObj + "<span class=\"caret\"></span></button>\n";
+                                    a = a + "<ul class=\"dropdown-menu stay-open pull-left\" role=\"menu\">\n";
+                                    var useJqueryEdit = '@Model.useJQueryEditFunction';
+                                    var link;
+                                    if(useJqueryEdit.toLowerCase() == 'false'){
+                                        if('@Model.EditController' == '' || '@Model.EditController' == 'null'){
+                                            link = '@Html.ActionLink(@Resources.FormsResources.Edit, "FormEdit", "TemporaryDepositsForms", new { TemporaryDepositID = -1 }, null)';
+                                        }else{
+                                            link = '@Html.ActionLink(@Resources.FormsResources.Edit, Model.EditAction, Model.EditController, new { TemporaryDepositID = -1 }, null)';
+                                        }
+                                    }else{
+                                        link = "<a style=\"cursor: pointer\" class = \"table-edit-action\", onclick = \"-2('-1')\" >" + '@Resources.FormsResources.Edit' + "</a>";
+                                        link = link.replace(-1, oObj); //Reemplazo los objetos que tomo de MVC
+                                        link = link.replace("-1", oObj); //Reemplazo los objetos que tomo de MVC
+                                        link = link.replace(-2, '@Model.concatWithID("editTable")'); //Reemplazo los objetos que tomo de MVC
+                                        link = link.replace("-2", '@Model.concatWithID("editTable")'); //Reemplazo los objetos que tomo de MVC
+                                    }
+                                    link = link.replace(-1, oObj);
+                                    a = a + "<li>" + link + "</li>\n";
+                                    a = a + "<li class=\"divider\"></li>\n";
+                                    link = "<a style=\"cursor: pointer\" class = \"table-delete-action\", onclick = \"-2('-1')\" >" + '@Model.DeleteText' + "</a>";
+                                    link = link.replace(-1, oObj); //Reemplazo los objetos que tomo de MVC
+                                    link = link.replace("-1", oObj); //Reemplazo los objetos que tomo de MVC
+                                    link = link.replace(-2, '@Model.concatWithID("delete")'); //Reemplazo los objetos que tomo de MVC
+                                    link = link.replace("-2", '@Model.concatWithID("delete")'); //Reemplazo los objetos que tomo de MVC
+                                    a = a + "<li>" + link + "</li>\n";
+                                    a = a + "</ul>\n";
+                                    a = a + "</div>\n";
+                                    a = a + "</div>";
+                                    return a;
+                                }
+                            },
+                            { "sName": "Description", "mData": "Description", },
+                            { "sName": "Floor", "mData": "Floor", },
+                            { "sName": "USEDPERCENTAGE", "mData": "UsedPercentage", "sClass": "dt-right"}
+            ]
+        }).fnSetFilteringDelay();
+
+        @Model.RefreshFunction = function () {
+            if (getServerProcessing()) {
+                eval('@Model.tableID'+".fnDraw()");
+            } else {
+                eval('@Model.tableID'+".fnReloadAjax()")
+            }
+
+        }
+    });
+</script>
+</head>
+<body>
+    <div class="row">
+        <div id="divProcessing" class="row text-center" hidden="hidden">
+            <p>@Resources.Resources.Processing<img src="../../Content/images/ajax-loader.gif"></p>
+        </div>
+        <table id="@Model.tableID" class="display">
+            <!--class="table table-striped table-hover ">-->
+            <thead>
+                <tr>
+                    <th>@Penates.App_GlobalResources.Forms.ModelFormsResources.TemporaryDepositID</th>
+                    <th>@Penates.App_GlobalResources.Forms.ModelFormsResources.Description</th>
+                    <th>@Penates.App_GlobalResources.Forms.ModelFormsResources.Floor</th>
+                    <th>@Penates.App_GlobalResources.Forms.ModelFormsResources.UsedSpace (%)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

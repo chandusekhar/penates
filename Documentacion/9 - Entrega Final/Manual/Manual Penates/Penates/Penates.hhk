@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<index version="1.0">
+	<properties>
+	</properties>
+	<item name="Administración">
+		<section name="PENATES INVENTORY SYSTEM#IX_Administraci_n" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Administraci_n">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Administraci_n_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Administraci_n_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Administraci_n_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Administraci_n_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Administraci_n_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Administraci_n_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Administraci_n_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Administraci_n_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Administraci_n_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Administraci_n_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Administraci_n_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Administraci_n_6">
+		</section>
+	</item>
+	<item name="Cajas">
+		<section name="PENATES INVENTORY SYSTEM#IX_Cajas" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Cajas">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Cajas_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Cajas_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Cajas_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Cajas_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Cajas_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Cajas_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Cajas_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Cajas_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Cajas_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Cajas_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Cajas_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Cajas_6">
+		</section>
+	</item>
+	<item name="Categoría">
+		<section name="PENATES INVENTORY SYSTEM#IX_Categor_a" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Categor_a">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Categor_a_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Categor_a_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Categor_a_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Categor_a_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Categor_a_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Categor_a_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Categor_a_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Categor_a_4">
+		</section>
+	</item>
+	<item name="Centros de Distribución Externos">
+		<section name="PENATES INVENTORY SYSTEM#Los_Centros_de1" link="PENATES_INVENTORY_SYSTEM_new.htm#Los_Centros_de1">
+		</section>
+	</item>
+	<item name="Centros de Distribución Internos">
+		<section name="PENATES INVENTORY SYSTEM#Los_Centros_de" link="PENATES_INVENTORY_SYSTEM_new.htm#Los_Centros_de">
+		</section>
+	</item>
+	<item name="Contenedor">
+		<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_6">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_7" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_7">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_11" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_11">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_12" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_12">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_13" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_13">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_14" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_14">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_15" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_15">
+		</section>
+	</item>
+	<item name="Contenedores" seealso="Contenedores">
+		<item name="Contenedor">
+			<section name="PENATES INVENTORY SYSTEM#IX_Contenedor" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor">
+			</section>
+			<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_1">
+			</section>
+			<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_2">
+			</section>
+			<section name="PENATES INVENTORY SYSTEM#5_G_Contenedores" link="PENATES_INVENTORY_SYSTEM_new.htm#5_G_Contenedores">
+			</section>
+			<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_4">
+			</section>
+			<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_5">
+			</section>
+			<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_8" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_8">
+			</section>
+			<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_9" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_9">
+			</section>
+			<section name="PENATES INVENTORY SYSTEM#IX_Contenedor_10" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Contenedor_10">
+			</section>
+		</item>
+	</item>
+	<item name="Depósito Temporal">
+		<section name="PENATES INVENTORY SYSTEM#IX_Dep_sito_Temporal" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Dep_sito_Temporal">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Dep_sito_Temporal_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Dep_sito_Temporal_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Dep_sito_Temporal_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Dep_sito_Temporal_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Dep_sito_Temporal_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Dep_sito_Temporal_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Dep_sito_Temporal_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Dep_sito_Temporal_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Dep_sito_Temporal_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Dep_sito_Temporal_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Dep_sito_Temporal_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Dep_sito_Temporal_6">
+		</section>
+	</item>
+	<item name="Depósitos">
+		<section name="PENATES INVENTORY SYSTEM#IX_Dep_sitos" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Dep_sitos">
+		</section>
+	</item>
+	<item name="Espacios">
+		<section name="PENATES INVENTORY SYSTEM#IX_Espacios" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Espacios">
+		</section>
+	</item>
+	<item name="Estado">
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_6">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_7" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_7">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_8" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_8">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_9" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_9">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_10" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_10">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_11" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_11">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_12" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_12">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_13" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_13">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_14" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_14">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estado_15" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estado_15">
+		</section>
+	</item>
+	<item name="Estanterías">
+		<section name="PENATES INVENTORY SYSTEM#IX_Estanter_as" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estanter_as">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Estanter_as_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Estanter_as_1">
+		</section>
+	</item>
+	<item name="Externos">
+		<section name="PENATES INVENTORY SYSTEM#IX_Externos" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Externos">
+		</section>
+	</item>
+	<item name="Gestión">
+		<section name="PENATES INVENTORY SYSTEM#5_A_Gesti_n_de_un_Centro" link="PENATES_INVENTORY_SYSTEM_new.htm#5_A_Gesti_n_de_un_Centro">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Gesti_n_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Gesti_n_1">
+		</section>
+	</item>
+	<item name="Internos">
+		<section name="PENATES INVENTORY SYSTEM#IX_Internos" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Internos">
+		</section>
+	</item>
+	<item name="Inventarios">
+		<section name="PENATES INVENTORY SYSTEM#IX_Inventarios" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Inventarios">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Inventarios_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Inventarios_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Inventarios_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Inventarios_2">
+		</section>
+	</item>
+	<item name="Ítems">
+		<section name="PENATES INVENTORY SYSTEM#IX__tems" link="PENATES_INVENTORY_SYSTEM_new.htm#IX__tems">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX__tems_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX__tems_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX__tems_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX__tems_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#6_G_Estadosdelos_tems" link="PENATES_INVENTORY_SYSTEM_new.htm#6_G_Estadosdelos_tems">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX__tems_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX__tems_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX__tems_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX__tems_5">
+		</section>
+	</item>
+	<item name="Lote">
+		<section name="PENATES INVENTORY SYSTEM#IX_Lote" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Lote">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Lote_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Lote_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Lote_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Lote_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Lote_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Lote_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Lote_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Lote_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Lote_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Lote_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Lote_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Lote_6">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Lote_7" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Lote_7">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Lote_8" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Lote_8">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Lote_9" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Lote_9">
+		</section>
+	</item>
+	<item name="Lotes">
+		<section name="PENATES INVENTORY SYSTEM#6_D_Lotes" link="PENATES_INVENTORY_SYSTEM_new.htm#6_D_Lotes">
+		</section>
+	</item>
+	<item name="mercadería">
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_6">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_7" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_7">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_8" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_8">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_9" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_9">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_10" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_10">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_11" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_11">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_12" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_12">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_13" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_13">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_14" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_14">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_15" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_15">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_16" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_16">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_17" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_17">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_18" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_18">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_19" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_19">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_20" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_20">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_21" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_21">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_22" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_22">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_23" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_23">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_24" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_24">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_25" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_25">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_26" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_26">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_27" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_27">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_28" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_28">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_29" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_29">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_mercader_a_30" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_mercader_a_30">
+		</section>
+	</item>
+	<item name="Orden de Compra">
+		<section name="PENATES INVENTORY SYSTEM#IX_Orden_de_Compra" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Orden_de_Compra">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Orden_de_Compra_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Orden_de_Compra_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Orden_de_Compra_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Orden_de_Compra_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Orden_de_Compra_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Orden_de_Compra_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Orden_de_Compra_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Orden_de_Compra_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Orden_de_Compra_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Orden_de_Compra_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Orden_de_Compra_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Orden_de_Compra_6">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Orden_de_Compra_7" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Orden_de_Compra_7">
+		</section>
+	</item>
+	<item name="Órdenes de Venta">
+		<section name="PENATES INVENTORY SYSTEM#De_la_misma_forma_que_en" link="PENATES_INVENTORY_SYSTEM_new.htm#De_la_misma_forma_que_en">
+		</section>
+	</item>
+	<item name="Pasillo">
+		<section name="PENATES INVENTORY SYSTEM#IX_Pasillo" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Pasillo">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Pasillo_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Pasillo_1">
+		</section>
+	</item>
+	<item name="Pasillos">
+		<section name="PENATES INVENTORY SYSTEM#IX_Pasillos" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Pasillos">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Pasillos_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Pasillos_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Pasillos_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Pasillos_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Pasillos_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Pasillos_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Pasillos_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Pasillos_4">
+		</section>
+	</item>
+	<item name="Producto">
+		<section name="PENATES INVENTORY SYSTEM#IX_Producto" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Producto">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Producto_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Producto_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Producto_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Producto_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Producto_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Producto_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Producto_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Producto_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Producto_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Producto_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Producto_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Producto_6">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Producto_7" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Producto_7">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Producto_8" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Producto_8">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Producto_9" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Producto_9">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Producto_10" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Producto_10">
+		</section>
+	</item>
+	<item name="Proveedor">
+		<section name="PENATES INVENTORY SYSTEM#IX_Proveedor" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Proveedor">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Proveedor_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Proveedor_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Proveedor_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Proveedor_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Proveedor_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Proveedor_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Proveedor_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Proveedor_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Proveedor_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Proveedor_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Proveedor_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Proveedor_6">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Proveedor_7" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Proveedor_7">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Proveedor_8" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Proveedor_8">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Proveedor_9" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Proveedor_9">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Proveedor_10" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Proveedor_10">
+		</section>
+	</item>
+	<item name="Racks">
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_6">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_7" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_7">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_8" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_8">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_9" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_9">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_10" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_10">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_11" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_11">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Racks_12" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Racks_12">
+		</section>
+	</item>
+	<item name="Reportes">
+		<section name="PENATES INVENTORY SYSTEM#IX_Reportes" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Reportes">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Reportes_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Reportes_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Reportes_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Reportes_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Reportes_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Reportes_3">
+		</section>
+	</item>
+	<item name="roles">
+		<section name="PENATES INVENTORY SYSTEM#IX_roles" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_roles">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_roles_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_roles_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_roles_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_roles_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_roles_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_roles_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_roles_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_roles_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_roles_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_roles_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_roles_6" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_roles_6">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_roles_7" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_roles_7">
+		</section>
+	</item>
+	<item name="Sectores">
+		<section name="PENATES INVENTORY SYSTEM#IX_Sectores" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Sectores">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Sectores_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Sectores_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Sectores_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Sectores_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Sectores_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Sectores_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Sectores_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Sectores_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Sectores_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Sectores_5">
+		</section>
+	</item>
+	<item name="Seguridad">
+		<section name="PENATES INVENTORY SYSTEM#IX_Seguridad" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Seguridad">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#10_D_Pol_ticas_de" link="PENATES_INVENTORY_SYSTEM_new.htm#10_D_Pol_ticas_de">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Seguridad_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Seguridad_2">
+		</section>
+	</item>
+	<item name="Stock">
+		<section name="PENATES INVENTORY SYSTEM#IX_Stock" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Stock">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#8_B_Consulta_de_Stock" link="PENATES_INVENTORY_SYSTEM_new.htm#8_B_Consulta_de_Stock">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Stock_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Stock_2">
+		</section>
+	</item>
+	<item name="Transacciones">
+		<section name="PENATES INVENTORY SYSTEM#IX_Transacciones" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Transacciones">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Transacciones_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Transacciones_1">
+		</section>
+	</item>
+	<item name="Transferencia">
+		<section name="PENATES INVENTORY SYSTEM#IX_Transferencia" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Transferencia">
+		</section>
+	</item>
+	<item name="Transferencia de Productos" seealso="Transferencia de Productos">
+		<item name="Transferencia">
+			<section name="PENATES INVENTORY SYSTEM#IX_Transferencia_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Transferencia_1">
+			</section>
+		</item>
+	</item>
+	<item name="Usuario">
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuario" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuario">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuario_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuario_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuario_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuario_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuario_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuario_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuario_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuario_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuario_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuario_5">
+		</section>
+	</item>
+	<item name="Usuarios">
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuarios" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuarios">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuarios_1" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuarios_1">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuarios_2" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuarios_2">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuarios_3" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuarios_3">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuarios_4" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuarios_4">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuarios_5" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuarios_5">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#10_A_Usuarios" link="PENATES_INVENTORY_SYSTEM_new.htm#10_A_Usuarios">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuarios_7" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuarios_7">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuarios_8" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuarios_8">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#10_C_Activaci_n_y" link="PENATES_INVENTORY_SYSTEM_new.htm#10_C_Activaci_n_y">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#IX_Usuarios_10" link="PENATES_INVENTORY_SYSTEM_new.htm#IX_Usuarios_10">
+		</section>
+	</item>
+	<item name="Ventas">
+		<section name="PENATES INVENTORY SYSTEM#7_D_Ventas_de_un_Centro" link="PENATES_INVENTORY_SYSTEM_new.htm#7_D_Ventas_de_un_Centro">
+		</section>
+		<section name="PENATES INVENTORY SYSTEM#De_la_misma_forma_que_en" link="PENATES_INVENTORY_SYSTEM_new.htm#De_la_misma_forma_que_en">
+		</section>
+	</item>
+</index>

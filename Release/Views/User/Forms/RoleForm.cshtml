@@ -1,0 +1,71 @@
+﻿@model Penates.Models.ViewModels.Users.Roles
+
+@{
+    ViewBag.Title = "Role Form";
+}
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+
+    <script type="text/javascript" title="Save Form Data">
+        $(document).ready(function () {
+            $(window).on('beforeunload', function () {
+                sessionStorage.setItem('Description', $('#Description').val());
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Load Form Data">
+        $(document).ready(function () {
+            aux = sessionStorage.getItem('Description');
+            if (aux != null && aux != "") $('#Description').val(aux);
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <form class="form-horizontal" id="role-form" name="role-form" action="@Url.Action("Save","RoleForm")" autocomplete="on" method="post" enctype="multipart/form-data">
+            @*@Html.ValidationMessageFor()*@
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend></legend>
+                @if (@Model.RoleId != null && @Model.RoleId != 0) {
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.RoleId):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.RoleId, new { disabled = "disabled", @class = "form-control" })
+                            <div class="form-group" hidden>
+                                @Html.TextBoxFor(m => m.RoleId, new { @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.RoleId)
+                        </div>
+                    </div>
+                }
+                <!-- Description -->
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.RoleDesciption):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.RoleDesciption, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(m => m.RoleDesciption)
+                    </div>
+                </div>
+                <br />
+                <div class="btn-toolbar">
+                    <button type="submit" class="btn btn-success" id="Save">@Resources.FormsResources.Save</button>
+                    @Html.ActionLink(@Resources.FormsResources.Cancel, "Index", "Roles", null, new { @class = "btn btn-default", @id = "Cancel" })
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>

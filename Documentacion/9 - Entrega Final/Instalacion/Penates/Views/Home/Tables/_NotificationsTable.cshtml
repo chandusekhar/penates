@@ -1,0 +1,189 @@
+﻿@model Penates.Interfaces.Models.ITableViewModel
+
+<html>
+<head>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="~/Content/DataTables/css/nonToolbar_table.css" rel="stylesheet" />
+    <link href="~/Content/DT_bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTables/plugins/dataTables.fnSetFilteringDelay.js"></script>
+    <script src="~/Scripts/DataTables/plugins/dataTables.bootstrapPagination.js"></script>
+    <script src="~/Scripts/DataTables/plugins/dataTables.fnReloadAjax.js"></script>
+    <script src="~/Scripts/DataTables/aoDataManagment.js"></script>
+    <style>
+        .table-responsive.foo {
+            overflow-x: visible !important;
+            overflow-y: visible !important;
+        }
+    </style>
+
+
+    <script title="Delete Function">
+    eval("var delete"+'@Model.tableID');
+    @Model.concatWithID("delete") = function(id){
+        var conf = true;
+        if('@Model.DeleteConfirmMessage' != "" && '@Model.DeleteConfirmMessage' != "null"){
+                conf = confirm('@Model.DeleteConfirmMessage');
+        }
+        if (conf) {
+            $("#divProcessing").show();
+        var del = @Html.Raw(Json.Encode(Model.Params));
+        if(del == null){
+            del = {};
+        }
+        try{
+            var globParam = globalParams.array;
+            if(globParam instanceof Array){
+                for (var p in globalParams.array) {
+                    del[globParam[p].name] = globParam[p].value;
+                }
+            }else{
+                for (var p in globalParams.array) {
+                    del[p] = globParam[p];
+                }
+            }
+        }catch(e){
+
+        }
+        del["NotificationID"] = id;
+        $.ajax({
+            url: '@Url.Action(@Model.DeleteAction, @Model.DeleteController)',
+            data: del,
+            dataType: 'json',
+            type: 'GET',
+            success: function (data) {
+                $("#divProcessing").hide();
+                window['@Model.RefreshFunction']();
+            },
+            error: function (xhr) {
+                $("#divProcessing").hide();
+                var er = xhr.status;
+                er = er + " - " + xhr.statusText;
+                er = er + ": \"" + xhr.responseText + "\"";
+                alert(er);
+            }
+        })
+    }
+    }
+    </script>
+
+    <script title="Paginacion/Sort">
+        //Obtengo si proceso en el servidor o de forma local
+        function getServerProcessing() {
+            var compare = "@Model.ServerProcessing"
+            if (compare == "False" || compare == "false") {
+                return false;
+            }
+            return true;
+        }
+        eval("var "+'@Model.RefreshFunction');
+
+        $(document).ready(function () {
+            var id = "#"+'@Model.tableID';
+            eval("var "+'@Model.tableID');
+            @Model.tableID = $(id).dataTable({
+                "bServerSide": getServerProcessing(),
+                "sAjaxSource": '@Model.AjaxRequest',
+                "order": [[ 0, "desc" ]],
+                // Server Parameters
+                "fnServerParams": function (aoData) {
+                    try {
+                        try{
+                            addGlobalParameters(aoData, globalParams.array);
+                        }catch(err){
+                            console.log("No hay parametros globales");
+                        }
+                        var p = @Html.Raw(Json.Encode(Model.Params));
+                        if(p != null){
+                            var nam = '';
+                            for (var i in p) {
+                                nam = i;
+                                aoData.push({ name: i, value: p[i] });
+                            }
+                        }
+                    } catch (err) {
+                        console.log(err);
+                    }
+                },
+                "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+                    oSettings.jqXHR = $.ajax({
+                        "dataType": 'json',
+                        "type": "GET",
+                        "url": sSource,
+                        "data": aoData,
+                        "success": fnCallback,
+                        "error": function (xhr, textStatus, error) {
+                            $("body").html(xhr.responseText);
+                        }
+                    })
+                },
+                "bProcessing": true,
+                "aLengthMenu": [[10, 20, 30, 50], [10, 20, 30, 50]],
+                "sPaginationType": "bootstrap",
+                //"bAutoWidth": false,
+                //"sScrollX": "100%",
+                //"bScrollCollapse": true,
+                //"sPaginationType": "full_numbers",
+                "aoColumns": [                                
+                                { "sName": "Date", "mData": "Date",  "width":"20%"},
+                                { "sName": "Address", "mData": "Address", },
+                                { "sName": "Message", "mData": "Message", "width":"50%" },
+                                {
+                                    "sName": "NotificationID",
+                                    "mData": "NotificationID",
+                                    "width":"10%",
+                                    "bSearchable": false,
+                                    "bSortable": true,
+                                    "mRender": function (ID, log, obj) {
+                                        // Armo el Html del boton con opciones
+                                        var link = "<a style=\"cursor: pointer\" class = \"table-delete-action btn btn-danger btn-xs\", onclick = \"-2('-1')\" > <span class=\"glyphicon glyphicon-remove\"></span> </a>";
+                                        link = link.replace(-1, ID); //Reemplazo los objetos que tomo de MVC
+                                        link = link.replace("-1", ID); //Reemplazo los objetos que tomo de MVC
+                                        link = link.replace(-2, '@Model.concatWithID("delete")'); //Reemplazo los objetos que tomo de MVC
+                                        link = link.replace("-2", '@Model.concatWithID("delete")'); //Reemplazo los objetos que tomo de MVC
+                                        return link;
+                                    }
+                                },
+                ]
+            }).fnSetFilteringDelay();
+
+            @Model.RefreshFunction = function () {
+                if (getServerProcessing()) {
+                    eval('@Model.tableID'+".fnDraw()");
+                } else {
+                    eval('@Model.tableID'+".fnReloadAjax()")
+                }
+
+            }
+        });
+    </script>
+</head>
+
+
+<body>
+    <div class="row">
+        <div id="divProcessing" class="row text-center" hidden="hidden">
+            <p>@Resources.Resources.Processing<img src="../../Content/images/ajax-loader.gif"></p>
+        </div>
+        <table id="@Model.tableID" class="display">
+            <!--class="table table-striped table-hover ">-->
+            <thead>
+                <tr>
+                    <th>@Penates.App_GlobalResources.Forms.ModelFormsResources.Date</th>
+                    <th>@Penates.App_GlobalResources.Forms.ModelFormsResources.Address</th>
+                    <th>@Penates.App_GlobalResources.Forms.ModelFormsResources.Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+﻿@model Penates.Models.ViewModels.Forms.ProductViewModel
+@using Penates.Helpers
+
+@{
+    ViewBag.Title = @Html.Resource("Title");
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToDelete, Resources.Resources.ProductWArt, Model.ProductID)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <noscript>
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <p class="text-danger"><strong>@Resources.Messages.JavascriptDeactivated</strong></p>
+            </div>
+        </noscript>
+        <div class="row">
+            <h2>@Html.Resource("Title")</h2>
+            <form class="form-horizontal" id="products-form-summary" name="products-form-summary" enctype="multipart/form-data">
+                <fieldset>
+                    <legend></legend>
+                    <div class="form-group">
+                        <label for="ProductID" class="col-lg-2 control-label">* @Html.Resource("ID"):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.ProductID</p>
+                         </div>
+                        <label class="col-lg-2 control-label">* @Html.Resource("Barcode"):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.Barcode</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.Resource("Name"):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.Name</p>
+                        </div>
+                        <label class="col-lg-2 control-label">* @Html.Resource("SellerPrice"): </label>
+                        <div class="col-lg-4">
+                            <p>$ @Model.SellPrice</p>
+                        </div>
+                    </div>
+
+                    <!-- Size Info -->
+                    <fieldset id="product-form-sizeinfo" name="product-form-sizeinfo">
+                        <legend>@Resources.FormsResources.SizeInfo:</legend>
+                        <div class="form-group">
+                            <label class="col-lg-1 control-label">* @Resources.FormsResources.Depth:</label>
+                            <div class="col-lg-3">
+                                <p>@Html.DisplayFor(m => m.Depth) cm</p>
+                            </div>
+                            <label class="col-lg-1 control-label">* @Resources.FormsResources.Width:</label>
+                            <div class="col-lg-3">
+                                <p>@Html.DisplayFor(m => m.Width) cm</p>
+                            </div>
+                            <label class="col-lg-1 control-label">* @Resources.FormsResources.Height:</label>
+                            <div class="col-lg-3">
+                                <p>@Html.DisplayFor(m => m.Height) cm</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-lg-offset-4 control-label">* @Resources.FormsResources.Size:</label>
+                            <div class="col-lg-4">
+                                <p>@Html.DisplayFor(m => m.Size) cm<small>3</small></p>
+                            </div>
+                        </div><br>
+                    </fieldset>
+
+                    <!-- Category Info -->
+                    <fieldset id="product-form-sizeinfo">
+                        <legend>@Html.Resource("CategoryInfo"):</legend>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">* @Html.Resource("Category"):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.CategoryName</p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset>
+                        <legend></legend>
+                        @if (Model.HasMinStock) {
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.MinStock):</label>
+                                <div class="col-lg-6">
+                                    @Model.MinStock
+                                </div>
+                            </div>
+                        }
+                        <div class="form-group">
+                                @if (Model.IsBasic) {
+                                    <p class="text-primary col-lg-offset-2"><strong>@Html.Resource("IsBasic")</strong></p>
+                                } else {
+                                    <p class="text-warning col-lg-offset-2"><strong>@Html.Resource("IsNotBasic")</strong></p>
+                                }
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend></legend>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">@Html.Resource("Description"):</label>
+                            <div class="col-lg-6">
+                                <p>@Model.Description</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br />
+                    <br />
+                    <!-- Pictures -->
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.Resource("ProductImage"):</label>
+                        @*Asi es como se muestra una imagen a partir de una byte[]*@
+                        <img id="ProdImg" class="form-image" src="@Url.Action("getProductImg", "Forms")" alt="Product Image" />
+                        <br />
+                    </div>
+                    <br>
+                    <div class="btn-toolbar center-block">
+                        @Html.ActionLink(@Resources.FormsResources.Ok, "ProductABM", "ABMs", null, new { @class = "btn btn-primary", @id = "Ok" })
+                        @Html.ActionLink(@Resources.FormsResources.Edit, "ProductFormUpdate", "Forms", new { ProductID = Model.ProductID }, new { @class = "btn btn-default", @id = "Edit" })
+                        <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "Forms", new { productID = Model.ProductID })">@Html.Resource("Delete")</button>
+                        @Html.ActionLink(@Html.Resource("ViewItems"), "Index", "BoxesABM", new { filterID = Model.ProductID }, new { @class = "btn btn-default", @id = "ViewItems" })
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

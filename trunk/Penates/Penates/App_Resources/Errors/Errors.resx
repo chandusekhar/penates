@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlreadyDeletedAlert" xml:space="preserve">
+    <value>{0} with ID: {1} has already been deleted or does not exist in the Database</value>
+  </data>
+  <data name="AutonumberedIDError" xml:space="preserve">
+    <value>Error when getting the autogenerated ID when trying to save an object to the Database</value>
+  </data>
+  <data name="ConverterFileNull" xml:space="preserve">
+    <value>The parameter file to convert should not be null</value>
+  </data>
+  <data name="DatabaseError" xml:space="preserve">
+    <value>Error while trying to access the database. Database could be down or unaccesible.</value>
+  </data>
+  <data name="JavascriptDisabled" xml:space="preserve">
+    <value>The browser must have JavaScript enabled in order for Penates Inventory System to work correctly</value>
+  </data>
+  <data name="SearchIDError" xml:space="preserve">
+    <value>The id from {0} is not a valid ID or is null</value>
+  </data>
+  <data name="SPError" xml:space="preserve">
+    <value>The transaction executed by the Stored Procedure could not be completed. The Stored Procedure returned an error state.</value>
+  </data>
+  <data name="AddIDNull" xml:space="preserve">
+    <value>{0} ID you were trying to add is null. Make sure you select a value from the search box</value>
+  </data>
+  <data name="FormValidationError" xml:space="preserve">
+    <value>There was a problem with the input data.</value>
+  </data>
+  <data name="OperationUnsaccessfull" xml:space="preserve">
+    <value>The operation did not terminate correctly</value>
+  </data>
+  <data name="UnassignUnsaccessfull" xml:space="preserve">
+    <value>{0} has already been deleted or can't be deleted from the Database</value>
+  </data>
+  <data name="FilterIDNull" xml:space="preserve">
+    <value>{0} ID to add to is null. Enter a {1} ID in the upper textbox to continue</value>
+  </data>
+  <data name="DeleteIDNull" xml:space="preserve">
+    <value>The ID of {0} to delete was null</value>
+  </data>
+  <data name="ChildAdd" xml:space="preserve">
+    <value>Error when trying to add the child</value>
+  </data>
+  <data name="ParentAdd" xml:space="preserve">
+    <value>Error when trying to add the parent</value>
+  </data>
+  <data name="AlreadyCancelledAlert" xml:space="preserve">
+    <value>{0} has already been cancelled or does not exist in the Database</value>
+  </data>
+  <data name="AlreadyRestoredAlert" xml:space="preserve">
+    <value>{0} is not cancelled or does not exist in the Database</value>
+  </data>
+  <data name="GetCategoryNameError" xml:space="preserve">
+    <value>Error: Can't get or find Category with ID {0}</value>
+  </data>
+  <data name="NewSpaceTooSmall" xml:space="preserve">
+    <value>The new Size assigned is too small. Free space in order to reduce the size.</value>
+  </data>
+  <data name="InvalidLogin" xml:space="preserve">
+    <value>Username or password are invalid</value>
+  </data>
+  <data name="AllreadyExists" xml:space="preserve">
+    <value>{0} allready exists in the system</value>
+  </data>
+  <data name="IDNull" xml:space="preserve">
+    <value>{0} ID can't have a null value</value>
+  </data>
+  <data name="NewSpaceTooSmallWSize" xml:space="preserve">
+    <value>The new Size assigned is too small. Space should be grater than {0}</value>
+  </data>
+  <data name="EditRackError" xml:space="preserve">
+    <value>Can't edit Rack's size, shelfs or divitions numbers because it still has products in it.</value>
+  </data>
+  <data name="MovementError" xml:space="preserve">
+    <value>Cannot move {0} to a {1}</value>
+  </data>
+  <data name="Box" xml:space="preserve">
+    <value>Box</value>
+  </data>
+  <data name="ContainerTooSmall" xml:space="preserve">
+    <value>Container too small for the Selected box size. Container ID </value>
+  </data>
+  <data name="NotEnoughContainers" xml:space="preserve">
+    <value>There are not enough containers of type</value>
+  </data>
+  <data name="Requested" xml:space="preserve">
+    <value>Requested</value>
+  </data>
+  <data name="LocationMissing" xml:space="preserve">
+    <value>Can not find an empty location in the selected Distribution Center for the requested containers.</value>
+  </data>
+  <data name="ReceptionDBError" xml:space="preserve">
+    <value>Problem saving reception to Database</value>
+  </data>
+  <data name="RequestedContainersError" xml:space="preserve">
+    <value>There is a problem with the amount of requested containers. Verify it is not 0. </value>
+  </data>
+  <data name="NotEnoughContainersForAllBoxes" xml:space="preserve">
+    <value>There is an internal calculation problem with the amount of boxes that can be assigned to the selected container type. The recieved boxes don't feet int the cointeners requested.</value>
+  </data>
+  <data name="MisssingCategoriesError" xml:space="preserve">
+    <value>Order can not be store in the selected Distribution Center. The followed Product Categories are not present</value>
+  </data>
+  <data name="WrongRequest" xml:space="preserve">
+    <value>Wrong request. There are not Temporary Deposit in External Distribution Centers</value>
+  </data>
+  <data name="NotEnoughSpace" xml:space="preserve">
+    <value>There is not enough space in the selected Distribution Ceneter. </value>
+  </data>
+  <data name="OrderAlreadyProcessed" xml:space="preserve">
+    <value>The selected Order it's already Processed </value>
+  </data>
+  <data name="CaptchaFailed" xml:space="preserve">
+    <value>CAPTCHA verification failed</value>
+  </data>
+  <data name="CaptchaSuccessfull" xml:space="preserve">
+    <value>CAPTCHA Verification Successfull!</value>
+  </data>
+  <data name="CantChangeOwnRoles" xml:space="preserve">
+    <value>You can't change your own roles</value>
+  </data>
+  <data name="ExternalDistributionCenterInvalid" xml:space="preserve">
+    <value>{0} is not a valid External Distribution Center</value>
+  </data>
+  <data name="OrderNotFound" xml:space="preserve">
+    <value>Order not found.</value>
+  </data>
+  <data name="AllProductsMustHaveAContainer" xml:space="preserve">
+    <value>All Products must have a Container Type assigned</value>
+  </data>
+  <data name="NoLocationError" xml:space="preserve">
+    <value>The System could not find a location with the requested charasteristics</value>
+  </data>
+  <data name="SecurityParametersError" xml:space="preserve">
+    <value>Error when trying to access the security settings, please try again later.</value>
+  </data>
+</root>

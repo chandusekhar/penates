@@ -1,0 +1,77 @@
+﻿@model Penates.Models.ViewModels.Reports.DistributionCenterReportViewModel
+@using Penates.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Reports</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+   
+
+    <script type="text/javascript" title="Autocomplete">
+    $(document).ready(function () {
+        $("#SelectedValue").autocompletar({
+            url: '@Url.Action("Autocomplete", "DistributionCenterABM")',
+            seleccion: function (event, ui) {
+                $('#DistributionCenterID').val(ui.item.id);
+                sessionStorage.setItem("DistributionCenterID",ui.item.id);
+                return false;
+            }
+        });
+    });
+    </script>
+</head>
+
+ <body>
+    <div class="container">
+        <div class="row">
+            <h2>@Html.Resource("Title")</h2>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "")
+            {
+                if (@Model.Error == true)
+                {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <form class="form-horizontal" action="@ViewBag.Action" method="get">
+                <fieldset>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <label class="col-sm-2 col-sm-offset-3 control-label">@Html.Resource("SelectDC"):</label>
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(model => model.SelectedValue, new { @class = "form-control input-sm" })
+                                </div>
+                                <div class="col-sm-1">
+                                    <button id="getReport" type="submit" class="btn btn-default btn-lg btn-xs">
+                                        <span class="glyphicon glyphicon-stats"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </fieldset>
+              </form>
+        </div><br>
+    </body>
+</html>

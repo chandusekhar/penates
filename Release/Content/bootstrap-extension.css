@@ -1,0 +1,20 @@
+﻿/* Aca toco los siguientes Items:
+    - Color de los mensajes de error en los formularios
+    */
+
+.field-validation-error{
+    color: #fc0303;
+}
+
+h1{
+    text-align: center;
+}
+
+.modal-loading{
+	height: 200px;
+	width: 200px;	
+}
+
+.form-number-input{
+    text-align: end;
+}

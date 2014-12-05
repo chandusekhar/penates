@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rhpml majorversion="6" minorversion="12">
+	<ScreenLayouts>
+		<ScreenLayout name="Penates" comment="The Responsive layout is a layout that automatically gives every device an optimized frame. With the Responsive layout you serve all devices at the same time.">
+			<ScreenLayoutPages>
+				<ScreenLayoutPage default="0" name="Glossary.slp" type="3"/>
+				<ScreenLayoutPage default="0" name="Index.slp" type="3"/>
+				<ScreenLayoutPage default="0" name="SearchResults.slp" type="2"/>
+				<ScreenLayoutPage default="0" name="Table_of_Contents.slp" type="3"/>
+				<ScreenLayoutPage default="1" name="Topic.slp" type="1"/>
+			</ScreenLayoutPages>
+		</ScreenLayout>
+		<ScreenLayout name="Android_Tablet_Layout" comment="A teal, green and black color scheme pre-configured to display in Android Tablets of popular sizes. This layout is part of a family that also includes ready-made layouts for these screens: Desktop, iPhone, iPad, Android Phone and Kindle Fire.">
+			<ScreenLayoutPages>
+				<ScreenLayoutPage default="0" name="Glossary.slp" type="3"/>
+				<ScreenLayoutPage default="1" name="HomePage.slp" type="3"/>
+				<ScreenLayoutPage default="0" name="Index.slp" type="3"/>
+				<ScreenLayoutPage default="0" name="SearchResults.slp" type="2"/>
+				<ScreenLayoutPage default="0" name="TableOfContents.slp" type="3"/>
+				<ScreenLayoutPage default="0" name="Topic.slp" type="1"/>
+			</ScreenLayoutPages>
+		</ScreenLayout>
+		<ScreenLayout name="iPad_Layout" comment="A grey and brown theme is easy to navigate with TOC, Index and Glossary and always accessible Search. This layout for iPad is part of a family that also includes ready-made layouts for these screens: Desktop, iPhone, Android Phone, Android Tablet and Kindle Fire.">
+			<ScreenLayoutPages>
+				<ScreenLayoutPage default="0" name="Glossary.slp" type="3"/>
+				<ScreenLayoutPage default="1" name="Home.slp" type="3"/>
+				<ScreenLayoutPage default="0" name="Index_rh.slp" type="3"/>
+				<ScreenLayoutPage default="0" name="SearchResults.slp" type="2"/>
+				<ScreenLayoutPage default="0" name="Table_of_Contents.slp" type="3"/>
+				<ScreenLayoutPage default="0" name="Topic.slp" type="1"/>
+			</ScreenLayoutPages>
+		</ScreenLayout>
+		<ScreenLayout name="iPhone_Layout" comment="A light blue and grey theme is bright and easy to navigate with TOC, Index and Glossary and always accessible Search. This layout for iPhone is part of a family that also includes ready-made layouts for these screens: Desktop, iPad, Android Phone, Android Tablet and Kindle Fire.">
+			<ScreenLayoutPages>
+				<ScreenLayoutPage default="0" name="Glossary.slp" type="3"/>
+				<ScreenLayoutPage default="1" name="Home.slp" type="3"/>
+				<ScreenLayoutPage default="0" name="Index_rh.slp" type="3"/>
+				<ScreenLayoutPage default="0" name="SearchResults.slp" type="2"/>
+				<ScreenLayoutPage default="0" name="Table_of_Contents.slp" type="3"/>
+				<ScreenLayoutPage default="0" name="Topic.slp" type="1"/>
+			</ScreenLayoutPages>
+		</ScreenLayout>
+		<ScreenLayout name="Desktop_Layout" comment="A grey and brown theme is easy to navigate with TOC, Index and Glossary on the left side. This layout for Desktop is part of a family that also includes ready-made layouts for these screens: iPhone, iPad, Android Phone, Android Tablet and Kindle Fire.">
+			<ScreenLayoutPages>
+				<ScreenLayoutPage default="0" name="SearchResults.slp" type="2"/>
+				<ScreenLayoutPage default="1" name="Topic.slp" type="1"/>
+			</ScreenLayoutPages>
+		</ScreenLayout>
+	</ScreenLayouts>
+</rhpml>

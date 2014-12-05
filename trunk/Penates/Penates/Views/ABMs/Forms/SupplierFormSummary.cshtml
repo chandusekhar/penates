@@ -1,0 +1,73 @@
+﻿@model Penates.Models.ViewModels.Forms.SupplierViewModel
+@using Penates.Helpers
+
+@{
+    ViewBag.Title = @Html.Resource("Title");
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="container">
+        <noscript>
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <p class="text-danger"><strong>@Resources.Messages.JavascriptDeactivated</strong></p>
+            </div>
+        </noscript>
+        <div class="row">
+            <h2>@Html.Resource("Title")</h2>
+            <form class="form-horizontal" id="products-form-summary" name="products-form-summary" enctype="multipart/form-data">
+                <fieldset>
+                    <legend></legend>
+                    <div class="form-group">
+                        <label for="ProductID" class="col-lg-2 control-label">@Penates.App_GlobalResources.Forms.ModelFormsResources.SupplierID:</label>
+                        <div class="col-lg-4">
+                            <p>@Model.SupplierID</p>
+                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Penates.App_GlobalResources.Forms.ModelFormsResources.Name:</label>
+                        <div class="col-lg-4">
+                            <p>@Model.Name</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Penates.App_GlobalResources.Forms.ModelFormsResources.Address:</label>
+                        <div class="col-lg-4">
+                            <p>@Model.Address</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Penates.App_GlobalResources.Forms.ModelFormsResources.Email:</label>
+                        <div class="col-lg-4">
+                            <p>@Model.Email</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Penates.App_GlobalResources.Forms.ModelFormsResources.Phone:</label>
+                        <div class="col-lg-4">
+                            <p>@Model.Phone</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="btn-toolbar center-block">
+                        @Html.ActionLink(@Resources.FormsResources.Ok, "Index", "SupplierABM", null, new { @class = "btn btn-primary", @id = "Ok" })
+                        @Html.ActionLink(@Resources.FormsResources.Edit, "FormEdit", "SupplierForms", new { id = Model.SupplierID }, new { @class = "btn btn-default", @id = "Edit" })
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

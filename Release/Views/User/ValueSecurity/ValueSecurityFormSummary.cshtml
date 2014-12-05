@@ -1,0 +1,108 @@
+﻿@model Penates.Models.ViewModels.Users.ValSecurityViewModel
+
+@{
+
+}
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToDelete, Resources.Resources.RuleWArt)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <div class="form-horizontal" id="deposit-form">
+            <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.FileNumber):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.FileNumber</p>
+                    </div>
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Username):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Username</p>
+                    </div>
+                </div>
+                <fieldset>
+                    <legend>@Html.Resource("ProductSecurity")</legend>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.MaxProductPrice):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasMaxProductPrice) {
+                                <p>@Model.MaxProductPrice</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.MinProductPrice):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasMinProductPrice) {
+                                <p>@Model.MinProductPrice</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Categories):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.Categories</p>
+                        </div>
+                    </div>
+                </fieldset>
+                <br />
+                <fieldset>
+                    <legend>@Html.Resource("OrdersSecurity")</legend>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.MaxOrderTotal):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasMaxOrderTotal) {
+                                <p>@Model.MaxOrderTotal</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.MinOrderTotal):</label>
+                        <div class="col-md-4">
+                            @if (Model.HasMinOrderTotal) {
+                                <p>@Model.MinOrderTotal</p>
+                            } else {
+                                <p>-</p>
+                            }
+                        </div>
+                    </div>
+                </fieldset>
+                <br>
+                <div class="btn-toolbar center-block">
+                    @Html.ActionLink(@Resources.FormsResources.Ok, "Index", "ValueSecurity", null, new { @class = "btn btn-primary", @id = "Ok" })
+                    @Html.ActionLink(@Resources.FormsResources.Edit, "FormEdit", "ValueSecurity", new { UserID = Model.FileNumber }, new { @class = "btn btn-default", @id = "Edit" })
+                    <button hidden="hidden" type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "ValueSecurity" , new { UserID = Model.FileNumber })">@Resources.FormsResources.Delete</button>
+                    @Html.ActionLink(@Html.Resource("EditUser"), "FormEdit", "User", new { UserID = Model.FileNumber }, new { @id = "EditUser", @class = "btn btn-default", @onclick = "sessionStorage.clear();", hidden = "hidden" })
+                    @Html.ActionLink(@Html.Resource("EditSecurity"), "Index", "Security", null, new { @id = "EditSecurity", @class = "btn btn-default", @onclick = "sessionStorage.clear();" })
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</body>
+</html>

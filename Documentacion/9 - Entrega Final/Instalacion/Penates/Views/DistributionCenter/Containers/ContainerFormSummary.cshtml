@@ -1,0 +1,188 @@
+﻿@model Penates.Models.ViewModels.DC.ContainerViewModel
+
+@{
+
+}
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToDelete, Resources.Resources.Container, Model.ContainerID)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <div class="form-horizontal" id="deposit-form">
+            <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.ContainerID):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.ContainerID</p>
+                    </div>
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Code):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Code</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.ContainerTypeID):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.ContainerTypeID</p>
+                    </div>
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.ContainerTypeName):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.ContainerTypeName</p>
+                    </div>
+                </div>
+                <!-- Size Info -->
+                <fieldset id="product-form-sizeinfo" name="product-form-sizeinfo">
+                    <legend>@Resources.FormsResources.SizeInfo:</legend>
+                    <div class="form-group">
+                        <label class="col-lg-1 control-label">* @Resources.FormsResources.Depth:</label>
+                        <div class="col-lg-3">
+                                <p>@Html.DisplayFor(m => m.Depth) cm</p>
+                        </div>
+                        <label class="col-lg-1 control-label">* @Resources.FormsResources.Width:</label>
+                        <div class="col-lg-3">
+                                <p>@Html.DisplayFor(m => m.Width) cm</p>
+                        </div>
+                        <label class="col-lg-1 control-label">* @Resources.FormsResources.Height:</label>
+                        <div class="col-lg-3">
+                                <p>@Html.DisplayFor(m => m.Height) cm</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-lg-offset-3 control-label">* @Resources.FormsResources.Size:</label>
+                        <div class="col-lg-4">
+                                <p>@Html.DisplayFor(m => m.Size) cm3</p>
+                        </div>
+                    </div>
+                    <br>
+                </fieldset>
+
+                <!-- Capacity Info -->
+                <fieldset id="product-form-sizeinfo" name="product-form-sizeinfo">
+                    <legend>@Resources.FormsResources.CapacityInfo:</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Resources.FormsResources.Capacity:</label>
+                        <div class="col-lg-2">
+                                <p>@Html.DisplayFor(m => m.Size) cm3</p>
+                        </div>
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.UsedSpace):</label>
+                        <div class="col-lg-2">
+                                <p>@Html.DisplayFor(m => m.UsedSpace) cm3</p>
+                        </div>
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.UsedPercentage):</label>
+                        <div class="col-lg-2">
+                                <p>@Html.DisplayFor(m => m.UsedPercentage) %</p>
+                        </div>
+                    </div>
+                    <br/>
+                </fieldset>
+                <fieldset>
+                    <legend>@Html.Resource("Location"):</legend>
+                    @if (Model.TemporaryDepositID.HasValue) {
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DistributionCenter):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.DistributionCenter</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.TemporaryDepositID):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.TemporaryDepositID</p>
+                            </div>
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.TemporaryDepositName):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.TemporaryDepositName</p>
+                            </div>
+                        </div>
+                    } else {
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DistributionCenter):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.DistributionCenter</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DepositID):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.DepositID</p>
+                            </div>
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DepositName):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.DepositName</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.SectorID):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.SectorID</p>
+                            </div>
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.SectorName):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.SectorName</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.HallID):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.HallID</p>
+                            </div>
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.HallName):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.HallName</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.RackID):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.RackID</p>
+                            </div>
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.RackName):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.RackName</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.IDShelfSubdivision):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.IDShelfSubdivision</p>
+                            </div>
+                            <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.ShelfSubdivisionName):</label>
+                            <div class="col-lg-4">
+                                <p>@Model.ShelfSubdivisionName</p>
+                            </div>
+                        </div>
+                    }
+                </fieldset>
+
+                <br>
+                <div class="btn-toolbar center-block">
+                    @Html.ActionLink(@Resources.FormsResources.Ok, "Index", "ContainersABM", new { RackID = Model.RackID, TemporaryDepositID = Model.TemporaryDepositID, ContainerTypeID = Model.ContainerTypeID }, new { @class = "btn btn-primary", @id = "Ok" })
+                    @Html.ActionLink(@Resources.FormsResources.Edit, "FormEdit", "ContainerForms", new { ContainerID = Model.ContainerID }, new { @class = "btn btn-default", @id = "Edit" })
+                    <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "ContainerForms", new { ContainerID = Model.ContainerID})">@Resources.FormsResources.Delete</button>
+                    @Html.ActionLink(@Html.Resource("ViewContainerTypes"), "Index", "ContainerTypesABM", null, new { @id = "ViewContainerTypes", @class = "btn btn-default", @onclick = "sessionStorage.clear();" })
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</body>
+</html>

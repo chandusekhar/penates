@@ -1,0 +1,125 @@
+﻿@model Penates.Models.ViewModels.ABMs.SupplierABMViewModel
+@using Penates.Models.ViewModels
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+        <meta charset=utf-8 />
+
+    <script type="text/javascript" title="Initialize">
+        var globalParams = new ParametrosGlobales;
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#tableRefresh").click(function (e) {
+                window["@Model.tableRefresh"]();
+            });
+        });
+    </script>
+
+
+
+    <script type="text/javascript" title="Save Form Data">
+    $(document).ready(function () {
+        $(window).on('beforeunload', function () {
+            sessionStorage.setItem('ProductName', $('#ProductName').val());
+        });
+    });
+    </script>
+
+    <script type="text/javascript" title="Load Form Data">
+        $(document).ready(function () {
+            var aux = sessionStorage.getItem('ProductID');
+            if (aux != null && aux != "") {
+                globalParams.addParam("ID", aux);
+                globalParams.addParam("productID", aux);
+            }
+            aux = sessionStorage.getItem('ProductName');
+            if (aux != null && aux != "") {
+                $('#ProductName').val(aux);
+            }
+        });
+    </script>
+
+    <script type="text/javascript" title="Prodcut Autocomplete">
+    $(document).ready(function () {
+        $("#ProductName").autocompletar({
+            url: '@Url.Action("Autocomplete", "ABMs")',
+            params: globalParams.array,
+            seleccion: function (event, ui) {
+                $('#ProductName').val(ui.item.label);
+                globalParams.addParam("ID", ui.item.id.ProductID);
+                globalParams.addParam("productID", ui.item.id.ProductID);
+                sessionStorage.setItem("ProductID", ui.item.id.ProductID);
+                sessionStorage.setItem("ProductName", ui.item.label);
+                window["refreshTablesearchAndAdd"]();
+                return false;
+            },
+            keyup: function (event, ui) {
+                var valor = $("#ProductName").val();
+                if (valor == null || valor == "") {
+                    sessionStorage.setItem("ProductID", "");
+                    sessionStorage.setItem("ProductName", "");
+                    globalParams.deleteParam("ID");
+                    globalParams.deleteParam("productID");
+                }
+            }
+        });
+    });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h3>@Html.Resource("Title")</h3>
+        @if (@Model.Message != null && @Model.Error != null && @Model.Message != "") {
+            if (@Model.Error == true) {
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    @Model.Message
+                </div>
+            } else {
+                <div class="alert alert-dismissable alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    @Model.Message
+                </div>
+            }
+        }
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                        <div class="row">
+                            <label class="col-sm-2 control-label">@Penates.App_GlobalResources.Forms.ModelFormsResources.ProductName:</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                </div>
+            </div>
+            @{Html.RenderPartial("~/Views/ABMs/_SearchAndAddModal.cshtml", new SearchAndAddViewModelWithModal() {
+                  TablePartialView = "~/Views/ABMs/Tables/_SupplierTable.cshtml",
+                  TableAjaxRequest = Url.Action("SupplierLoad", "ProductSupplierABM"),
+                  AjaxRequest = @Url.Action("Autocomplete", "ProductSupplierABM"),
+                  SubmitAction = "AssignSupplier",
+                  SubmitController = "ProductSupplierABM",
+                  ConfirmMessage = @String.Format(Resources.Messages.SureToAdd, Resources.Resources.Suppliers),
+                  TableDeleteAction = "UnassignSupplier",
+                  TableDeleteController = "ProvidedByForm",
+                  TableDeleteText = @Resources.FormsResources.Unassign,
+                  TableDeleteConfirmMessage = String.Format(Resources.Messages.SureToUnassign, Resources.Resources.SupplierWArt, Resources.Resources.ProductWArt),
+                  TableServerProcessing = false,
+                  ModalURL = Url.Action("ProvidedByFormModal", "ProvidedByForm"),
+                  ModalEditURL = Url.Action("EditForm", "ProvidedByForm")
+              });}
+         </div>
+    </div>
+</body>
+</html>

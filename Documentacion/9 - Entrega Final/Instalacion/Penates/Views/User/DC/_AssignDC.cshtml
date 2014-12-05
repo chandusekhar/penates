@@ -1,0 +1,25 @@
+﻿@model Penates.Models.ViewModels.Users.AssignViewModel
+@using Penates.Models.ViewModels
+
+<div class="container">
+    <h3>@Html.Resource("Title") @Model.UserName</h3>
+    <br />
+    <br />
+    <div class="row">
+        @{Html.RenderPartial("~/Views/ABMs/_SearchAndAdd.cshtml", new SearchAndAddViewModel() {
+            TablePartialView = "~/Views/DistributionCenter/Tables/_DistributionCenterTable.cshtml",
+            AjaxRequest = Url.Action("Autocomplete", "DistributionCenterABM"),
+            TableAjaxRequest = Url.Action("UserDC", "User"),
+            Params = new { UserID = Model.UserFileNumber },
+            SubmitAction = "AddDCToUser",
+            SubmitController = "User",
+            TableDeleteAction = "UnassignDC",
+            TableDeleteController = "User",
+            TableDeleteText = @Resources.FormsResources.Unassign,
+            TableServerProcessing = false
+        });}
+    </div>
+    <div>
+        @Html.ActionLink(@Resources.Menu.AssignRoles, "AssignRoles", "User", new { FileNumber = Model.UserFileNumber }, new { @class = "btn btn-info" })
+    </div>
+</div>

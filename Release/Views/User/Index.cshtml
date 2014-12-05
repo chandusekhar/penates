@@ -1,0 +1,97 @@
+﻿@model Penates.Models.ViewModels.ABMs.ABMViewModel
+@using Penates.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <meta charset=utf-8 />
+    
+    <script>
+        $(document).ready(function () {
+            $("#tableRefresh").click(function (e) {
+                window["@Model.tableRefresh"]();
+            });
+
+            $("#SelectedValue").change(function (e) {
+                globalParams.addParam("SelectedValue", $("#SelectedValue").val());
+                globalParams.addParam("UserActive", $("#ActiveList").val());
+                window["@Model.tableRefresh"]();
+            });
+
+            $("#ActiveList").change(function (e) {
+                globalParams.addParam("SelectedValue", $("#SelectedValue").val());
+                globalParams.addParam("UserActive", $("#ActiveList").val());
+                window["@Model.tableRefresh"]();
+            });
+        });
+    </script>
+    <script type="text/javascript" title="Global Parameters">
+    var globalParams = new ParametrosGlobales();
+    </script>
+
+    <script type="text/javascript" title="Clear Form Data">
+    $(document).ready(function () {
+        sessionStorage.clear();
+    });
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h3 style="text-align: center">@Html.Resource("Title")</h3>
+            @if (@Model.Message != null && @Model.Message != "") {
+                if (@Model.Error == null || @Model.Error == false) {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                } else {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <a class="btn btn-success btn-lg btn-xs" href="@Url.Action("Register", "User")">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                            <a id="tableRefresh" class="btn btn-default btn-lg btn-xs">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        </div>
+                        <label class="col-sm-2 control-label">@Html.Resource("ActiveList"):</label>
+                        <div class="col-sm-2">
+                            @Html.DropDownList("ActiveList", new SelectList(ViewBag.ActiveList, "Value", "Text"), new { @class = "form-control input-sm" })
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-2 control-label">@Html.Resource("RoleList"):</label>
+                        <div class="col-sm-3">
+                            @Html.DropDownListFor(model => model.SelectedValue, Model.List, new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        @{Html.RenderPartial("~/Views/User/Tables/_UserTable.cshtml", new TableAjaxViewModel(@Model.tableID) {
+            AjaxRequest = @Url.Action("ABMAjax", "User"),
+            DeleteAction = "Delete",
+            DeleteController = "User",
+            DeleteText = Resources.FormsResources.Delete,
+            DeleteConfirmMessage = String.Format(Resources.Messages.SureToDelete, Resources.Resources.UserWArt),
+            RefreshFunction = @Model.tableRefresh,
+            useDefault = true
+        });}
+    </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+﻿@model Penates.Models.ViewModels.Transactions.ProductsReceptions.ProductsReceptionModel
+@using Penates.Helpers
+@using Penates.Models.ViewModels
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+
+
+    <script type="text/javascript" title="Supplier Filter">
+        var globalParams = new ParametrosGlobales();
+        $(document).ready(function () {
+            $("#SelectedSupplier").autocompletar({
+            url: '@Url.Action("SupplierAutocomplete", "ProductsReceptions")',
+                seleccion: function (event, ui) {
+                    $("#SelectedSupplier").val(ui.item.label);                    
+                    $("#SupplierID").val(ui.item.id.SupplierID);
+                    globalParams.addParam("SupplierID", ui.item.id.SupplierID);                    
+                    return false;
+                },
+                keyup: function (event) {
+                    var value = $("#SelectedSupplier").val();
+                    if (value == null || value == "") {
+                        globalParams.deleteParam("SupplierID");                      
+                    }
+                }
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript" title="Supplier Filter">
+        var globalParams = new ParametrosGlobales();
+        $(document).ready(function () {
+            $("#SelectedOrder").autocompletar({
+                url: '@Url.Action("OrderAutocomplete", "ProductsReceptions")',
+                params: globalParams.array,
+                seleccion: function (event, ui) {
+                    $("#SelectedOrder").val(ui.item.label);
+                    $("#OrderID").val(ui.item.id.SupplierID);
+                    globalParams.addParam("OrderID", ui.item.id.SupplierID);
+                    return false;
+                },
+                keyup: function (event) {
+                    var value = $("#SelectedOrder").val();
+                    if (value == null || value == "") {
+                        globalParams.deleteParam("OrderID");
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>@Html.Resource("Title")</h2>         
+            <h4>@Html.Resource("SearchTitle"):</h4>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "")
+            {
+                if (@Model.Error == true)
+                {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <form class="form-horizontal" action="@ViewBag.Action" method="get">
+                <fieldset>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <label class="col-sm-2 col-sm-offset-3 control-label">@Html.Resource("Supplier"):</label>                                                            
+                                <div class="col-sm-3">                                                                      
+                                    <div hidden="hidden">
+                                        @Html.TextBoxFor(model => model.SupplierID, new { @class = "form-control input-sm" })
+                                    </div>
+                                    @Html.TextBoxFor(model => model.SelectedSupplier, new { @class = "form-control input-sm" })
+                                    @Html.ValidationMessageFor(model => model.SelectedSupplier)
+                                    @Html.ValidationMessageFor(model => model.SupplierID)
+                                </div>           
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>           
+                <fieldset>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <label class="col-sm-2 col-sm-offset-3 control-label">@Html.Resource("OrderNumber"):</label>
+                                <div class="col-sm-3">
+                                    <div hidden="hidden">
+                                        @Html.TextBoxFor(model => model.OrderID, new { @class = "form-control input-sm" })
+                                    </div>
+                                    @Html.TextBoxFor(model => model.SelectedOrder, new { @class = "form-control input-sm" })
+                                    @Html.ValidationMessageFor(model => model.OrderID)
+                                    @Html.ValidationMessageFor(model => model.SelectedOrder)
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="col-lg-offset-6">
+                    <div class="btn-toolbar">
+                        <button type="submit" class="btn btn-success" id="Save" value="SubmitProduct">@Resources.FormsResources.Receive</button>
+                    </div>
+                </div>
+            </form>
+
+        </div><br>
+     </div>
+</body>
+</html>

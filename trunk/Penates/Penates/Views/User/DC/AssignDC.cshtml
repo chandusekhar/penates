@@ -1,0 +1,19 @@
+﻿@model Penates.Models.ViewModels.Users.AssignViewModel
+@using Penates.Models.ViewModels
+@{
+    ViewBag.Title = "AssignRoles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <meta charset=utf-8 />
+</head>
+<body>
+    @{Html.RenderPartial("~/Views/User/DC/_AssignDC.cshtml", Model);}
+</body>
+
+</html>

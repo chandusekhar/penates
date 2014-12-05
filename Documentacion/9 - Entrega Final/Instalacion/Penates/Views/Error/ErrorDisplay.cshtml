@@ -1,0 +1,40 @@
+﻿@model Penates.Models.ErrorModel
+
+@{
+    ViewBag.Title = "ErrorDisplay";
+}
+<html>
+<head>
+    <title>ErrorDisplay</title> 
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <br />
+        <br />
+        <br />
+        @if (Model.ErrorTitle != null) {
+            <h3>@Model.ErrorTitle :</h3>
+            <br />
+        }
+        @if (Model.ErrorMessage != null) {
+            <p class="text-danger text-left">@Model.ErrorMessage</p>
+        }
+        @if (Model.ControllerName != null) {
+            <p class="text-danger text-left">Controller: @Model.ControllerName</p>
+            <p class="text-danger text-left">Action: @Model.ActionName</p>
+        }
+        @if (@Model.Exception != null) {
+            <br />
+            <br />
+            <h4>Exception information:</h4>
+            <br />
+            <p class="text-warning text-left">Message: @Model.Exception.Message</p>
+            <br />
+            <h4 >Stack:</h4>
+            <p class="text-info text-left">@Model.Exception.StackTrace</p>
+        }
+    </div>
+</body>
+</html>

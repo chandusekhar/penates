@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toc version="1.0">
+	<properties imagewidth="16" windowstyles="8388610" exwindowstyles="256">
+	</properties>
+	<item name="1. Introducción" link="PENATES_INVENTORY_SYSTEM_new.htm#1_Introducci_n">
+		<item name="1.A. Beneficios" link="PENATES_INVENTORY_SYSTEM_new.htm#1_A_Beneficios">
+		</item>
+		<item name="1.B. Características del Sistema" link="PENATES_INVENTORY_SYSTEM_new.htm#1_B_Caracter_sticas_del">
+		</item>
+	</item>
+	<item name="2. Instalación del Sistema" link="PENATES_INVENTORY_SYSTEM_new.htm#2_Instalaci_n_del_Sistema">
+		<item name="2.A. Instalación del Motor de Base de Datos" link="PENATES_INVENTORY_SYSTEM_new.htm#2_A_Instalaci_n_del">
+		</item>
+		<item name="2.B. Instalación de la Base de Datos" link="PENATES_INVENTORY_SYSTEM_new.htm#2_B_Instalaci_n_de_la">
+		</item>
+		<item name="2.C. Instalación del Internet Information Services" link="PENATES_INVENTORY_SYSTEM_new.htm#2_C_Instalaci_n_del">
+		</item>
+		<item name="2.D. Configuración del Sitio" link="PENATES_INVENTORY_SYSTEM_new.htm#2_D_Configuraci_n_del">
+		</item>
+		<item name="2.E. Instalación de la Aplicación" link="PENATES_INVENTORY_SYSTEM_new.htm#2_E_Instalaci_n_de_la">
+		</item>
+	</item>
+	<item name="3. Ingreso al Sistema" link="PENATES_INVENTORY_SYSTEM_new.htm#3_Ingreso_al_Sistema">
+	</item>
+	<item name="4. Menú Principal" link="PENATES_INVENTORY_SYSTEM_new.htm#4_Men_Principal">
+	</item>
+	<item name="5. Centros de Distribución" link="PENATES_INVENTORY_SYSTEM_new.htm#5_Centros_de_Distribuci_n">
+		<item name="5.A. Gestión de un Centro de Distribución Interno" link="PENATES_INVENTORY_SYSTEM_new.htm#5_A_Gesti_n_de_un_Centro">
+		</item>
+		<item name="5.B. Depósitos" link="PENATES_INVENTORY_SYSTEM_new.htm#5_B_Dep_sitos">
+		</item>
+		<item name="5.C. Depósitos Temporales" link="PENATES_INVENTORY_SYSTEM_new.htm#5_C_Dep_sitos_Temporales">
+		</item>
+		<item name="5.D. Sectores" link="PENATES_INVENTORY_SYSTEM_new.htm#5_D_Sectores">
+		</item>
+		<item name="5.E. Pasillos" link="PENATES_INVENTORY_SYSTEM_new.htm#5_E_Pasillos">
+		</item>
+		<item name="5.F. Racks" link="PENATES_INVENTORY_SYSTEM_new.htm#5_F_Racks">
+		</item>
+		<item name="5.G. Contenedores" link="PENATES_INVENTORY_SYSTEM_new.htm#5_G_Contenedores">
+			<item name="· TiposdeContenedores" link="PENATES_INVENTORY_SYSTEM_new.htm#_TiposdeContenedores">
+			</item>
+			<item name="· Contenedores – Palletes y Cajas" link="PENATES_INVENTORY_SYSTEM_new.htm#_Contenedores_–_Palletes">
+			</item>
+		</item>
+		<item name="5.H. CentrodeDistribuciónExterno" link="PENATES_INVENTORY_SYSTEM_new.htm#5_H_CentrodeDistribuci">
+		</item>
+	</item>
+	<item name="6. Administración de Productos" link="PENATES_INVENTORY_SYSTEM_new.htm#6_Administraci_n_de">
+		<item name="6.A. Productos" link="PENATES_INVENTORY_SYSTEM_new.htm#6_A_Productos">
+		</item>
+		<item name="6.B. Proveedores" link="PENATES_INVENTORY_SYSTEM_new.htm#6_B_Proveedores">
+		</item>
+		<item name="6.C. Asignación de un Producto a un Proveedor" link="PENATES_INVENTORY_SYSTEM_new.htm#6_C_Asignaci_n_de_un">
+		</item>
+		<item name="6.D. Lotes" link="PENATES_INVENTORY_SYSTEM_new.htm#6_D_Lotes">
+		</item>
+		<item name="6.E. Categorías" link="PENATES_INVENTORY_SYSTEM_new.htm#6_E_Categor_as">
+			<item name="· Jerarquía de una Categoría" link="PENATES_INVENTORY_SYSTEM_new.htm#_Jerarqu_a_de_una">
+			</item>
+			<item name="· Visualización de todo el árbol jerárquico de una Categoría" link="PENATES_INVENTORY_SYSTEM_new.htm#_Visualizaci_n_de_todo">
+			</item>
+		</item>
+		<item name="6.F. Clientes" link="PENATES_INVENTORY_SYSTEM_new.htm#6_F_Clientes">
+		</item>
+		<item name="6.G. EstadosdelosÍtems" link="PENATES_INVENTORY_SYSTEM_new.htm#6_G_Estadosdelos_tems">
+		</item>
+		<item name="6.H. Cajas" link="PENATES_INVENTORY_SYSTEM_new.htm#6_H_Cajas">
+		</item>
+	</item>
+	<item name="7. Transacciones" link="PENATES_INVENTORY_SYSTEM_new.htm#7_Transacciones">
+		<item name="7.A. ÓrdenesdeCompra" link="PENATES_INVENTORY_SYSTEM_new.htm#7_A_rdenesdeCompra">
+		</item>
+		<item name="7.B. IngresodeMercadería" link="PENATES_INVENTORY_SYSTEM_new.htm#7_B_IngresodeMercader_a">
+		</item>
+		<item name="7.C. Transferencias entre Centros de Distribución" link="PENATES_INVENTORY_SYSTEM_new.htm#7_C_Transferencias_entre">
+		</item>
+		<item name="7.D. Ventas de un Centro de Distribución a un Cliente" link="PENATES_INVENTORY_SYSTEM_new.htm#7_D_Ventas_de_un_Centro">
+		</item>
+		<item name="7.E. Transferencias entre Depósitos de un mismo CD" link="PENATES_INVENTORY_SYSTEM_new.htm#7_E_Transferencias_entre">
+		</item>
+	</item>
+	<item name="8. Reportes" link="PENATES_INVENTORY_SYSTEM_new.htm#8_Reportes">
+		<item name="8.A. Detalles por Centro de Distribución" link="PENATES_INVENTORY_SYSTEM_new.htm#8_A_Detalles_por_Centro">
+		</item>
+		<item name="8.B. Consulta de Stock" link="PENATES_INVENTORY_SYSTEM_new.htm#8_B_Consulta_de_Stock">
+		</item>
+	</item>
+	<item name="9. Inventarios" link="PENATES_INVENTORY_SYSTEM_new.htm#9_Inventarios">
+		<item name="9.A. Generación de Inventario" link="PENATES_INVENTORY_SYSTEM_new.htm#9_A_Generaci_n_de">
+		</item>
+	</item>
+	<item name="10. Gestión de Usuarios" link="PENATES_INVENTORY_SYSTEM_new.htm#10_Gesti_n_de_Usuarios">
+		<item name="10.A. Usuarios" link="PENATES_INVENTORY_SYSTEM_new.htm#10_A_Usuarios">
+		</item>
+		<item name="10.B. Roles" link="PENATES_INVENTORY_SYSTEM_new.htm#10_B_Roles">
+		</item>
+		<item name="10.C. Activación y Desactivación de Usuarios" link="PENATES_INVENTORY_SYSTEM_new.htm#10_C_Activaci_n_y">
+		</item>
+		<item name="10.D. Políticas de Seguridad" link="PENATES_INVENTORY_SYSTEM_new.htm#10_D_Pol_ticas_de">
+			<item name="· Sesión" link="PENATES_INVENTORY_SYSTEM_new.htm#_Sesi_n">
+			</item>
+			<item name="· Nombres de Usuario" link="PENATES_INVENTORY_SYSTEM_new.htm#_Nombres_de_Usuario">
+			</item>
+			<item name="· Contraseña" link="PENATES_INVENTORY_SYSTEM_new.htm#_Contrase_a">
+			</item>
+			<item name="· Seguridad por valor" link="PENATES_INVENTORY_SYSTEM_new.htm#_Seguridad_por_valor">
+			</item>
+		</item>
+	</item>
+	<item name="11. Tablas" link="PENATES_INVENTORY_SYSTEM_new.htm#11_Tablas">
+	</item>
+	<item name="12. Ilustraciones" link="PENATES_INVENTORY_SYSTEM_new.htm#12_Ilustraciones">
+	</item>
+</toc>

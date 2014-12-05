@@ -1,0 +1,293 @@
+﻿﻿@using Penates.Helpers
+
+<!DOCTYPE html>
+<html lang="@Html.getUICulture()">
+<head>
+    <!-- Por mas que se queje NO AGREGAR EL TITLE ACA!!-->
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/menu/menu.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Plugins/cookiesManagment.js"></script>
+    <script src="~/Scripts/Plugins/jQueryHelp.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.1.min.js"></script>
+    <style>
+        a:hover {
+            cursor:pointer;
+        }
+    </style>
+    <script title="menu-fixed">
+        $(document).ready(function () {
+            $("#fixMenu").click(function () {
+                if ($("#menu-wrap").hasClass("navbar-fixed-top")) {
+                    $("#menu-wrap").removeClass("navbar-fixed-top");
+                    $(this).text("@Resources.Menu.UnfixMenu");
+                    $("#submenu").css("margin-top", "");
+                    setCookie("menuFixed", "true", 7);
+                } else {
+                    $("#fixMenu").text("@Resources.Menu.FixMenu");
+                    $("#menu-wrap").addClass("navbar-fixed-top");
+                    var h = $("#menu-wrap").height();
+                    $("#submenu").css("margin-top", h);
+                    delete_cookie("menuFixed");
+                }
+                $("#menu-navbar").redraw();
+                //var height = $("#menu-navbar").css("min-height")
+                //$("#menu-navbar").css("min-height", 30);
+                //$("#menu-navbar").css("min-height", height);
+            });
+        });
+
+        $(document).ready(function () {
+            var x = getCookie("menuFixed");
+            if (x == null || x == undefined || x != "true") {
+                $("#menu-wrap").addClass("navbar-fixed-top");
+                $("#fixMenu").text("@Resources.Menu.FixMenu");
+                var h = $("#menu-wrap").height();
+                $("#submenu").css("margin-top", h);
+            } else {
+                $("#menu-wrap").removeClass("navbar-fixed-top");
+                setCookie("menuFixed", "true", 7);
+                $("#fixMenu").text("@Resources.Menu.UnfixMenu");
+                $("#submenu").css("margin-top", "");
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="menu-navbar" class="menu-navbar" >
+        <nav id="menu-wrap">
+            <ul id="menu">
+                <li><a href="/" style="padding: 0px 0px"><img src="@Url.Content("~/Images/PenatesBanner.png")" alt="Logo"></a></li>
+                <!-- <li><a href="/">@Resources.Menu.Home</a></li> -->
+                <li>
+                    @Html.ActionLink(Resources.Menu.DistributionCenters, "Index", "DistributionCenterABM")
+                    <ul>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.DistributionCenters, "Index", "DistributionCenterABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.DistributionCenterABM, "Index", "DistributionCenterABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddInternalDistributionCenter, "AddInternalForm", "DistributionCenterForms")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddExternalDistributionCenter, "AddExternalForm", "DistributionCenterForms")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Deposits, "Index", "DepositsABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.DepositsABM, "Index", "DepositsABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddDeposit, "Index", "DepositsForms")</li>
+                                <li>@Html.ActionLink(Resources.Menu.TemporalDepositsABM, "Index", "TemporaryDepositsABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddTemporaryDeposit, "Index", "TemporaryDepositsForms")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Sectors, "Index", "SectorsABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.SectorsABM, "Index", "SectorsABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddSector, "Index", "SectorsForms")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Halls, "Index", "HallsABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.HallsABM, "Index", "HallsABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddHall, "Index", "HallsForms")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Racks, "Index", "RacksABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.RacksABM, "Index", "RacksABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddRack, "Index", "RacksForms")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Containers, "Index", "ContainersABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.ContainersAdmin, "Index", "ContainersABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddContainer, "Index", "ContainerForms")</li>
+                                <li>@Html.ActionLink(Resources.Menu.ContainersTypesAdmin, "Index", "ContainerTypesABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddContainerType, "Index", "ContainerTypeForms")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">@Resources.Menu.Transactions</a>
+                    <ul>
+                        <li>@Html.ActionLink(Resources.Menu.Orders, "Index", "OrdersABM")</li>
+                        <li>@Html.ActionLink(Resources.Menu.Receptions, "Index", "ProductsReceptions")</li>
+                        <!--<li>@Html.ActionLink(Resources.Menu.Transfers, "Index", "")</li>
+                    <li>@Html.ActionLink(Resources.Menu.Sales, "Index", "")</li>-->
+                    </ul>
+                </li>
+                <li>
+                    <a href="">@Resources.Menu.Reports</a>
+                    <ul>
+                        <li>@Html.ActionLink(Resources.Menu.DetailsPerDC, "Index", "DistributionCenterReport")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">@Resources.Menu.Inventories</a>
+                    <ul>
+                        <!--<li>@Html.ActionLink(Resources.Menu.ViewLastInventory, "ViewLast", "Inventory")</li>
+                    <li>@Html.ActionLink(Resources.Menu.EditLastInventory, "EditLast", "Inventory")</li>
+                    <li><a href="">Ver Historial</a></li>-->
+                        <li>@Html.ActionLink(Resources.Menu.CreateInventory, "Index", "Inventory")</li>
+                        <!--<li><a href="">Comparar Inventario con Stock</a></li>-->
+                    </ul>
+                </li>
+                <li>
+                    <a href="">@Resources.Menu.Admin</a>
+                    <ul>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Boxes, "Index", "BoxesABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.BoxesAdmin, "Index", "BoxesABM")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Categories, "Index", "CategoryABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.CategoryAdmin, "Index", "CategoryABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddCategory, "Index", "CategoryForm")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Clients, "Index", "ClientsABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.ClientsAdmin, "Index", "ClientsABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddClient, "Index", "ClientForms")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.ItemStates, "Index", "ItemStatesABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.ItemsStatesABM, "Index", "ItemStatesABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddItemStates, "Index", "ItemStatesForms")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Packs, "Index", "PacksABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.PacksABM, "Index", "PacksABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddPack, "Index", "PackForm")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Products, "ProductABM", "ABMs")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.ProductAdmin, "ProductABM", "ABMs")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddProduct, "ProductForm", "Forms")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AsignSuppliers, "Index", "ProductSupplierABM")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Suppliers, "Index", "SupplierABM")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.SupplierAdmin, "Index", "SupplierABM")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddSupplier, "Index", "SupplierForms")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    @Html.ActionLink(Resources.Menu.Users, "Index", "User")
+                    <ul>
+                        <li>@Html.ActionLink(Resources.Menu.UsersAdmin, "Index", "User")</li>
+                        <li>@Html.ActionLink(Resources.Menu.AddUser, "Register", "User")</li>
+                        <li>@Html.ActionLink(Resources.Menu.Search, "AdvancedSearch", "User")</li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Roles, "Index", "Roles")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.ViewRoles, "Index", "Roles")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AssignRoles, "AssignRolesUserSelect", "User")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Assignations, "AssignUserSelect", "User")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.AssignRoles, "AssignRolesUserSelect", "User")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AssignToDistributionCenter, "AssignDCUserSelect", "User")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink(Resources.Menu.Security, "Index", "Security")
+                            <ul>
+                                <li>@Html.ActionLink(Resources.Menu.SecurityPolicies, "Index", "Security")</li>
+                                <li>@Html.ActionLink(Resources.Menu.ValueSecurity, "Index", "ValueSecurity")</li>
+                                <li>@Html.ActionLink(Resources.Menu.AddValueSecurity, "AddRule", "ValueSecurity")</li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink(Resources.Menu.ChangeUserPassword, "ChangePasswordUserSelect", "User")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">@User.Identity.Name.Trim()</a>
+                    <ul>
+                        <li>@Html.ActionLink(Resources.Menu.ChangePassword, "ChangeMyPassword", "Account")</li>
+                        <li>@Html.ActionLink(Resources.Menu.LogOut, "LogOut", "Account")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a><span class="glyphicon glyphicon-cog"></span></a>
+                    <ul>
+                        <li><a id="fixMenu" style="z-index: 1030">@Resources.Menu.FixMenu</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="submenu" class="container">
+            <ul class="nav navbar-nav">
+                @{string controller = ViewContext.RouteData.Values.Values.FirstOrDefault().ToString();
+                string action = ViewContext.RouteData.Values.Values.ElementAt(1).ToString();
+                string aux = null;
+                if (ViewContext.RouteData.Values.Values.Count > 2) {
+                    aux = ViewContext.RouteData.Values.Values.ElementAt(2).ToString();
+                }}
+                <li class="active"><a href="/">@Resources.Menu.Home</a></li>
+                @if (String.Compare(controller, "Home", true) != 0) {
+                    <li><a href="">=></a></li>
+                    <li class="active">@Html.ActionLink(controller, "Index", controller)</li>
+                }
+                @if (String.Compare(action, "Index", true) != 0) {
+                    <li><a href="">=></a></li>
+                    <li class="active">@Html.ActionLink(action, action, controller)</li>
+                    if (!String.IsNullOrWhiteSpace(aux)) {
+                        <li><a href="">=></a></li>
+                        <li><a href="">@aux</a></li>
+                    }
+                } else {
+                    if (!String.IsNullOrWhiteSpace(aux)) {
+                        <li><a href="">=></a></li>
+                        <li class="active">@Html.ActionLink(controller, "Index", controller)</li>
+                        <li><a href="">=></a></li>
+                        <li><a href="">@aux</a></li>
+                    }
+                }
+            </ul>
+        </div>
+
+    </div>
+    <noscript>
+        <div class="container row">
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <p class="text-danger"><strong>@Resources.Messages.JavascriptDeactivated</strong></p>
+            </div>
+        </div>
+    </noscript>
+    @RenderBody()
+
+
+    <div class="text-center">
+        <br />
+        <br />
+        <img src="@Url.Content("~/Images/LogoPES.png")" style="height:60px">
+        <p>Penates Inventory System / Pegasus Enterprise Software </p>
+    </div>
+</body>
+</html>

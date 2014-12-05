@@ -1,0 +1,476 @@
+﻿@model Penates.Models.ViewModels.Users.SecurityParametersViewModel
+@{
+}
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+
+    <script type="text/javascript" title="Save Form Data">
+    $(document).ready(function () {
+        $(window).on('beforeunload', function () {
+            sessionStorage.setItem('SessionTime', $('#SessionTime').val());
+            //Users
+            if ($("#HasUsernameMax").is(':checked')) {
+                sessionStorage.setItem('UsernameMax', $('#UsernameMax').val());
+            } else {
+                sessionStorage.removeItem('UsernameMax');
+            }
+            if ($("#HasUsernameMin").is(':checked')) {
+                sessionStorage.setItem('UsernameMin', $('#UsernameMin').val());
+            } else {
+                sessionStorage.removeItem('UsernameMin');
+            }
+            if ($("#HasUsernameLower").is(':checked')) {
+                sessionStorage.setItem('UsernameLower', $('#UsernameLower').val());
+            } else {
+                sessionStorage.removeItem('UsernameLower');
+            }
+            if ($("#HasUsernameUpper").is(':checked')) {
+                sessionStorage.setItem('UsernameUpper', $('#UsernameUpper').val());
+            } else {
+                sessionStorage.removeItem('UsernameUpper');
+            }
+            if ($("#HasUsernameDigits").is(':checked')) {
+                sessionStorage.setItem('UsernameDigits', $('#UsernameDigits').val());
+            } else {
+                sessionStorage.removeItem('UsernameDigits');
+            }
+            if ($("#HasUsernameSymbols").is(':checked')) {
+                sessionStorage.setItem('UsernameSymbols', $('#UsernameSymbols').val());
+            } else {
+                sessionStorage.removeItem('UsernameSymbols');
+            }
+            //Passwords
+            if ($("#HasPasswordMax").is(':checked')) {
+                sessionStorage.setItem('PasswordMax', $('#PasswordMax').val());
+            } else {
+                sessionStorage.removeItem('PasswordMax');
+            }
+            if ($("#HasPasswordMin").is(':checked')) {
+                sessionStorage.setItem('PasswordMin', $('#PasswordMin').val());
+            } else {
+                sessionStorage.removeItem('PasswordMin');
+            }
+            if ($("#HasPasswordLower").is(':checked')) {
+                sessionStorage.setItem('PasswordLower', $('#PasswordLower').val());
+            } else {
+                sessionStorage.removeItem('PasswordLower');
+            }
+            if ($("#HasPasswordUpper").is(':checked')) {
+                sessionStorage.setItem('PasswordUpper', $('#PasswordUpper').val());
+            } else {
+                sessionStorage.removeItem('PasswordUpper');
+            }
+            if ($("#HasPasswordDigits").is(':checked')) {
+                sessionStorage.setItem('PasswordDigits', $('#PasswordDigits').val());
+            } else {
+                sessionStorage.removeItem('PasswordDigits');
+            }
+            if ($("#HasPasswordSymbols").is(':checked')) {
+                sessionStorage.setItem('PasswordSymbols', $('#PasswordSymbols').val());
+            } else {
+                sessionStorage.removeItem('PasswordSymbols');
+            }
+        });
+    });
+    </script>
+
+    <script type="text/javascript" title="Load Form Data">
+        $(document).ready(function () {
+            var aux = sessionStorage.getItem('SessionTime');
+            if (aux != null && aux != "") $('#SessionTime').val(aux);
+            //Users
+            aux = sessionStorage.getItem('UsernameMax');
+            if (aux != null && aux != "") {
+                $("#HasUsernameMax").attr("checked", "checked");
+                $("#UsernameMax").removeAttr("disabled");
+                $('#UsernameMax').val(aux);
+            }
+            aux = sessionStorage.getItem('UsernameMin');
+            if (aux != null && aux != "") {
+                $("#HasUsernameMin").attr("checked", "checked");
+                $("#UsernameMin").removeAttr("disabled");
+                $('#UsernameMin').val(aux);
+            }
+            aux = sessionStorage.getItem('UsernameLower');
+            if (aux != null && aux != "") {
+                $("#HasUsernameLower").attr("checked", "checked");
+                $("#UsernameLower").removeAttr("disabled");
+                $('#UsernameLower').val(aux);
+            }
+            aux = sessionStorage.getItem('UsernameUpper');
+            if (aux != null && aux != "") {
+                $("#HasUsernameUpper").attr("checked", "checked");
+                $("#UsernameUpper").removeAttr("disabled");
+                $('#UsernameUpper').val(aux);
+            }
+            aux = sessionStorage.getItem('UsernameDigits');
+            if (aux != null && aux != "") {
+                $("#HasUsernameDigits").attr("checked", "checked");
+                $("#UsernameDigits").removeAttr("disabled");
+                $('#UsernameDigits').val(aux);
+            }
+            aux = sessionStorage.getItem('UsernameSymbols');
+            if (aux != null && aux != "") {
+                $("#HasUsernameSymbols").attr("checked", "checked");
+                $("#UsernameSymbols").removeAttr("disabled");
+                $('#UsernameSymbols').val(aux);
+            }
+
+            //Password
+            aux = sessionStorage.getItem('PasswordMax');
+            if (aux != null && aux != "") {
+                $("#HasPasswordMax").attr("checked", "checked");
+                $("#PasswordMax").removeAttr("disabled");
+                $('#PasswordMax').val(aux);
+            }
+            aux = sessionStorage.getItem('PasswordMin');
+            if (aux != null && aux != "") {
+                $("#HasPasswordMin").attr("checked", "checked");
+                $("#PasswordMin").removeAttr("disabled");
+                $('#PasswordMin').val(aux);
+            }
+            aux = sessionStorage.getItem('PasswordLower');
+            if (aux != null && aux != "") {
+                $("#HasPasswordLower").attr("checked", "checked");
+                $("#PasswordLower").removeAttr("disabled");
+                $('#PasswordLower').val(aux);
+            }
+            aux = sessionStorage.getItem('PasswordUpper');
+            if (aux != null && aux != "") {
+                $("#HasPasswordUpper").attr("checked", "checked");
+                $("#PasswordUpper").removeAttr("disabled");
+                $('#PasswordUpper').val(aux);
+            }
+            aux = sessionStorage.getItem('PasswordDigits');
+            if (aux != null && aux != "") {
+                $("#HasPasswordDigits").attr("checked", "checked");
+                $("#PasswordDigits").removeAttr("disabled");
+                $('#PasswordDigits').val(aux);
+            }
+            aux = sessionStorage.getItem('PasswordSymbols');
+            if (aux != null && aux != "") {
+                $("#HasPasswordSymbols").attr("checked", "checked");
+                $("#PasswordSymbols").removeAttr("disabled");
+                $('#PasswordSymbols').val(aux);
+            }
+        });
+    </script>
+
+    <script type="text/javascript" title="Form Jquery">
+    $(document).ready(function () {
+        $("#HasUsernameMax").click(function () {
+            if ($("#HasUsernameMax").is(':checked')) {
+                $("#UsernameMax").removeAttr("disabled");
+            } else {
+                $("#UsernameMax").attr("disabled", "disabled");
+            }
+        });
+
+        $("#HasUsernameMin").click(function () {
+            if ($("#HasUsernameMin").is(':checked')) {
+                $("#UsernameMin").removeAttr("disabled");
+            } else {
+                $("#UsernameMin").attr("disabled", "disabled");
+            }
+        });
+
+        $("#HasUsernameLower").click(function () {
+            if ($("#HasUsernameLower").is(':checked')) {
+                $("#UsernameLower").removeAttr("disabled");
+            } else {
+                $("#UsernameLower").attr("disabled", "disabled");
+            }
+        });
+
+        $("#HasUsernameUpper").click(function () {
+            if ($("#HasUsernameUpper").is(':checked')) {
+                $("#UsernameUpper").removeAttr("disabled");
+            } else {
+                $("#UsernameUpper").attr("disabled", "disabled");
+            }
+        });
+
+        $("#HasUsernameDigits").click(function () {
+            if ($("#HasUsernameDigits").is(':checked')) {
+                $("#UsernameDigits").removeAttr("disabled");
+            } else {
+                $("#UsernameDigits").attr("disabled", "disabled");
+            }
+        });
+
+        $("#HasUsernameSymbols").click(function () {
+            if ($("#HasUsernameSymbols").is(':checked')) {
+                $("#UsernameSymbols").removeAttr("disabled");
+            } else {
+                $("#UsernameSymbols").attr("disabled", "disabled");
+            }
+        });
+
+        $("#HasPasswordMax").click(function () {
+            if ($("#HasPasswordMax").is(':checked')) {
+                $("#PasswordMax").removeAttr("disabled");
+            } else {
+                $("#PasswordMax").attr("disabled", "disabled");
+            }
+        });
+
+        $("#HasPasswordMin").click(function () {
+            if ($("#HasPasswordMin").is(':checked')) {
+                $("#PasswordMin").removeAttr("disabled");
+            } else {
+                $("#PasswordMin").attr("disabled", "disabled");
+            }
+        });
+
+        $("#HasPasswordLower").click(function () {
+            if ($("#HasPasswordLower").is(':checked')) {
+                $("#PasswordLower").removeAttr("disabled");
+            } else {
+                $("#PasswordLower").attr("disabled", "disabled");
+            }
+        });
+
+        $("#HasPasswordUpper").click(function () {
+            if ($("#HasPasswordUpper").is(':checked')) {
+                $("#PasswordUpper").removeAttr("disabled");
+            } else {
+                $("#PasswordUpper").attr("disabled", "disabled");
+            }
+        });
+
+        $("#HasPasswordDigits").click(function () {
+            if ($("#HasPasswordDigits").is(':checked')) {
+                $("#PasswordDigits").removeAttr("disabled");
+            } else {
+                $("#PasswordDigits").attr("disabled", "disabled");
+            }
+        });
+
+        $("#HasPasswordSymbols").click(function () {
+            if ($("#HasPasswordSymbols").is(':checked')) {
+                $("#PasswordSymbols").removeAttr("disabled");
+            } else {
+                $("#PasswordSymbols").attr("disabled", "disabled");
+            }
+        });
+    });
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+
+        @using (Html.BeginForm("ChangeParameters", "Security", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+            @Html.AntiForgeryToken()
+            @Html.ValidationMessageFor(m => m.error)
+            @Html.ValidationSummary()
+            <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">* @Html.DisplayNameFor(m => m.SessionTime) (min):</label>
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(m => m.SessionTime, new { required = "required", @class = "form-control", autofocus = "autofocus" })
+                    </div>
+                    <p class="text-danger">@Html.ValidationMessageFor(m => m.SessionTime)</p>
+                </div>
+                <fieldset>
+                    <legend>@Html.Resource("UsernameRules")</legend>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasUsernameMax) @Html.DisplayNameFor(m => m.HasUsernameMax):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasUsernameMax) {
+                                @Html.TextBoxFor(m => m.UsernameMax, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.UsernameMax, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.UsernameMax)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasUsernameMin) @Html.DisplayNameFor(m => m.HasUsernameMin):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasUsernameMin) {
+                                @Html.TextBoxFor(m => m.UsernameMin, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.UsernameMin, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.UsernameMin)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasUsernameLower) @Html.DisplayNameFor(m => m.HasUsernameLower):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasUsernameLower) {
+                                @Html.TextBoxFor(m => m.UsernameLower, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.UsernameLower, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.UsernameLower)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasUsernameUpper) @Html.DisplayNameFor(m => m.HasUsernameUpper):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasUsernameUpper) {
+                                @Html.TextBoxFor(m => m.UsernameUpper, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.UsernameUpper, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.UsernameUpper)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasUsernameDigits) @Html.DisplayNameFor(m => m.HasUsernameDigits):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasUsernameDigits) {
+                                @Html.TextBoxFor(m => m.UsernameDigits, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.UsernameDigits, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.UsernameDigits)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasUsernameSymbols) @Html.DisplayNameFor(m => m.HasUsernameSymbols):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasUsernameSymbols) {
+                                @Html.TextBoxFor(m => m.UsernameSymbols, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.UsernameSymbols, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.UsernameSymbols)
+                        </div>
+                    </div>
+                </fieldset>
+                <br />
+                <br />
+                <fieldset>
+                    <legend>@Html.Resource("PasswordRules")</legend>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasPasswordMax) @Html.DisplayNameFor(m => m.HasPasswordMax):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasPasswordMax) {
+                                @Html.TextBoxFor(m => m.PasswordMax, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.PasswordMax, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.PasswordMax)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasPasswordMin) @Html.DisplayNameFor(m => m.HasPasswordMin):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasPasswordMin) {
+                                @Html.TextBoxFor(m => m.PasswordMin, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.PasswordMin, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.PasswordMin)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasPasswordLower) @Html.DisplayNameFor(m => m.HasPasswordLower):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasPasswordLower) {
+                                @Html.TextBoxFor(m => m.PasswordLower, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.PasswordLower, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.PasswordLower)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasPasswordUpper) @Html.DisplayNameFor(m => m.HasPasswordUpper):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasPasswordUpper) {
+                                @Html.TextBoxFor(m => m.PasswordUpper, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.PasswordUpper, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.PasswordUpper)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasPasswordDigits) @Html.DisplayNameFor(m => m.HasPasswordDigits):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasPasswordDigits) {
+                                @Html.TextBoxFor(m => m.PasswordDigits, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.PasswordDigits, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.PasswordDigits)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 control-label">
+                            <label>
+                                @Html.CheckBoxFor(m => m.HasPasswordSymbols) @Html.DisplayNameFor(m => m.HasPasswordSymbols):
+                            </label>
+                        </div>
+                        <div class="col-lg-2">
+                            @if (Model.HasPasswordSymbols) {
+                                @Html.TextBoxFor(m => m.PasswordSymbols, new { @class = "form-control" })
+                            } else {
+                                @Html.TextBoxFor(m => m.PasswordSymbols, new { @class = "form-control", disabled = "disabled" })
+                            }
+                            @Html.ValidationMessageFor(m => m.PasswordSymbols)
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+            <br>
+            <div class="btn-toolbar">
+                <button type="submit" class="btn btn-success" id="Save">@Resources.FormsResources.Confirm</button>
+                @Html.ActionLink(@Resources.FormsResources.Cancel, "HomeDashboards", "Home", null, new { @class = "btn btn-default", @id = "Cancel" })
+            </div>
+        }
+    </div>
+</body>

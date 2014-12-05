@@ -1,0 +1,120 @@
+﻿@model Penates.Models.ViewModels.Forms.ClientViewModel
+
+@{
+}
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+
+    <script type="text/javascript" title="Form Jquery">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                    window.location.href = $(this).data('url');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <div class="form-horizontal" id="deposit-form">
+            @if(!String.IsNullOrWhiteSpace(Model.error)){
+                <p class="text-danger">@Model.error</p>
+            }
+            <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.ClientID):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.ClientID</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Name):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Name</p>
+                    </div>
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.CUIT):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.CUIT</p>
+                    </div>
+                </div>
+                <fieldset>
+                    <legend>@Html.Resource("ContactInfo")</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Phone):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.Phone</p>
+                        </div>
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Email):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.Email</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.ContactName):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.ContactName</p>
+                        </div>
+                    </div>
+                </fieldset>
+                <br/>
+                <fieldset>
+                    <legend>@Html.Resource("LocationInfo")</legend>
+                    <!-- City -->
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.CountryName):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.CountryName</p>
+                        </div>
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.StateName):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.StateName</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.CityName):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.CityName</p>
+                        </div>
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Address):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.Address</p>
+                        </div>
+                    </div>
+                </fieldset>
+                <br />
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"></label>
+                    <div class="col-lg-4">
+                        @if (Model.Active) {
+                            <p class="text-success">@Html.Resource("ClientActive")</p>
+                        } else {
+                            <p class="text-danger">@Html.Resource("ClientDeactive")</p>
+                        }
+                    </div>
+                </div>
+                <br />
+                <div class="btn-toolbar center-block">
+                    @Html.ActionLink(@Resources.FormsResources.Ok, "Index", "ClientsABM", null, new { @class = "btn btn-primary", @id = "Ok" })
+                    @Html.ActionLink(@Resources.FormsResources.Edit, "FormEdit", "ClientForms", new { ClientID = Model.ClientID }, new { @class = "btn btn-default", @id = "Edit" })
+                    @if (@Model.ClientID != null && @Model.ClientID > 0) {
+                        if (Model.Active) {
+                            <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "ClientForms", new { ClientID = Model.ClientID })">@Resources.FormsResources.Deactivate</button>
+                        } else {
+                            <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "ClientForms", new { ClientID = Model.ClientID })">@Resources.FormsResources.Activate</button>
+                        }
+                    }
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</body>
+</html>

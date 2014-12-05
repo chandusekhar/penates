@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Topic</title>
+<link rel="Stylesheet" href="mobile.css" type="text/css" />
+</head>
+
+<body>
+<div class="contentholder">
+	<div class="searchholder">
+		<table class="searchholdertable">
+			<tr>
+				<td class="home"><a href="home.slp"><img src="home_default.png" 
+															 alt="" style="border: none;" 
+															 border="0" /></a></td>
+				<td class="searchfield"><div class="wSearchField">
+					<?rh-msp-search-text-box id="searchBox" widgettype="searchfield" 
+											 placeholder="{{Search}}" class="wSearchField" 
+											 type="search" ?><?rh-msp-search-link-start 
+					 class="wSearchLink" widgettype="navlinksearch" related-id="searchBox" ?><img 
+					 src="Search.png" alt="" class="wSearchLink" border="0" /><?rh-msp-search-link-end ?> 
+					 
+				</div></td>
+			</tr>
+		</table>
+	</div>
+	<div class="content">
+		<div class="options">
+			<table class="options">
+				<tr>
+					<td class="bsback"><?rh-msp-bs-back-start id="browseSeqBack" 
+					 widgettype="browsesequence" class="wBSBackButton" ?><img 
+					 alt="" src="BSBack.png" class="wBSBackButton" border="0" /><?rh-msp-bs-back-end ?> 
+					 </td>
+					<td class="home"></td>
+					<td class="bsnext"><?rh-msp-bs-next-start id="browseSeqNext" 
+					 widgettype="browsesequence" class="wBSNextButton" ?><img 
+					 alt="" src="BSNext.png" class="wBSNextButton" border="0" /><?rh-msp-bs-next-end ?> 
+					 </td>
+				</tr>
+			</table>
+		</div>
+		<?rh-msp-topic class="wTopic" widgettype="topic" ?>
+		
+	</div>
+</div>
+</body>
+</html>

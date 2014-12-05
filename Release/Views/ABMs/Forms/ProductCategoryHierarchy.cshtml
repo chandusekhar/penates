@@ -1,0 +1,76 @@
+﻿@model Penates.Models.ViewModels.Forms.CategoryHierarchyViewModel
+@using Penates.Models.ViewModels
+
+@{
+
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title"): @Model.actual.Description</title>
+    <meta charset="utf-8">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title"): @Model.actual.Description</h2>
+        @if (!String.IsNullOrWhiteSpace(Model.Message) && @Model.Error != null) {
+            if (@Model.Error == true) {
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    @if (!String.IsNullOrWhiteSpace(Model.Title)) {
+                        <h3>@Model.Title:</h3>
+                    }
+                    <p>@Model.Message</p>
+                </div>
+            } else {
+                <div class="alert alert-dismissable alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    @if (!String.IsNullOrWhiteSpace(Model.Title)) {
+                        <h3>@Model.Title:</h3>
+                    }
+                    <p>@Model.Message</p>
+                </div>
+            }
+        }
+        <fieldset id="parents-hierarchy">
+            <legend>@Html.Resource("Parents"):</legend>
+            @{Html.RenderPartial("~/Views/Trees/_TreeView.cshtml", new TreeViewModel("ParentsTable") {
+                arbol = Model.padres,
+                SelectAction = "FormEdit",
+                SelectController = "CategoryForm"
+            });}
+        </fieldset>
+        <br />
+        <div class="form-horizontal" id="category-form">
+            <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.actual.ProductCategoriesID, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.actual.ProductCategoriesID, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.actual.Description, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.actual.Description, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <fieldset id="children-hierarchy">
+            <legend>@Html.Resource("Children"):</legend>
+            @{Html.RenderPartial("~/Views/Trees/_TreeView.cshtml", new TreeViewModel("ChildrenTable") {
+                arbol = Model.hijos,
+                SelectAction = "FormEdit",
+                SelectController = "CategoryForm"
+            });}
+        </fieldset>
+    </div>
+</body>
+</html>

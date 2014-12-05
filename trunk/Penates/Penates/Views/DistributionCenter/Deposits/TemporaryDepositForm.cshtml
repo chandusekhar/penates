@@ -1,0 +1,257 @@
+﻿@model Penates.Models.ViewModels.DC.DepositViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../../Scripts/ABMs/calculateSizes.js"></script>
+    <script src="~/Scripts/ABMs/calculateCapacity.js"></script>
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToDelete, Resources.Resources.DistributionCenterWArt, Model.DistributionCenterID)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Save Form Data">
+        $(document).ready(function () {
+            $(window).on('beforeunload', function () {
+                sessionStorage.setItem('DistributionCenterID', $('#DistributionCenterID').val());
+                sessionStorage.setItem('Description', $('#Description').val());
+                sessionStorage.setItem('Floor', $('#Floor').val());
+                sessionStorage.setItem('Depth', $('#Depth').val());
+                sessionStorage.setItem('Height', $('#Height').val());
+                sessionStorage.setItem('Width', $('#Width').val());
+                sessionStorage.setItem('Size', $('#Size').val());
+                sessionStorage.setItem('UsedSpacePercentage', $('#UsedSpacePercentage').val());
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Load Form Data">
+        $(document).ready(function () {
+            aux = sessionStorage.getItem('DistributionCenterID');
+            if (aux != null && aux != "") $('#DistributionCenterID').val(aux);
+            aux = sessionStorage.getItem('Description');
+            if (aux != null && aux != "") $('#Description').val(aux);
+            aux = sessionStorage.getItem('Floor');
+            if (aux != null && aux != "") $('#Floor').val(aux);
+            var dep = sessionStorage.getItem('Depth');
+            if (dep != null && dep != "") $('#Depth').val(dep);
+            var heigh = sessionStorage.getItem('Height');
+            if (heigh != null && heigh != "") $('#Height').val(heigh);
+            var wid = sessionStorage.getItem('Width');
+            if (wid != null && wid != "") $('#Width').val(wid);
+            aux = sessionStorage.getItem('Floors');
+            if (aux != null && aux != "") $('#Floors').val(aux);
+            calculateSizeByID();
+            aux = dep * wid * heigh;
+            if (aux != null && aux != "") $('#Capacity').val(aux);
+        });
+    </script>
+    <script type="text/javascript" title="Capacity Update">
+    $(document).ready(function () {
+        $("#Width").change(function (e) {
+            var dcID = @Html.Raw(Model.DepositID);
+                if(dcID == null || dcID == 0){
+                    calculateCapacity(null);
+                }else{
+                    calculateCapacity("@Resources.Errors.NewSpaceTooSmall");
+            }
+        });
+        $("#Height").change(function (e) {
+            var dcID = @Html.Raw(Model.DepositID);
+            if(dcID == null || dcID == 0){
+                calculateCapacity(null);
+            }else{
+                calculateCapacity("@Resources.Errors.NewSpaceTooSmall");
+            }
+        });
+        $("#Depth").change(function (e) {
+            var dcID = @Html.Raw(Model.DepositID);
+            if(dcID == null || dcID == 0){
+                calculateCapacity(null);
+            }else{
+                calculateCapacity("@Resources.Errors.NewSpaceTooSmall");
+            }
+        });
+    });
+    </script>
+    <script type="text/javascript" title="Autocomplete">
+    $(document).ready(function () {
+        $("#DistributionCenterID").autocompletar({
+            url: '@Url.Action("DistributionCenterAutocomplete", "DepositsABM")',
+            seleccion: function (event, ui) {
+                $('#DistributionCenterID').val(ui.item.id);
+                sessionStorage.setItem("DistributionCenterID",ui.item.id);
+                return false;
+            }
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <form class="form-horizontal" id="internal-DC-form" name="internal-DC-form" action="@Url.Action("Save","TemporaryDepositsForms")" autocomplete="on" method="post" enctype="multipart/form-data">
+            @Html.ValidationMessageFor(m => m.error)
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend></legend>
+                @if (@Model.DepositID != null && @Model.DepositID != 0) {
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DepositID):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.DepositID, new { disabled = "disabled", @class = "form-control" })
+                            <div class="form-group" hidden>
+                                @Html.TextBoxFor(m => m.DepositID, new { @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.DepositID)
+                        </div>
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.Description):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Description, new { @class = "form-control", required = "required", autofocus = "autofocus" })
+                            @Html.ValidationMessageFor(m => m.Description)
+                        </div>
+                    </div>
+                } else {
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.Description):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Description, new { @class = "form-control", required = "required", autofocus = "autofocus" })
+                            @Html.ValidationMessageFor(m => m.Description)
+                        </div>
+                    </div>
+                }
+                @if (Model.DepositID != null && Model.DepositID != 0) {
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DistributionCenterID):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.DistributionCenterID, new { disabled = "disabled", @class = "form-control" })
+                            <div class="form-group" hidden>
+                                @Html.TextBoxFor(m => m.DistributionCenterID, new { @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.DistributionCenterID)
+                        </div>
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.Floor):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Floor, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.Floor)
+                        </div>
+                    </div>
+                } else {
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.DistributionCenterID):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.DistributionCenterID, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.DistributionCenterID)
+                        </div>
+                        <label class="col-lg-2 control-label">* @Html.DisplayNameFor(m => m.Floor):</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(m => m.Floor, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.Floor)
+                        </div>
+                    </div>
+                }
+                <!-- Size Info -->
+                <fieldset id="product-form-sizeinfo" name="product-form-sizeinfo">
+                    <legend>@Resources.FormsResources.SizeInfo:</legend>
+                    <div class="form-group">
+                        <label class="col-lg-1 control-label">* @Resources.FormsResources.Depth:</label>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Depth, "{0:F2}", new { @class = "form-control form-number-input", required = "required", onchange = "calculateSizeByID()" })
+                                <span class="input-group-addon">m</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Depth)
+                        </div>
+                        <label class="col-lg-1 control-label">* @Resources.FormsResources.Width:</label>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Width, "{0:F2}", new { @class = "form-control form-number-input", required = "required", onchange = "calculateSizeByID()" })
+                                <span class="input-group-addon">m</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Width)
+                        </div>
+                        <label class="col-lg-1 control-label">* @Resources.FormsResources.Height:</label>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Height, "{0:F2}", new { @class = "form-control form-number-input", required = "required", onchange = "calculateSizeByID()" })
+                                <span class="input-group-addon">m</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Height)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-lg-offset-3 control-label">* @Resources.FormsResources.Size:</label>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Size, "{0:F2}", new { @class = "form-control form-number-input", disabled = "disabled", required = "required" })
+                                <span class="input-group-addon">m3</span>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Size)
+                        </div>
+                    </div>
+                    <br>
+                </fieldset>
+
+                <!-- Capacity Info -->
+                <fieldset id="product-form-sizeinfo" name="product-form-sizeinfo">
+                    <legend>@Resources.FormsResources.CapacityInfo:</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Resources.FormsResources.Capacity:</label>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.Size, "{0:F2}", new { @id = "Capacity", @class = "form-control form-number-input", disabled = "disabled" })
+                                <span class="input-group-addon">m3</span>
+                            </div>
+                        </div>
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.UsedSpace):</label>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.UsedSpace, "{0:F2}", new { @class = "form-control form-number-input", disabled = "disabled" })
+                                <span class="input-group-addon">m3</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.UsedPercentage):</label>
+                        <div class="col-lg-4">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.UsedPercentage, "{0:F2}", new { @class = "form-control form-number-input", disabled = "disabled" })
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </fieldset>
+                <div class="btn-toolbar">
+                    <button type="submit" class="btn btn-success" id="Save" value="SubmitProduct">@Resources.FormsResources.Save</button>
+                    @Html.ActionLink(@Resources.FormsResources.Cancel, "Index", "TemporaryDepositsABM", new {SelectedValue = Model.DistributionCenterID }, new { @class = "btn btn-default", @id = "Cancel" })
+                    @if (@Model.DepositID != null && @Model.DepositID > 0) {
+                        <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "TemporaryDepositsForms", new { TemporaryDepositID = Model.DepositID, DistributionCenterID = Model.DistributionCenterID })">@Resources.FormsResources.Delete</button>
+                        @Html.ActionLink(@Html.Resource("EditDistributionCenter"), "FormEdit", "DistributionCenterForms", new { id = Model.DistributionCenterID }, new { @class = "btn btn-default", @onclick = "sessionStorage.clear();" })
+                        @Html.ActionLink(@Html.Resource("ViewBoxes"), "Index", "BoxesABMs", new { DepositID = Model.DepositID }, new { @class = "btn btn-default", @id = "ViewTemporalDeposits" })
+                    }
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

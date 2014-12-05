@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BarcodeLength" xml:space="preserve">
+    <value>La longitud del Código de Barras debe ser menor a 128 caracteres</value>
+  </data>
+  <data name="BarcodeRequired" xml:space="preserve">
+    <value>Necesita ingresar el Código de Barras para poder continuar</value>
+  </data>
+  <data name="CurrencyTypeError" xml:space="preserve">
+    <value>{0} debe tener formato de moneda</value>
+  </data>
+  <data name="DateTypeError" xml:space="preserve">
+    <value>El valor de {0} debe ser una fecha valida</value>
+  </data>
+  <data name="DescriptionLength" xml:space="preserve">
+    <value>La descripción puede contener un maximo de {1} caracteres</value>
+  </data>
+  <data name="DescriptionType" xml:space="preserve">
+    <value>La Descripción debe ser un valor numerico</value>
+  </data>
+  <data name="DimentionTooBig" xml:space="preserve">
+    <value>{0} es muy grande. Deberia ser menor a {1}</value>
+  </data>
+  <data name="DistributionCenterRequired" xml:space="preserve">
+    <value>Necesita ingresar un Centro de Distribución para poder continuar</value>
+  </data>
+  <data name="DistributionCenterValid" xml:space="preserve">
+    <value>Necesita ingresar un Centro de Distribución valido para poder continuar</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>El/la {0} debe ser una dirección de correo electronica valida</value>
+  </data>
+  <data name="ExtensionError" xml:space="preserve">
+    <value>La extension del archivo para {0} debe tener una de las siguientes: {1}</value>
+  </data>
+  <data name="FloorTooBig" xml:space="preserve">
+    <value>El numero de piso es muy grande. {0} tiene unicamente {1} pisos.</value>
+  </data>
+  <data name="GraterOrEqualThanError" xml:space="preserve">
+    <value>El {0} debe ser un valor mayor o igual a {1}</value>
+  </data>
+  <data name="GraterThanError" xml:space="preserve">
+    <value>El {0} debe ser un valor mayor a {1}</value>
+  </data>
+  <data name="ImageSizeError" xml:space="preserve">
+    <value>La {0} ingresada es muy grande, el archivo debe ser menor a los 4Mb</value>
+  </data>
+  <data name="IntegerError" xml:space="preserve">
+    <value>El {0} debe ser un numero entero</value>
+  </data>
+  <data name="InvalidCharacters" xml:space="preserve">
+    <value>Caracteres invalidos. {0} solo debe contener {1}</value>
+  </data>
+  <data name="IvalidUsername" xml:space="preserve">
+    <value>{0} invalido, por favor elija uno diferente</value>
+  </data>
+  <data name="LenghtError" xml:space="preserve">
+    <value>El/la {0} debe tener una longitud menor o igual a {1}</value>
+  </data>
+  <data name="MinLengthError" xml:space="preserve">
+    <value>La longitud de {0} debe contener al menos {1} caracteres</value>
+  </data>
+  <data name="MinMaxLenghtError" xml:space="preserve">
+    <value>El/la {0} debe tener una longitud menor o igual a {1} y mayor o igual a {2}</value>
+  </data>
+  <data name="NameLength" xml:space="preserve">
+    <value>La longitud del Nombre debe ser menor a 128 caracteres</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Necesita ingresar el Nombre para poder continuar</value>
+  </data>
+  <data name="NumericTypeError" xml:space="preserve">
+    <value>El {0} debe tener un valor numerico</value>
+  </data>
+  <data name="PasswordErrorMessage" xml:space="preserve">
+    <value>{0} debe tener una logitud de por lo menos {1} caracteres y un maximo de {2}. Ademas, debera tener al menos {3} letras minusculas, {4} mayusculas, {5} digitos y {6} symbolos</value>
+  </data>
+  <data name="PasswordPolicyError" xml:space="preserve">
+    <value>La contraseña debe contener al menos una letra mayuscula y al menos un número o simbolo.</value>
+  </data>
+  <data name="PasswordSameAsOld" xml:space="preserve">
+    <value>La nueva contraseña debera ser diferente a la anterior</value>
+  </data>
+  <data name="PasswordSameAsUser" xml:space="preserve">
+    <value>La contraseña debera ser diferente al nombre de usuario</value>
+  </data>
+  <data name="PasswordsDontMatch" xml:space="preserve">
+    <value>Las contraseñas no coinciden</value>
+  </data>
+  <data name="PhoneError" xml:space="preserve">
+    <value>El {0} debe ser un numero de telefono válido</value>
+  </data>
+  <data name="ProductIDRange" xml:space="preserve">
+    <value>Se debe ingresar un número de Identifiacion valido (Numerico y mayor que 0)</value>
+  </data>
+  <data name="ProductIDRequired" xml:space="preserve">
+    <value>Necesita ingresar el Identificador del producto para poder continuar</value>
+  </data>
+  <data name="RangeError" xml:space="preserve">
+    <value>El {0} debe ser un valor entre {1} y {2}</value>
+  </data>
+  <data name="RequiredError" xml:space="preserve">
+    <value>Necesita ingresar el {0} para poder continuar</value>
+  </data>
+  <data name="SellerPriceRequired" xml:space="preserve">
+    <value>Necesita ingresar el Precio de Venta para poder continuar</value>
+  </data>
+  <data name="SellerPriceTypeError" xml:space="preserve">
+    <value>Debe ingresar un valor numerico como Precio de Venta</value>
+  </data>
+  <data name="StringLenghtError" xml:space="preserve">
+    <value>{0} puede contener un máximo de {1} caracteres</value>
+  </data>
+  <data name="TextTypeError" xml:space="preserve">
+    <value>{0} debe tener un valor de tipo texto</value>
+  </data>
+</root>

@@ -1,0 +1,343 @@
+﻿@model Penates.Models.ViewModels.ABMs.ABMViewModel
+@using Penates.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <meta charset=utf-8 />
+
+    <script>
+        $(document).ready(function () {
+            $("#tableRefresh").click(function (e) {
+                window["@Model.tableRefresh"]();
+            });
+        });
+    </script>
+    <script type="text/javascript" title="Initialize">
+    var globalParams = new ParametrosGlobales;
+    $(document).ready(function(){
+        var iniVal = @Html.Raw(Json.Encode(Model.SelectedValue));
+        var link = "<a id=\"addHalls\" class=\"btn btn-success btn-lg btn-xs\" href = \"@Url.Action("Index", "HallsForms", new { param=-1})\"><span class=\"glyphicon glyphicon-plus\"></span</a>";
+        var parametros;
+        if(iniVal == null || iniVal == 0){
+            var aux = sessionStorage.getItem("FilterID");
+            if(aux == null || aux == ""){
+                $("#SelectedValue").val("");
+                $("#hallsTable").hide();
+            }else{
+                $("#SelectedValue").val(aux);
+                globalParams.addParam("DistributionCenterID", aux);
+                parametros = "DistributionCenterID=" + aux;
+                $("#hallsTable").show();
+            }
+        }else{
+            globalParams.addParam("DistributionCenterID", iniVal);
+            parametros = "DistributionCenterID=" + iniVal;
+            $("#hallsTable").show();
+        }
+        iniVal = @Html.Raw(Json.Encode(ViewBag.DepositID));
+        if(iniVal == null){
+            var aux = sessionStorage.getItem("DepositID");
+            var aux2 = sessionStorage.getItem("DepositName");
+            if(aux != null && aux != "" && aux2 != null && aux2 != ""){
+                globalParams.addParam("DepositID", aux);
+                $('#DepositFilter').val(aux2);
+                $('#DepositID').val(aux);
+                if(parametros != null && parametros != ""){
+                    parametros = parametros + "&";
+                }
+                parametros = parametros + "DepositID=" + aux;
+                $("#hallsTable").show();
+            }
+        }else{
+            globalParams.addParam("DepositID", iniVal);
+            if(parametros != null && parametros != ""){
+                parametros = parametros + "&";
+            }
+            parametros = parametros + "DepositID=" + iniVal;
+            $("#hallsTable").show();
+        }
+        iniVal = @Html.Raw(Json.Encode(ViewBag.SectorID));
+        if(iniVal == null){
+            var aux = sessionStorage.getItem("SectorID");
+            var aux2 = sessionStorage.getItem("SectorName");
+            if(aux != null && aux != "" && aux2 != null && aux2 != ""){
+                globalParams.addParam("SectorID", aux);
+                $('#SectorFilter').val(aux2);
+                $('#SectorID').val(aux);
+                if(parametros != null && parametros != ""){
+                    parametros = parametros + "&";
+                }
+                parametros = parametros + "SectorID=" + aux;
+                $("#hallsTable").show();
+            }
+        }else{
+            globalParams.addParam("SectorID", iniVal);
+            if(parametros != null && parametros != ""){
+                parametros = parametros + "&";
+            }
+            parametros = parametros + "SectorID=" + iniVal;
+            $("#hallsTable").show();
+        }
+        if(parametros != null && parametros != ""){
+            link = link.replace("param=-1", parametros);
+            $("#addHalls").replaceWith(link);
+        }
+    });
+    </script>
+
+    <script type="text/javascript" title="Clear Form Data">
+        $(document).ready(function () {
+            var aux = sessionStorage.getItem("FilterID");
+            var auxDepoID = sessionStorage.getItem("DepositID");
+            var auxDepoName = sessionStorage.getItem("DepositName");
+            var auxSectorID = sessionStorage.getItem("SectorID");
+            var auxSectorName = sessionStorage.getItem("SectorName");
+            sessionStorage.clear();
+            if(aux != null && aux != ""){
+                sessionStorage.setItem("FilterID", aux);
+            }
+            if(auxDepoID != null && auxDepoID != "" && auxDepoName != null && auxDepoName != ""){
+                sessionStorage.setItem("DepositID", auxDepoID);
+                sessionStorage.setItem("DepositName", auxDepoName);
+            }
+            if(auxSectorID != null && auxSectorID != "" && auxSectorName != null && auxSectorName != ""){
+                sessionStorage.setItem("SectorID", auxSectorID);
+                sessionStorage.setItem("SectorName", auxSectorName);
+            }
+        });
+    </script>
+
+    <script type="text/javascript" title="Autocomplete">
+        $(document).ready(function () {
+            $("#SelectedValue").autocompletar({
+                url: '@Url.Action("DistributionCenterAutocomplete", "DepositsABM")',
+                seleccion: function (event, ui) {
+                    $('#SelectedValue').val(ui.item.id);
+                    globalParams.addParam("DistributionCenterID", ui.item.id);
+                    globalParams.deleteParam("DepositID");
+                    globalParams.deleteParam("SectorID");
+                    $("#DepositFilter").val("");
+                    $("#DepositID").val("");
+                    $("#SectorFilter").val("");
+                    $("#SectorID").val("");
+                    var link = "<a id=\"addHalls\" class=\"btn btn-success btn-lg btn-xs\" href = \"@Url.Action("Index", "HallsForms", new {DistributionCenterID = -1})\"><span class=\"glyphicon glyphicon-plus\"></span</a>";
+                    $("#hallsTable").show();
+                    window["@Model.tableRefresh"]();
+                    link = link.replace("-1", ui.item.id);
+                    $("#addHalls").replaceWith(link);
+                    sessionStorage.setItem("FilterID",ui.item.id);
+                    return false;
+                },
+                keyup: function (event, ui) {
+                    var valor = $("#SelectedValue").val();
+                    if (valor == null || valor == "") {
+                        globalParams.deleteParam("DistributionCenterID");
+                        valor = $("#DepositFilter").val();
+                        sessionStorage.setItem("FilterID","");
+                        if(valor == null || valor == ""){
+                            valor = $("#SectorFilter").val();
+                            if(valor == null || valor == ""){
+                                $("#hallsTable").hide();
+                            }
+                        }
+                        window["@Model.tableRefresh"]();
+                    }
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" title="Deposit Autocomplete">
+        $(document).ready(function () {
+            $("#DepositFilter").autocompletar({
+                url: '@Url.Action("Autocomplete", "DepositsABM")',
+                params: globalParams.array,
+                seleccion: function (event, ui) {
+                    $('#DepositFilter').val(ui.item.label);
+                    $('#DepositID').val(ui.item.id);
+                    $('#SectorFilter').val("");
+                    $('#SectorID').val("");
+                    sessionStorage.setItem("SectorID","");
+                    sessionStorage.setItem("SectorName","");
+                    globalParams.addParam("DepositID", ui.item.id);
+                    var link = "<a id=\"addHalls\" class=\"btn btn-success btn-lg btn-xs\" href = \"@Url.Action("Index", "HallsForms", new {DistributionCenterID = -1, DepositID = -2})\"><span class=\"glyphicon glyphicon-plus\"></span</a>";
+                    if(ui.item.aux != undefined && ui.item.aux.DistributionCenterID != null && ui.item.aux.DistributionCenterID != ""){
+                        $('#SelectedValue').val(ui.item.aux.DistributionCenterID);
+                        link = link.replace("-1", ui.item.aux.DistributionCenterID);
+                        sessionStorage.setItem("FilterID",ui.item.aux.DistributionCenterID);
+                        globalParams.addParam("DistributionCenterID", ui.item.aux.DistributionCenterID);
+                    }else{
+                        link = link.replace("-1","null");
+                        sessionStorage.setItem("FilterID","");
+                    }
+                    $("#hallsTable").show();
+                    window["@Model.tableRefresh"]();
+                    link = link.replace("-2", ui.item.id);
+                    $("#addHalls").replaceWith(link);
+                    sessionStorage.setItem("DepositID",ui.item.id);
+                    sessionStorage.setItem("DepositName",ui.item.label);
+                    return false;
+                },
+                keyup: function (event, ui) {
+                    var valor = $("#DepositFilter").val();
+                    if (valor == null || valor == "") {
+                        $("#DepositID").val("");
+                        globalParams.deleteParam("DepositID");
+                        sessionStorage.setItem("DepositID", "");
+                        sessionStorage.setItem("DepositName", "");
+                        valor = $("#SelectedValue").val();
+                        if(valor == null || valor == ""){
+                            valor = $("#SectorID").val();
+                            if(valor == null || valor == ""){
+                                $("#hallsTable").hide();
+                            }
+                        }
+                        window["@Model.tableRefresh"]();
+                    }
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" title="Sector Autocomplete">
+    $(document).ready(function () {
+        $("#SectorFilter").autocompletar({
+            url: '@Url.Action("Autocomplete", "SectorsABM")',
+            params: globalParams.array,
+            seleccion: function (event, ui) {
+                $('#SectorFilter').val(ui.item.label);
+                $('#SectorID').val(ui.item.id);
+                globalParams.addParam("SectorID", ui.item.id);
+                sessionStorage.setItem("SectorID",ui.item.id);
+                sessionStorage.setItem("SectorName",ui.item.label);
+                var link = "<a id=\"addHalls\" class=\"btn btn-success btn-lg btn-xs\" href = \"@Url.Action("Index", "HallsForms", new {DistributionCenterID = -1, DepositID = -2, SectorID = -3})\"><span class=\"glyphicon glyphicon-plus\"></span</a>";
+                link = link.replace("-3", ui.item.id);
+                if(ui.item.aux != undefined && ui.item.aux.DistributionCenterID != null && ui.item.aux.DistributionCenterID != ""){
+                    $('#SelectedValue').val(ui.item.aux.DistributionCenterID);
+                    link = link.replace("-1", ui.item.aux.DistributionCenterID);
+                    sessionStorage.setItem("FilterID",ui.item.aux.DistributionCenterID);
+                }else{
+                    link = link.replace("-1","null");
+                    sessionStorage.setItem("FilterID","");
+                }
+                if(ui.item.aux != undefined && ui.item.aux.DepositID != null && ui.item.aux.DepositID != ""){
+                    $('#DepositID').val(ui.item.aux.DepositID);
+                    $('#DepositFilter').val(ui.item.aux.DepositName);
+                    link = link.replace("-2", ui.item.aux.DepositID);
+                    sessionStorage.setItem("DepositID",ui.item.aux.DepositID);
+                    sessionStorage.setItem("DepositName",ui.item.aux.DepositName);
+                }else{
+                    link = link.replace("-2", "null");
+                    sessionStorage.setItem("DepositID", "");
+                    sessionStorage.setItem("DepositName", "");
+                }
+                $("#hallsTable").show();
+                window["@Model.tableRefresh"]();
+                $("#addHalls").replaceWith(link);
+                return false;
+            },
+            keyup: function (event, ui) {
+                var valor = $("#SectorFilter").val();
+                if (valor == null || valor == "") {
+                    $("#SectorID").val("");
+                    globalParams.deleteParam("SectorID");
+                    sessionStorage.setItem("SectorID", "");
+                    sessionStorage.setItem("SectorName", "");
+                    valor = $("#SelectedValue").val();
+                    if(valor == null || valor == ""){
+                        valor = $("#DepositID").val();
+                        if(valor == null || valor == ""){
+                            $("#hallsTable").hide();
+                        }
+                    }
+                    window["@Model.tableRefresh"]();
+                }
+            }
+        });
+    });
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h3>@Html.Resource("Title")</h3>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "") {
+                if (@Model.Error == true) {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                } else {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            @if (Model.SelectedValue == null || Model.SelectedValue == 0) {
+                                <a class="btn btn-success btn-xs" id="addHalls" href="@Url.Action("Index", "HallsForms", new { DepositID = ViewBag.DepositID, SectorID = ViewBag.SectorID })">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                            } else {
+                                <a class="btn btn-success btn-xs" id="addHalls" href="@Url.Action("Index", "HallsForms", new { DistributionCenterID = Model.SelectedValue, DepositID = ViewBag.DepositID, SectorID = ViewBag.SectorID })">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                            }
+                            <a id="tableRefresh" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        </div>
+                        <label class="col-sm-2 control-label">@Html.Resource("SelectDC"):</label>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.SelectedValue, new { @class = "form-control input-sm" })
+                        </div>
+                        <label class="col-sm-2 control-label">@Html.Resource("SelectDeposit"):</label>
+                        <div class="col-sm-3">
+                            <input id="DepositFilter" class="form-control input-sm" value="@ViewBag.DepositFilter" />
+                            <div hidden="hidden">
+                                <input id="DepositID" value="@ViewBag.DepositID" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-2 control-label">@Html.Resource("SelectSector"):</label>
+                        <div class="col-sm-3">
+                            <input id="SectorFilter" class="form-control input-sm" value="@ViewBag.SectorFilter" />
+                            <div hidden="hidden">
+                                <input id="SectorID" value="@ViewBag.SectorID" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="hallsTable" hidden="hidden">
+            @{Html.RenderPartial("~/Views/DistributionCenter/Tables/_HallsTable.cshtml", new TableAjaxViewModel(@Model.tableID) {
+                AjaxRequest = @Url.Action("GetTable", "HallsABM"),
+                DeleteAction = "Delete",
+                DeleteController = "HallsABM",
+                DeleteText = Resources.FormsResources.Delete,
+                DeleteConfirmMessage = String.Format(Resources.Messages.SureToDelete, Resources.Resources.HallWArt),
+                RefreshFunction = @Model.tableRefresh,
+                ServerProcessing = false
+            });}
+        </div>
+    </div>
+</body>
+</html>

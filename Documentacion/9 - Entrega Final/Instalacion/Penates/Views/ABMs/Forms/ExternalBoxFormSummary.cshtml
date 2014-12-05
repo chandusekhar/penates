@@ -1,0 +1,172 @@
+﻿@model Penates.Models.ViewModels.Forms.ExternalBoxViewModel
+
+@{
+}
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <h2>@Html.Resource("Title")</h2>
+        <div class="form-horizontal" id="deposit-form">
+            <fieldset>
+                <legend></legend>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.BoxID):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.BoxID</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.ProductID):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.ProductID</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.ProductName):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.ProductName</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.AdquisitionDate):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.AdquisitionDate</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.Quantity):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.Quantity</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.BuyerCost):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.BuyerCost</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.UnitCost):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.UnitCost</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.PackSerialCode):</label>
+                    <div class="col-lg-4">
+                        <p>@Model.PackSerialCode</p>
+                    </div>
+                </div>
+                <fieldset>
+                    <legend>@Html.Resource("BoxStatusInfo")</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.StatusID):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.StatusID</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.StatusDescription):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.StatusDescription</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-4">
+                            @if(Model.IsWaste){
+                                <p class="text-danger">@Html.Resource("IsWaste")</p>
+                            }else{
+                                <p class="text-success">@Html.Resource("IsNotWaste")</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-4">
+                            @if (Model.Reevaluate) {
+                                <p class="text-warning">@Html.Resource("Reevaluate")</p>
+                            } else {
+                                <p class="text-success">@Html.Resource("NotReevaluate")</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-4">
+                            @if (Model.Reserved) {
+                                <p class="text-info">@Html.Resource("Reserved")</p>
+                            } else {
+                                <p class="text-info">@Html.Resource("NotReserved")</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-4">
+                            @if (Model.Transit) {
+                                <p class="text-info">@Html.Resource("Transit")</p>
+                            } else {
+                                <p class="text-success">@Html.Resource("NotTransit")</p>
+                            }
+                        </div>
+                    </div>
+                </fieldset>
+                <br />
+                <fieldset>
+                    <legend>@Html.Resource("LocationInfo")</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Html.DisplayNameFor(m => m.DistributionCenterID):</label>
+                        <div class="col-lg-4">
+                            <p>@Model.DistributionCenterID</p>
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- Size Info -->
+                <fieldset id="product-form-sizeinfo" name="product-form-sizeinfo">
+                    <legend>@Resources.FormsResources.SizeInfo:</legend>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">@Resources.FormsResources.Depth:</label>
+                        <div class="col-lg-4">
+                            <p>@Html.DisplayFor(m => m.Depth) cm</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Resources.FormsResources.Width:</label>
+                        <div class="col-lg-4">
+                            <p>@Html.DisplayFor(m => m.Width) cm</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Resources.FormsResources.Height:</label>
+                        <div class="col-lg-4">
+                            <p>@Html.DisplayFor(m => m.Height) cm</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* @Resources.FormsResources.Size:</label>
+                        <div class="col-lg-4">
+                            <p>@Html.DisplayFor(m => m.Size) cm3</p>
+                        </div>
+                    </div>
+                </fieldset>
+                <br>
+                <div class="btn-toolbar center-block">
+                    @Html.ActionLink(@Resources.FormsResources.Ok, "Index", "BoxesABM", null, new { @class = "btn btn-primary", @id = "Ok" })
+                    @Html.ActionLink(@Resources.FormsResources.Edit, "FormEdit", "BoxForm", new { BoxID = Model.BoxID }, new { @class = "btn btn-default", @id = "Edit" })
+                </div>
+           </fieldset>
+        </div>
+    </div>
+</body>
+</html>

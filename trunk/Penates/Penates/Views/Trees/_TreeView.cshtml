@@ -1,0 +1,40 @@
+﻿@model Penates.Models.ViewModels.TreeViewModel
+@using Penates.Utils.Objects
+@using Penates.Models.ViewModels
+
+<head>
+    <link href="~/Content/jsTree/themes/default/style.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jsTree3/jstree.min.js"></script>
+
+    <script title="Tree Initialization">
+        $(document).ready(function () {
+            $('#'+'@Model.treeID').jstree().bind("select_node.jstree", function (e, data) {
+                var url = data.node.data.url;
+                if (url != null && url != "") {
+                    window.location.href = url;
+                }
+            });
+        });
+    </script>
+</head>
+@helper DisplayTree(Nodo<TreeItemViewModel> nodo) {
+    <ul>
+        <li data-url="@Url.Action(@Model.SelectAction, @Model.SelectController, new { id = nodo.getItem().ID })">
+            @nodo.getItem().Label
+            @{
+                if (nodo.countChildren() > 0) {
+                    foreach (var item in nodo.getChildren()) {
+                        @DisplayTree(item)
+                    }
+                }
+            }
+        </li>
+    </ul>
+}
+<body>
+    <div class="row">
+        <div id="@Model.treeID">
+            @DisplayTree(Model.arbol)
+        </div>
+    </div>
+</body>

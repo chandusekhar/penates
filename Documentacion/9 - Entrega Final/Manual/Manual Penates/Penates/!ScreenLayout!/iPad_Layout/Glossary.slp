@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Glossary</title>
+<link rel="StyleSheet" href="mobile.css" type="text/css" />
+</head>
+
+<body>
+<div class="contentholder">
+	<div class="searchholder">
+		<table class="searchholdertable">
+			<tr>
+				<td class="home"><a href="home.slp"><img src="home_default.png" 
+															 alt="" style="border: none;" 
+															 border="0" /></a></td>
+				<td class="searchfield"><div class="wSearchField">
+					<?rh-msp-search-text-box id="searchBox" widgettype="searchfield" 
+											 placeholder="{{Search}}" class="wSearchField" 
+											 type="search" ?><?rh-msp-search-link-start 
+					 class="wSearchLink" widgettype="navlinksearch" related-id="searchBox" ?><img 
+					 src="Search.png" alt="" class="wSearchLink" border="0" /><?rh-msp-search-link-end ?> 
+					 
+				</div></td>
+			</tr>
+		</table>
+	</div>
+	<div class="contentlight">
+		<div class="optionslight">
+			<table class="optionslight">
+				<tr>
+					<td class="title"><?rh-lng-string lngname="Glossary" 
+														 lngvalue="Glossary" ?></td>
+
+				</tr>
+			</table>
+		</div>
+		<?rh-msp-glo-start id="glo" class="wGlossary" widgettype="glossarylist" ?>
+			<?rh-msp-filter-box class="wGloFilter" widgettype="glossaryfilter" 
+								 placeholder="{{GlossaryFilterTerms}}" 
+								 id="gloFilterBox" type="text" ?>
+			<?rh-msp-glo-term-start class="wGloTerm" classhover="wGloTermHover" 
+									 classselected="wGloTermSelected" ?>
+				<?rh-msp-term class="wGloTermText" ?> 
+			<?rh-msp-glo-term-end ?>
+			<?rh-msp-glo-def-start class="wGloDefinition" classhover="wGloDefinitionHover" ?>
+				<?rh-msp-term class="wGloDefinitionText" ?> 
+			<?rh-msp-glo-def-end ?>
+			<?rh-msp-category-start class="wGloAlphabet" ?>
+				<?rh-msp-term class="wGloAlphabetText" ?> 
+			<?rh-msp-category-end ?>
+		<?rh-msp-glo-end ?>
+	</div>
+</div>
+</body>
+</html>

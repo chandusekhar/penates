@@ -1,0 +1,12 @@
+﻿@{
+    Layout = null;
+}
+
+@model Penates.Models.NotFoundModel
+@{
+    ViewBag.Title = "Page could not be found";
+}
+<h2>@ViewBag.Title</h2>
+<div>
+You tried to visit '@Model.RequestedUrl' which cannot be found.
+</div>

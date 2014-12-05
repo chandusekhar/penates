@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Search results page</title>
+<link rel="Stylesheet" href="mobile.css" type="text/css" />
+</head>
+
+<body>
+<div class="contentholder">
+	<div class="searchholder">
+		<table class="searchholdertable">
+			<tr>
+				<td class="home"><a href="home.slp"><img src="home_default.png" 
+														 alt="" style="border: none;" 
+														 border="0" /></a></td>
+				<td class="searchfield"><div class="wSearchField">
+					<?rh-msp-search-text-box id="searchBox" widgettype="searchfield" 
+											 placeholder="{{Search}}" class="wSearchField" 
+											 type="search" ?><?rh-msp-search-link-start 
+					 class="wSearchLink" widgettype="navlinksearch" related-id="searchBox" ?><img 
+					 src="Search.png" alt="" class="wSearchLink" border="0" /><?rh-msp-search-link-end ?> 
+					 
+				</div></td>
+			</tr>
+		</table>
+	</div>
+	<div class="contentlight">
+		<div class="optionslight">
+			<table class="optionslight">
+				<tr>
+					<td class="title"><?rh-lng-string lngname="SearchPageTitle" 
+														 lngvalue="Search Results" ?></td>
+				</tr>
+			</table>
+		</div>
+		<?rh-msp-search-results-start widgettype="searchresultwithoutpageno" 
+										 class="wSearchResultsSmallScr" ?>
+			<div class="searchhighlightholder">
+				<?rh-msp-search-highlight-control id="highlightsearch" 
+													 widgettype="highlightsearch" 
+													 type="checkbox" checked="true" 
+													 class="wSearchHighlight" 
+													 textcolorval="#d7ac69" 
+													 bgcolorval="#51758c" ?><?rh-lng-string 
+				 widgettype="lngstring" lngname="HighlightSearchResults" 
+				 class="wSearchHighlight" lngvalue="Highlight Search Results" ?> 
+				 
+			</div>
+			<div class="wSearchResultSettingsSmallScr">
+				<div class="wSearchCountMsgSmallScr" scr="">
+					<?rh-lng-string widgettype="lngstring" lngname="SearchResultsPerScreen" 
+									 lngvalue="Search results per page" 
+									 class="wSearchCountSmallScr" ?> 
+				</div>
+				<div class="wSearchCountComboSmallScr">
+					<?rh-msp-search-count-combo-start class="wSearchCountSmallScr" 
+														 id="searchResCount" 
+														 widgettype="searchcount" 
+														 option="5|5;10|10;15|15;20|20;25|25;30|30;35|35;40|40;45|45;50|50;" ?>
+					<?rh-msp-search-count-combo-end ?>
+				</div>
+			</div>
+			<div class="wSearchMessageSmallScr">
+				<?rh-msp-search-message id="searchMsg" class="wSearchMessageSmallScr" ?> 
+				 
+			</div>
+			<div class="wSearchResultItemsBlockSmallScr">
+				<?rh-msp-search-result-item-start id="searchResList" class="wSearchResultItemSmallScr" ?>
+					<?rh-msp-search-result-title class="wSearchResultTitleSmallScr" 
+												 classhover="wSearchResultTitleHoverSmallScr" ?>
+					
+					<?rh-msp-search-result-url class="wSearchURLSmallScr" ?> 
+					 <br />
+					<?rh-msp-search-result-context class="wSearchContextSmallScr" ?> 
+					 
+				<?rh-msp-search-result-item-end ?>
+			</div>
+			<div class="wSearchNavigationSmallScr">
+				<div class="wSearchBackSmallScr">
+					<?rh-msp-search-back-start widgettype="navlinksearchback" 
+												 id="searchprev" class="wSearchBackSmallScr" ?><?rh-lng-string 
+					 widgettype="lngstring" lngname="Back" lngvalue="Back" ?><img 
+					 src="SearchBack.png" alt="" align="left" border="0" /><?rh-msp-search-back-end ?> 
+					 
+				</div>
+				<div class="wSearchNextSmallScr">
+					<?rh-msp-search-next-start widgettype="navlinksearchnext" 
+												 id="searchnext" class="wSearchNextSmallScr" ?><?rh-lng-string 
+					 widgettype="lngstring" lngname="Next" lngvalue="Next" ?><img 
+					 src="SearchNext.png" alt="" align="right" border="0" /><?rh-msp-search-next-end ?> 
+					 
+				</div>
+			</div>
+		<?rh-msp-search-results-end ?>
+	</div>
+</div>
+</body>
+</html>

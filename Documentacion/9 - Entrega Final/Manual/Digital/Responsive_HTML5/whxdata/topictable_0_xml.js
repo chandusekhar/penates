@@ -1,0 +1,1 @@
+gXMLBuffer="<?xml version=\"1.0\" encoding=\"UTF-8\"?><ck><di ky=\"0\" rd=\"PENATES_INVENTORY_SYSTEM_new.htm|PENATES INVENTORY SYSTEM\" ct=\"          	 		   	   PENATES  INVENTORY SYSTEM        	 Manual d ...\"/></ck>";

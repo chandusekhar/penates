@@ -1,0 +1,174 @@
+﻿@model Penates.Models.ViewModels.ABMs.ABMViewModel
+@using Penates.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <meta charset=utf-8 />
+    
+    <script type="text/javascript" title="Global Parameters">
+        var globalParams = new ParametrosGlobales();
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#tableRefresh").click(function (e) {
+                window["@Model.tableRefresh"]();
+            });
+
+            $("#SelectedValue").change(function (e) {
+                var selectedVal = $("#SelectedValue").val();
+                $.getJSON('@Url.Action("GetStatesAll", "Geography")', {countryID: selectedVal}, function (states) {
+                    var list = $('select#StateSelectList');
+                    list.find('option').remove();
+                    $(states).each(function (index, state) {
+                        list.append('<option value="' + state.Value + '">' + state.Text + '</option>');
+                    });
+                }).fail(function(){
+                    alert("Error loading state");
+                });
+                if (selectedVal == -1) {
+                    $("#stateList").hide();
+                    $("#cityList").hide();
+                    globalParams.deleteParam("ProvinceID");
+                    globalParams.deleteParam("CityID");
+                } else {
+                    $("#stateList").show();
+                }
+                globalParams.addParam("SelectedValue", selectedVal);
+                window["@Model.tableRefresh"]();
+            });
+            
+            $("#StateSelectList").change(function (e) {
+                var selectedVal = $("#StateSelectList").val();
+                $.getJSON('@Url.Action("GetCitiesAll", "Geography")', { provinceID: selectedVal }, function (cities) {
+                    var list = $('select#CitySelectList');
+                    list.find('option').remove();
+                    $(cities).each(function (index, city) {
+                        list.append('<option value="' + city.Value + '">' + city.Text + '</option>');
+                    });
+                }).fail(function () {
+                    alert("Error loading city");
+                });
+                if (selectedVal == -1) {
+                    $("#cityList").hide();
+                    globalParams.deleteParam("CityID");
+                } else {
+                    $("#cityList").show();
+                }
+                globalParams.addParam("SelectedValue", $("#SelectedValue").val());
+                globalParams.addParam("ProvinceID", selectedVal);
+                window["@Model.tableRefresh"]();
+            });
+
+            $("#CitySelectList").change(function (e) {
+                globalParams.addParam("SelectedValue", $("#SelectedValue").val());
+                globalParams.addParam("ProvinceID", $("#StateSelectList").val());
+                globalParams.addParam("CityID", $("#CitySelectList").val());
+                window["@Model.tableRefresh"]();
+            });
+
+            $("#AnnulatedSelectList").change(function (e) {
+                globalParams.addParam("Annulated", $("#AnnulatedSelectList").val());
+                window["@Model.tableRefresh"]();
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Clear Form Data">
+        $(document).ready(function () {
+            sessionStorage.clear();
+        });
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h3>@Html.Resource("Title")</h3>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "") {
+                if (@Model.Error == true) {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                } else {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <a class="btn btn-success btn-lg btn-xs" onclick="location.href='@Url.Action("Index", "ClientForms")'">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                            <a id="tableRefresh" class="btn btn-default btn-lg btn-xs">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        </div>
+                        <label class="col-sm-2 control-label">@Html.Resource("CountryList"):</label>
+                        <div class="col-sm-3">
+                            @Html.DropDownListFor(model => model.SelectedValue, Model.List, new { @class = "form-control input-sm" })
+                        </div>
+                        <div id="stateList" hidden="hidden">
+                            @{
+                                List<SelectListItem> stateListInitialize = new List<SelectListItem>();
+                                SelectListItem i = new SelectListItem();
+                                i.Text = Resources.Resources.All;
+                                i.Value = "-1";
+                                stateListInitialize.Add(i);
+                            }
+                            <label class="col-sm-2 control-label">@Html.Resource("ProvinceList"):</label>
+                            <div class="col-sm-3">
+                                @Html.DropDownList("StateSelectList", new SelectList(stateListInitialize, "Value", "Text"), new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                    </div><br />
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div id="cityList" hidden="hidden">
+                            @{
+                                List<SelectListItem> cityListInitialize = new List<SelectListItem>();
+                                SelectListItem j = new SelectListItem();
+                                j.Text = Resources.Resources.All;
+                                j.Value = "-1";
+                                cityListInitialize.Add(j);
+                            }
+                            <label class="col-sm-2 control-label">@Html.Resource("CityList"):</label>
+                            <div class="col-sm-3">
+                                @Html.DropDownList("CitySelectList", new SelectList(cityListInitialize, "Value", "Text"), new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                        <label class="col-sm-2 control-label">@Html.Resource("AnnulatedList"):</label>
+                        <div class="col-sm-2">
+                            @Html.DropDownList("AnnulatedSelectList", new SelectList(ViewBag.AnnulatedList, "Value", "Text"), new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @{Html.RenderPartial("~/Views/ABMs/Tables/_ClientsTable.cshtml", new TableAjaxViewModel(@Model.tableID) {
+            AjaxRequest = Url.Action("GetTable", "ClientsABM"),
+            DeleteAction = "Annulate",
+            DeleteController = "ClientsABM",
+            DeleteText = Resources.FormsResources.Deactivate,
+            ToggleDeleteMessage = true,
+            DeleteText2 = Resources.FormsResources.Activate,
+            RefreshFunction = @Model.tableRefresh,
+            ServerProcessing = true
+        });}
+    </div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-modal-background.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <script src="~/Scripts/Plugins/ajaxSubmit.js"></script>
+
+    <script type="text/javascript" title="Autocomplete">
+        $(document).ready(function () {
+            $("#UserName").autocompletar({
+                url: '@Url.Action("Autocomplete", "User")',
+                seleccion: function (event, ui) {
+                    $("#UserName").val(ui.item.label);
+                    $('#FileNumber').val(ui.item.id);
+                    $('#FileNumberAux').val(ui.item.id);
+                    return false;
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Save Form Data">
+    $(document).ready(function () {
+        $(window).on('beforeunload', function () {
+            sessionStorage.setItem('FileNumber', $('#FileNumber').val());
+        });
+    });
+    </script>
+
+    <script type="text/javascript" title="Load Form Data">
+        $(document).ready(function () {
+            aux = sessionStorage.getItem('FileNumber');
+            if (aux != null && aux != "") $('#FileNumber').val(aux);
+        });
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>@Html.Resource("Title")</h1>
+        <form class="form-horizontal" action="@ViewBag.Action" method="get">
+            @if (!String.IsNullOrWhiteSpace(ViewBag.Error)) {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @ViewBag.Error
+                    </div>
+            }
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">* @Penates.App_GlobalResources.Forms.ModelFormsResources.Username</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="UserName" name="UserName" required="required" autofocus="autofocus"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Penates.App_GlobalResources.Forms.ModelFormsResources.FileNumber</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" disabled="disabled" id="FileNumberAux" />
+                        <div class="form-group" hidden>
+                            <input type="text" class="form-control" id="FileNumber" name="FileNumber" />
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-toolbar">
+                    <button type="submit" class="btn btn-primary" id="Pick">@Resources.FormsResources.Pick</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>

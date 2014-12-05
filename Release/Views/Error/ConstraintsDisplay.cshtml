@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Penates.Models.ViewModels.ABMs.ConstraintViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <title>ErrorDisplay</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-left">ConstraintsDisplay</h2>
+
+        @foreach (var item in Model) {
+            <h3 class="text-danger text-left">@Html.DisplayFor(modelItem => item.Title)</h3>
+            <p class="text-left text-danger">@String.Format(@Html.Resource("Message"), item.Count, item.TableWithConstrain)</p>
+            <p class="text-primary text-left">@Html.DisplayFor(modelItem => item.Message)</p>
+            if (item.constraints != null) {
+                foreach (var constr in item.constraints) {
+                    if (constr != null) {
+                        <p class="text-warning text-left">ID: @Html.DisplayFor(modelItem => constr.id) || Info: @Html.DisplayFor(modelItem => constr.name)</p>
+                    }
+                }
+            }
+        }
+        </div>
+</body>
+</html>

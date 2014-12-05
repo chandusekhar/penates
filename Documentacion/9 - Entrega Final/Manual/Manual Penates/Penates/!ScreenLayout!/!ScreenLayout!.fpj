@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rhpml majorversion="6" minorversion="12">
+	<folders>
+		<folder>
+			<name>Penates</name>
+		</folder>
+		<folder>
+			<name>Android_Tablet_Layout</name>
+		</folder>
+		<folder>
+			<name>iPad_Layout</name>
+		</folder>
+		<folder>
+			<name>iPhone_Layout</name>
+		</folder>
+		<folder>
+			<name>Desktop_Layout</name>
+		</folder>
+	</folders>
+</rhpml>

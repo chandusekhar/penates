@@ -1,0 +1,124 @@
+﻿@model Penates.Models.ViewModels.ABMs.ABMViewModel
+@using Penates.Models
+@using Penates.Models.ViewModels.Transactions
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/globalParams.js"></script>
+    <meta charset=utf-8 />
+    
+    <style>
+        .ui-autocomplete {
+            max-height: 300px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+        /* IE 6 doesn't support max-height
+            * we use height instead, but this forces the menu to always be this tall
+            */
+        * html .ui-autocomplete {
+            height: 300px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $("#tableRefresh").click(function (e) {
+                window["@Model.tableRefresh"]();
+            });
+
+            $("#SelectedValue").change(function (e) {
+                window["@Model.tableRefresh"]();
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Supplier Filter">
+        var globalParams = new ParametrosGlobales();
+        $(document).ready(function () {
+        $("#supplierFilter").autocompletar({
+            url: '@Url.Action("SupplierAutocomplete", "OrdersABM")',
+            seleccion: function (event, ui) {
+                globalParams.addParam("FilterID", ui.item.id.SupplierID);
+                window["@Model.tableRefresh"]();
+                    return false;
+                },
+                keyup: function (event) {
+                    var value = $("#supplierFilter").val();
+                    if (value == null || value == "") {
+                        globalParams.deleteParam("FilterID");
+                        window["@Model.tableRefresh"]();
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="modalDiv">
+        <!-- Modal -->
+        <div class="modal fade" id="OrderFormModal" tabindex="-1" role="dialog" aria-labelledby="OrderFormModal" aria-hidden="true">
+            @{Html.RenderPartial("~/Views/Transactions/Orders/_OrderFormModal.cshtml", new OrderViewModel());}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <h3>@Html.Resource("Title")</h3>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "") {
+                if (@Model.Error == true) {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                } else {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <a class="btn btn-success btn-lg btn-xs" data-toggle="modal" data-target="#OrderFormModal">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                            <a id="tableRefresh" class="btn btn-default btn-lg btn-xs">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        </div>
+                        <div class="col-sm-4">
+                            @String.Format(Resources.FormsResources.FilterBy, Resources.Resources.Supplier):
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" id="supplierFilter" name="objectSearch" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @{Html.RenderPartial("~/Views/Transactions/Tables/_OrderTable.cshtml", new TableAjaxViewModel("Order") {
+                  AjaxRequest = Url.Action("ABMAjax", "OrdersABM"),
+                  DeleteAction = "Delete",
+                  DeleteController = "OrdersABM",
+                  DeleteText = Resources.FormsResources.Cancel,
+                  DeleteConfirmMessage = String.Format(Resources.Messages.SureToCancel, Resources.Resources.OrderWArt),
+                  ToggleDeleteMessage = true,
+                  DeleteText2 = Resources.FormsResources.Restore,
+                  DeleteConfirmMessage2 = String.Format(Resources.Messages.SureToRestore, Resources.Resources.OrderWArt),
+                  RefreshFunction = @Model.tableRefresh
+              });}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿.ui-autocomplete {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	cursor: default;
+    max-height: 300px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall*/
+* html .ui-autocomplete {
+    height: 300px;
+}
+
+.ui-autocomplete-loading {
+    background:url('images/loading.gif') no-repeat right center;
+    background-size: contain;
+}
+
+img.ui-datepicker-trigger{
+    height: 30px;
+	width: 30px;	
+}

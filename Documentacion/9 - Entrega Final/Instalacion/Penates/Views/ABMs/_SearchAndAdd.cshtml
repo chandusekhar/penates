@@ -1,0 +1,260 @@
+﻿@model Penates.Models.ViewModels.SearchAndAddViewModel
+@using Penates.Models
+
+@{
+    ViewContext.FormContext = new FormContext();
+}
+
+<!doctype html>
+<html>
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui-1.11.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <meta charset=utf-8 />
+    <style>
+             .ui-autocomplete {
+                 max-height: 300px;
+                 overflow-y: auto;
+                 /* prevent horizontal scrollbar */
+                 overflow-x: hidden;
+             }
+             /* IE 6 doesn't support max-height
+        * we use height instead, but this forces the menu to always be this tall
+        */
+             * html .ui-autocomplete {
+                 height: 300px;
+             }
+    </style>
+    <script>
+        $(document).ready(function () {
+            var refreshid = "#" + '@Model.TableUpdateFunctionName';
+            $(refreshid).click(function (e) {
+                window['@Model.TableUpdateFunctionName']();
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Autocomplete">
+    eval("var " + '@Model.concatWithId("paramID")');
+    $(document).ready(function () {
+        var autocompleteID = "#objectSearch" + '@Model.TableId';
+        $(autocompleteID).autocomplete({
+            source: function (request, response) {
+                var p = @Html.Raw(Json.Encode(Model.Params));
+                var params = {};
+                if(p != null){
+                    params = p;
+                }
+                try{
+                    var globParam = globalParams.array;
+                    if(globParam instanceof Array){
+                        for (var p in globalParams.array) {
+                            params[globParam[p].name] = globParam[p].value;
+                        }
+                    }else{
+                        for (var p in globalParams.array) {
+                            params[p] = globParam[p];
+                        }
+                    }
+                }catch(e){
+
+                }
+                params["term"] = request.term;
+                $.ajax({
+                    url: '@Model.AjaxRequest',
+                    data: params,
+                    dataType: 'json',
+                    type: 'GET',
+                    delay: 500,
+                    success: function (data) {
+                        response($.map(data,function (item) {
+                            return {
+                                id: item.ID,
+                                label: item.Label,
+                                desc: item.Description
+                            }
+                        }));
+                    },
+                    error: function (xhr, textStatus, error) {
+                        var er = xhr.status;
+                        er = er + " - " + error;
+                        er = er + ": \"" + xhr.responseText + "\"";
+                        alert(er);
+                    }
+                })
+            },
+            select:function (event, ui) {
+                $(autocompleteID).val(ui.item.label);
+                @Model.concatWithId("paramID") = ui.item.id;
+                return false;
+            },
+            minLength: 1
+        }).data("ui-autocomplete")._renderItem = function (ul, item) {
+            if (item.desc == null || item.desc == "") {
+                return $("<li>")
+                .append("<a>" + "<p>" + item.label + "</p>\n" + "</a>")
+                .appendTo(ul);
+            } else {
+                return $("<li>")
+                    .append("<a>" + "<p>" + item.label + "</p>" + "<p   style=\"font-size: 10px\">" + item.desc + "</p>\n" + "</a>")
+                    .appendTo(ul);
+            }
+        };
+        $(autocompleteID).bind("keyup.myPlugin", function (e) {
+            var valor = $(autocompleteID).val();
+            if (valor == null || valor == "") {
+                @Model.concatWithId("paramID") = null;
+            }
+        });
+    });
+    </script>
+
+    <script type="text/javascript" title="FormAjax">
+    $(document).ready(function(){
+        $("#@Model.concatWithId("addObject")").click(function(){
+            //Obtengo los parametros a pasarle a la consulta de Ajax
+            var param = @Html.Raw(Json.Encode(Model.Params));
+            var addParams = @Model.concatWithId("paramID");
+            var params = {};
+            for (var attrname in param) { params[attrname] = param[attrname]; }
+            try{
+                var globParam = globalParams.array;
+                if(globParam instanceof Array){
+                    for (var p in globalParams.array) {
+                        params[globParam[p].name] = globParam[p].value;
+                    }
+                }else{
+                    for (var p in globalParams.array) {
+                        params[p] = globParam[p];
+                    }
+                }
+            }catch(e){
+
+            }
+            if(typeof(addParams) == "object" || typeof(addParams) == "array"){
+                for (var attrname in addParams) { params[attrname] = addParams[attrname]; }
+            }else{
+                params["AddID"] = addParams;
+            }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action(Model.SubmitAction, Model.SubmitController)",
+                data: params,
+                beforeSend : function(){
+                    if('@Model.ConfirmMessage' == '' || '@Model.ConfirmMessage' == 'null'){
+                        $("#@Model.concatWithId("divProcessing")").show();
+                        $("#addFormError" + '@Model.TableId').hide();
+                        $("#addFormMessage" + '@Model.TableId').hide();
+                        return true;
+                    }else{
+                        if (confirm('@Model.ConfirmMessage')) {
+                            $("#@Model.concatWithId("divProcessing")").show();
+                            $("#addFormError" + '@Model.TableId').hide();
+                            $("#addFormMessage" + '@Model.TableId').hide();
+                            return true;
+                        }
+                        return false;
+                    }   
+                },
+                success: function(msg){
+                    window['@Model.concatWithId("AddFormOnSuccess")'](msg);
+                },
+                error: function(obj, textStatus, errorThrown){
+                    window['@Model.concatWithId("AddFormOnFailure")'](obj);
+                }
+
+            });
+        });
+    });
+    </script>
+
+    <script>
+        eval("var AddFormOnSuccess"+'@Model.TableId');
+        @Model.concatWithId("AddFormOnSuccess") = function(response) {
+        $("#addFormMessageHeading" + '@Model.TableId').text(response.title);
+        $("#addFormMessageText" + '@Model.TableId').text(response.message);
+        $("#@Model.concatWithId("divProcessing")").hide();
+        $("#addFormMessage" + '@Model.TableId').show();
+        window['@Model.TableUpdateFunctionName']();
+    }
+
+    eval("var AddFormOnFailure"+'@Model.TableId');
+    @Model.concatWithId("AddFormOnFailure") = function(response) {
+        var er = response.status;
+        er = er + " - " + response.statusText;
+        $("#addFormErrorHeading" + '@Model.TableId').text(er);
+        if (response.status == 505 || response.status == 511) {
+            $("#addFormErrorText" + '@Model.TableId').html(response.responseText);
+        } else {
+            if (response.status == 404) {
+                $("body").html(response.responseText);
+            } else {
+                er = "\"" + response.responseText + "\"";
+                $("#addFormErrorText" + '@Model.TableId').text(er);
+            }
+        }
+        $("#@Model.concatWithId("divProcessing")").hide();
+        $("#addFormError" + '@Model.TableId').show();
+    }
+    </script>
+
+</head>
+<body>
+    <div id="@Model.concatWithId("addFormError")" class="alert alert-dismissable alert-danger" hidden="hidden">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4><strong id="@Model.concatWithId("addFormErrorHeading")"></strong></h4>
+        <div id="@Model.concatWithId("addFormErrorText")"></div>
+    </div>
+    <div id="@Model.concatWithId("addFormMessage")" class="alert alert-dismissable alert-success" hidden="hidden">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4><strong id="@Model.concatWithId("addFormMessageHeading")"></strong></h4>
+        <p id="@Model.concatWithId("addFormMessageText")"></p>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div id="@Model.concatWithId("divProcessing")" class="row text-center" hidden="hidden">
+                        <p><img src="../../Content/images/ajax-loader.gif">@Resources.Resources.Processing</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <button type="button" id="@Model.concatWithId("addObject")" class="btn btn-success btn-xs">
+                                <span class="glyphicon glyphicon-floppy-save"></span>
+                            </button>
+                            <button id="@Model.TableUpdateFunctionName" type="button" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </button>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" id="@Model.concatWithId("objectSearch")" name="objectSearch" />
+                        </div>
+                        <div id="formResult" class="col-sm-6">
+
+                        </div>
+                        <div class="col-sm-4" hidden>
+                            @Html.TextBoxFor(m => m.AddID, new { @id = @Model.concatWithId("AddID") })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @{Html.RenderPartial(@Model.TablePartialView, new TableAjaxViewModel(@Model.TableId) {
+              AjaxRequest = @Model.TableAjaxRequest,
+              DeleteAction = @Model.TableDeleteAction,
+              DeleteController = @Model.TableDeleteController,
+              DeleteText = @Model.TableDeleteText,
+              DeleteConfirmMessage = @Model.TableDeleteConfirmMessage,
+              ServerProcessing = @Model.TableServerProcessing,
+              RefreshFunction = @Model.TableUpdateFunctionName,
+              Params = Model.Params
+          });}
+    </div>
+</body>
+
+</html>

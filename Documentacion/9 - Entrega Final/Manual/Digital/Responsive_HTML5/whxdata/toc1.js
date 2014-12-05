@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc.js\"  name=\"1. Introducción\" url=\"PENATES_INVENTORY_SYSTEM_new.htm#1_Introducci_n\"><item name=\"1.A. Beneficios\" url=\"PENATES_INVENTORY_SYSTEM_new.htm#1_A_Beneficiosbc-1\" /><item name=\"1.B. Características del Sistema\" url=\"PENATES_INVENTORY_SYSTEM_new.htm#1_B_Caracter_sticas_delbc-2\" /></data>";

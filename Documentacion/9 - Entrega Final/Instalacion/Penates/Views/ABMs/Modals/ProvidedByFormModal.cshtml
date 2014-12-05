@@ -1,0 +1,235 @@
+﻿@model Penates.Models.ViewModels.Forms.ProvidedByViewModel
+@using Penates.Helpers
+
+@{
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-modal-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/ABMs/calculateSizes.js"></script>
+    <script type="text/javascript" title="Delete Confirm">
+    $(document).ready(function () {
+        $('#Delete').click(function () {
+            if (confirm('@String.Format(Resources.Messages.SureToUnassign, Resources.Resources.SupplierWArt, Model.ProductName)')) {
+                var ur = $(this).data('url');
+                var param = {};
+                var params = [];
+                var p = '@Model.ProductID';
+                param = {
+                    name: "ID",
+                    value: p
+                }
+                params.push(param);
+                p = '@Model.SupplierID';
+                param = {
+                    name: "deleteID",
+                    value: p
+                }
+                params.push(param);
+                window['@Model.concatWithID("modalFormAjax")'](ur, params);
+            }
+        });
+    });
+    </script>
+
+    <script type="text/javascript" title="FormAjax">
+    $(document).ready(function () {
+        $("#" + "@Model.concatWithID("modalSave")").click(function () {
+            var params = $("#" + '@Model.concatWithID("modalForm")' + " :input").serialize() + "&ViewId=" + '@Model.ViewId';
+            window['@Model.concatWithID("modalFormAjax")']('@Url.Action("Save", "ProvidedByForm")', params);
+        });
+
+        $('@Model.getJqueryID("modalCancel")').click(function () {
+            $('@Model.getJqueryID("modal")').modal("hide");
+        });
+    });
+</script>
+
+    <script type="text/javascript" title="AjaxCall">
+    eval("var " + '@Model.concatWithID("modalFormAjax")');
+    @Model.concatWithID("modalFormAjax") = function(ur, params){
+            $.ajax({
+                type: "POST",
+                url: ur,
+                data: params,
+                beforeSend : function(){
+                    $("@Model.getJqueryID("formProcessing")").show();
+                },
+                success: function (response) {
+                    if (typeof @Model.concatWithID("formSubmitSuccess") == 'undefined' || !$.isFunction(@Model.concatWithID("formSubmitSuccess"))) {
+                        var message = response.title;
+                        $("@Model.getJqueryID("formProcessing")").hide();
+                        message = message + ": " + response.message;
+                        alert(message);
+                        $('@Model.getJqueryID("modal")').modal("hide");
+                    }else{
+                        $("@Model.getJqueryID("formProcessing")").hide();
+                        window['@Model.concatWithID("formSubmitSuccess")'](response.title, response.message);
+                    }
+            },
+            error: function (obj, textStatus, errorThrown) {
+                if(obj.status == 550){
+                    $('@Model.getJqueryID("modalContent")').empty();
+                    $('@Model.getJqueryID("modalContent")').html(obj.responseText);
+                }else{
+                    var m = '<button type="button" class="close" data-dismiss="alert">×</button>\n';
+                    m = m + '<h4><strong>' + errorThrown + '</strong></h4>';
+                    m = m + '<p>' + obj.responseText + '</p>';
+                    $('@Model.getJqueryID("addFormErrorText")').html(m);
+                    $('@Model.getJqueryID("addFormErrorText")').show();
+                }
+            }
+        });
+    }
+    </script>
+</head>
+<body>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">@Html.Resource("Title")</h4>
+    </div>
+    <div class="modal-body">
+        <div id="@Model.concatWithID("addFormErrorText")" class="alert alert-dismissable alert-danger" hidden="hidden">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4><strong id="@Model.concatWithID("addFormErrorHeading")"></strong></h4>
+            <div id="@Model.concatWithID("addFormErrorText")"></div>
+        </div>
+        <div id="@Model.concatWithID("formProcessing")" class="row text-center" hidden="hidden">
+            <p><img src="../../Content/images/ajax-loader.gif">@Resources.Resources.Processing</p>
+        </div>
+        <div id="@Model.concatWithID("modalForm")" class="form-horizontal">
+            @Html.ValidationMessageFor(m => m.error)
+            <div class="form-group">
+                <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.ProductID):</label>
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.ProductID, new { disabled = "disabled", @class = "form-control" })
+                    <div class="form-group" hidden>
+                        @Html.TextBoxFor(m => m.ProductID, new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ProductID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.Barcode):</label>
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.Barcode, new { disabled = "disabled", @class = "form-control" })
+                    <div class="form-group" hidden>
+                        @Html.TextBoxFor(m => m.Barcode, new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Barcode)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.ProductName):</label>
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.ProductName, new { disabled = "disabled", @class = "form-control" })
+                    <div class="form-group" hidden>
+                        @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ProductName)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.SupplierID):</label>
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.SupplierID, new { disabled = "disabled", @class = "form-control" })
+                    <div class="form-group" hidden>
+                        @Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.SupplierID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.SupplierName):</label>
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.SupplierName, new { disabled = "disabled", @class = "form-control" })
+                    <div class="form-group" hidden>
+                        @Html.TextBoxFor(m => m.SupplierName, new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.SupplierName)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.PurchasePrice):</label>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        @Html.TextBoxFor(m => m.PurchasePrice, new { @class = "form-control form-number-input", required = "required" })
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    @Html.ValidationMessageFor(m => m.PurchasePrice)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.ItemsPerBox):</label>
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(m => m.ItemsPerBox, new { required = "required", @class = "form-control form-number-input" })
+                    @Html.ValidationMessageFor(m => m.ItemsPerBox)
+                </div>
+            </div>
+            <!-- Size Info -->
+            <fieldset id="product-form-sizeinfo" name="product-form-sizeinfo">
+                <legend>@Resources.FormsResources.SizeInfo:</legend>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.Width):</label>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.Width, "{0:F2}", new { @id = @Model.concatWithID("Width"), @class = "form-control form-number-input", required = "required", onchange = "calculateSizeByParamID(\"" + @Model.concatWithID("Size") + "\", \"" + @Model.concatWithID("Width") + "\", \"" + @Model.concatWithID("Depth") + "\", \"" + @Model.concatWithID("Height") + "\")" })
+                            <span class="input-group-addon">cm</span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Width)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.Depth):</label>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.Depth, "{0:F2}", new { @id = @Model.concatWithID("Depth"), @class = "form-control form-number-input", required = "required", onchange = "calculateSizeByParamID(\"" + @Model.concatWithID("Size") + "\", \"" + @Model.concatWithID("Width") + "\", \"" + @Model.concatWithID("Depth") + "\", \"" + @Model.concatWithID("Height") + "\")" })
+                            <span class="input-group-addon">cm</span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Depth)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.Height):</label>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.Height, "{0:F2}", new { @id = @Model.concatWithID("Height"), @class = "form-control form-number-input", required = "required", onchange = "calculateSizeByParamID(\"" + @Model.concatWithID("Size") + "\", \"" + @Model.concatWithID("Width") + "\", \"" + @Model.concatWithID("Depth") + "\", \"" + @Model.concatWithID("Height") + "\")" })
+                            <span class="input-group-addon">cm</span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Height)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.Size):</label>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.Size, "{0:F2}", new { @id = @Model.concatWithID("Size"), @class = "form-control form-number-input", disabled = "disabled", required = "required" })
+                            <span class="input-group-addon">cm3</span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Size)
+                    </div>
+                </div><br>
+            </fieldset>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="btn-toolbar">
+            <button type="button" class="btn btn-success" id="@Model.concatWithID("modalSave")">@Resources.FormsResources.Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="@Model.concatWithID("modalCancel")">@Resources.FormsResources.Cancel</button>
+            @if (@Model.edit) {
+                <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("UnassignSupplier", "ProvidedByForm", new { id = Model.SupplierID })">@Resources.FormsResources.Delete</button>
+                @Html.ActionLink(@Html.Resource("ViewProduct"), "ProductFormUpdate", "Forms", new { ProductID = Model.ProductID }, new { @class = "btn btn-default"})
+                @Html.ActionLink(@Html.Resource("ViewSupplier"), "FormEdit", "SupplierForms", new { id = Model.SupplierID }, new { @class = "btn btn-default"})
+            }
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+﻿Aqui van excepciones de Reglas de Negocio

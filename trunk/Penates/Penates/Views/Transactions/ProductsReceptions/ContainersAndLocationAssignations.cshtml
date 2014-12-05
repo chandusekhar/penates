@@ -1,0 +1,137 @@
+﻿@model Penates.Models.ViewModels.Transactions.ProductsReceptions.ContainersAndLocationAssignationModel
+@{
+    ViewBag.Title = "ContainersAndLocationAssignation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/forms/images-sizes.css" rel="stylesheet" /> <!--Para hacer resize de las Imagenes-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>@Html.Resource("Title")</h2>
+            @if (@Model.Message != null && @Model.Error != null && @Model.Message != "")
+            {
+                if (@Model.Error == true)
+                {
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Model.Message
+                    </div>
+                }
+            }
+
+            <form class="form-horizontal" action="@Url.Action("RequestContainers", "ProductsReceptions")" method="get">
+                <fieldset>
+                    <div class="panel panel-default">
+                        @for (int i = 0; i < Model.productsAssignations.Count; i++)
+                        {
+                           if(!Model.productsAssignations[i].IsTransitory)
+                           {     
+                            <div class="panel-body">
+                                <div class="row">                                  
+                                    <h3><b>@Model.productsAssignations[i].ProductName</b></h3>
+                                    <fieldset>
+                                        <legend>@Html.Resource("ContainerTitle")</legend>
+                                        <p class="lead">@String.Format(@Html.Resource("ContainerMessage"), Model.productsAssignations[i].ContainerTypeDescription, Model.productsAssignations[i].ContainerID)</p>
+                                    </fieldset>
+                                    <br/>
+
+                                    <fieldset>
+                                        <legend>@Html.Resource("BoxesQuantityTitle")</legend>
+                                        <p class="lead">@String.Format(@Html.Resource("BoxesQuantityMessage"), Model.productsAssignations[i].BoxesQuantity)</p>
+                                        <br />
+                                        <h3>@Html.Resource("BoxesIdsTitle")</h3>
+                                        <p class="lead">@Html.Resource("BoxesIdsMessage")</p>
+                                        <ul>
+                                            @foreach (var boxId in Model.productsAssignations[i].BoxesID)
+                                            {
+                                                <li>@boxId</li>
+                                            }
+                                        </ul>
+                                    </fieldset>
+                                    <br />
+                                    <fieldset>
+                                        <legend>@Html.Resource("LocationTitle")</legend>
+                                        <p class="lead">@Html.Resource("LocationMessage"):</p>
+                                        <ul>
+                                            <li><b>@Html.Resource("Deposit")</b>: @Html.DisplayTextFor(x => x.productsAssignations[i].ContainerLocation.DepositDescription)</li>
+                                            <li><b>@Html.Resource("Sector")</b>:@Html.DisplayTextFor(x => x.productsAssignations[i].ContainerLocation.SectorDescription)</li>
+                                            <li><b>@Html.Resource("Hall")</b>: @Html.DisplayTextFor(x => x.productsAssignations[i].ContainerLocation.HallDescription)</li>
+                                            <li><b>@Html.Resource("Rack")</b>: @Html.DisplayTextFor(x => x.productsAssignations[i].ContainerLocation.RackDescription)</li>
+                                            <li><b>@Html.Resource("ShelfNumber")</b>: @Html.DisplayTextFor(x => x.productsAssignations[i].ContainerLocation.ShelfNumber)</li>
+                                            <li><b>@Html.Resource("ShelfDivisionCode")</b>: @Html.DisplayTextFor(x => x.productsAssignations[i].ContainerLocation.ShelfDivisionCode)</li>
+                                        </ul>
+                                    </fieldset>        
+                                    <br />                                        
+                                </div>
+                            </div>
+                           }
+                           else
+                           {
+                               <div class="panel-body">
+                                <div class="row">                                  
+                                    <h3><b>@Model.productsAssignations[i].ProductName</b></h3>
+                                    <fieldset>
+                                        <legend>@Html.Resource("TransitoryTitle")</legend>
+                                        <p class="lead">@Html.Resource("TransitoryMessage")</p>
+                                    </fieldset>
+                                    <br/>
+
+                                    <fieldset>
+                                        <legend>@Html.Resource("BoxesQuantityTitle")</legend>
+                                        <p class="lead">@String.Format(@Html.Resource("TransitoryBoxesQuantityMessage"), Model.productsAssignations[i].BoxesQuantity)</p>
+                                        <br />
+                                        <h3>@Html.Resource("BoxesIdsTitle")</h3>
+                                        <p class="lead">@Html.Resource("BoxesIdsMessage")</p>
+                                        <ul>
+                                            @foreach (var boxId in Model.productsAssignations[i].BoxesID)
+                                            {
+                                                <li>@boxId</li>
+                                            }
+                                        </ul>
+                                    </fieldset>
+                                    <br />
+                                    <fieldset>
+                                        <legend>@Html.Resource("LocationTitle")</legend>
+                                        <p class="lead">@Html.Resource("LocationMessage"):</p>
+                                        <ul>
+                                            <li><b>@Html.Resource("Deposit")</b>: @Html.DisplayTextFor(x => x.productsAssignations[i].ContainerLocation.DepositDescription)</li>                                            
+                                        </ul>
+                                    </fieldset>        
+                                    <br />                                        
+                                </div>
+                            </div>
+                           } 
+                        }
+                  </div>
+                </fieldset>
+                <fieldset><legend> </legend></fieldset>
+                <div class="btn-toolbar center-block">
+                    @Html.ActionLink(@Resources.FormsResources.Ok, "Index", "ProductsReceptions", null, new { @class = "btn btn-primary", @id = "Ok" })
+                </div>
+            </form>
+            </div>
+        </div>
+</body>
+</html>

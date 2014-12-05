@@ -1,0 +1,142 @@
+﻿@model Penates.Models.ViewModels.Transactions.OrderViewModel
+@using Penates.Helpers
+
+@{
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>@Html.Resource("Title")</title>
+    <meta charset="utf-8">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-modal-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-extension.css" rel="stylesheet" />
+
+    <script src="~/Scripts/Plugins/autocomplete.js"></script>
+    <script src="~/Scripts/Plugins/ajaxSubmit.js"></script>
+    <script type="text/javascript" title="Datepicker">
+        $(document).ready(function(){
+            $("#OrderDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showOn: "button",
+                buttonImage: "@Url.Content("Images/calendar_icon.png")",
+                buttonImageOnly: true
+            });
+            $("#OrderDate").datepicker("option", "showAnim", "fold");
+            $("#OrderDate").datepicker("setDate", new Date());
+        });
+    </script>
+
+    <script type="text/javascript" title="Autocomplete">
+        $(document).ready(function () {
+            $("#SupplierName").autocompletar({
+                url: '@Url.Action("SupplierAutocomplete", "OrdersABM")',
+                seleccion: function (event, ui) {
+                    $("#SupplierName").val(ui.item.label);
+                    $('#SupplierID2').val(ui.item.id.SupplierID);
+                    $('#SupplierID').val(ui.item.id.SupplierID);
+                    return false;
+                },
+                append: '@Model.getJqueryID("modal-dialog")'
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="SubmitForm">
+    $(document).ready(function () {
+        $('@Model.getJqueryID("orderHSave")').click(function () {
+            $("#orderModalForm").enviar({
+                url: '@Url.Action("Save", "OrdersABM")',
+                beforeSend : function(){
+                    $("@Model.getJqueryID("formProcessing")").modal("show");
+                },
+                success: function (response) {
+                    response.model.OrderDate = response.date;
+                    var p = $.param(response.model);
+                    window.location.href = '@Url.Action("Index","OrderForm")?' + p;
+                },
+                error: function (obj, textStatus, errorThrown) {
+                    $("@Model.getJqueryID("formProcessing")").modal("hide");
+                    if (obj.status == 550) {
+                        $('@Model.getJqueryID("modalContent")').empty();
+                        $('@Model.getJqueryID("modalContent")').replaceWith(obj.responseText);
+                    } else {
+                        var m = '<button type="button" class="close" data-dismiss="alert">×</button>\n';
+                        m = m + '<h4><strong>' + errorThrown + '</strong></h4>';
+                        m = m + '<p>' + obj.responseText + '</p>';
+                        $('@Model.getJqueryID("addFormErrorText")').html(m);
+                        $('@Model.getJqueryID("addFormErrorText")').show();
+                    }
+                }
+            });
+        });
+    });
+    </script>
+
+</head>
+<body>
+    <div id="@Model.concatWithID("modal-dialog")" class="modal-dialog">
+        <div id="@Model.concatWithID("modalContent")" class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">@Html.Resource("Title")</h4>
+            </div>
+            <div class="modal-body">
+                <div id="@Model.concatWithID("formProcessing")" class="row text-center" hidden="hidden">
+                    <p><img src="../../Content/images/ajax-loader.gif">@Resources.Resources.Processing</p>
+                </div>
+                <div id="@Model.concatWithID("addFormErrorText")" class="alert alert-dismissable alert-danger" hidden="hidden">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h4><strong id="@Model.concatWithID("addFormErrorHeading")"></strong></h4>
+                    <div id="@Model.concatWithID("addFormErrorText")"></div>
+                </div>
+                <div id="orderModalForm" class="form-horizontal">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationMessageFor(m => m.Error)
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.OrderID):</label>
+                        <div class="col-lg-6">
+                            @Html.TextBoxFor(m => m.OrderID, new { required = "required", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OrderID)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.SupplierID):</label>
+                        <div class="col-lg-6">
+                            @Html.TextBoxFor(m => m.SupplierID, new { @id = "SupplierID2" ,required = "required", @class = "form-control", disabled = "disabled" })
+                            <div class="form-group" hidden>
+                                @Html.TextBoxFor(m => m.SupplierID, new { @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.SupplierID)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.SupplierName):</label>
+                        <div class="col-lg-6">
+                            @Html.TextBoxFor(m => m.SupplierName, new { required = "required", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SupplierName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">* @Html.DisplayNameFor(m => m.OrderDate):</label>
+                        <div class="col-lg-6">
+                            @Html.TextBoxFor(m => m.OrderDate, new { required = "required", @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.OrderDate)
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-toolbar">
+                    <button type="button" class="btn btn-success" id="@Model.concatWithID("orderHSave")">@Resources.FormsResources.Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.FormsResources.Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

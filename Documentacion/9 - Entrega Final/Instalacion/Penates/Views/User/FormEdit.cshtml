@@ -1,0 +1,151 @@
+﻿@model Penates.Models.ViewModels.Users.UserViewModel
+@{
+    ViewBag.Title = @Html.Resource("Title");
+}
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-background.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-extension.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Delete').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToDelete, Resources.Resources.UserWArt, Model.FileNumber)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+
+            $('#Deactivate').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToDeactivate, Resources.Resources.UserWArt, Model.FileNumber)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+
+            $('#Activate').click(function () {
+                if (confirm('@String.Format(Resources.Messages.SureToActivate, Resources.Resources.UserWArt, Model.FileNumber)')) {
+                    window.location.href = $(this).data('url');
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" title="Save Form Data">
+    $(document).ready(function () {
+        $(window).on('beforeunload', function () {
+            sessionStorage.setItem('FileNumber', $('#FileNumber').val());
+            sessionStorage.setItem('FirstName', $('#FirstName').val());
+            sessionStorage.setItem('LastName', $('#LastName').val());
+            sessionStorage.setItem('UserName', $('#UserName').val());
+            sessionStorage.setItem('Address', $('#Address').val());
+            sessionStorage.setItem('Email', $('#Email').val());
+            sessionStorage.setItem('Telephone', $('#Telephone').val());
+        });
+    });
+    </script>
+
+    <script type="text/javascript" title="Load Form Data">
+    $(document).ready(function () {
+        var aux = sessionStorage.getItem('FileNumber');
+        if (aux != null && aux != "") $('#FileNumber').val(aux);
+        aux = sessionStorage.getItem('FirstName');
+        if (aux != null && aux != "") $('#FirstName').val(aux);
+        aux = sessionStorage.getItem('LastName');
+        if (aux != null && aux != "") $('#LastName').val(aux);
+        aux = sessionStorage.getItem('UserName');
+        if (aux != null && aux != "") $('#UserName').val(aux);
+        aux = sessionStorage.getItem('Address');
+        if (aux != null && aux != "") $('#Address').val(aux);
+        aux = sessionStorage.getItem('Email');
+        if (aux != null && aux != "") $('#Email').val(aux);
+        aux = sessionStorage.getItem('Telephone');
+        if (aux != null && aux != "") $('#Telephone').val(aux);
+    });
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+
+        @using (Html.BeginForm("Save", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.FileNumber):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.FileNumber, new { disabled = "disabled", @class = "form-control" })
+                        <div class="form-group" hidden>
+                            @Html.TextBoxFor(m => m.FileNumber, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.FileNumber)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">* @Html.DisplayNameFor(m => m.FirstName):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.FirstName, new { required = "required", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">* @Html.DisplayNameFor(m => m.LastName):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.LastName, new { required = "required", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.UserName):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.UserName, new { disabled = "disabled", @class = "form-control" })
+                        <div class="form-group" hidden>
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.Address):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">* @Html.DisplayNameFor(m => m.Email):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Email, new { required = "required", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.Telephone):</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.LastLoginDate):</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(m => m.LastLoginDate, new { disabled = "disabled", @class = "form-control" })
+                        <div class="form-group" hidden>
+                            @Html.TextBoxFor(m => m.LastLoginDate, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+            <div class="btn-toolbar">
+                <button type="submit" class="btn btn-success" id="Save">@Resources.FormsResources.Save</button>
+                @Html.ActionLink(@Resources.FormsResources.Cancel, "Index", "User", null, new { @class = "btn btn-default", @id = "Cancel" })
+                @if (@Model.Active) {
+                    <button type="button" class="btn btn-warning" id="Deactivate" data-url="@Url.Action("Activate", "User", new { UserID = Model.FileNumber })">@Resources.FormsResources.Deactivate</button>
+                } else {
+                    <button type="button" class="btn btn-warning" id="Activate" data-url="@Url.Action("Activate", "User", new { UserID = Model.FileNumber })">@Resources.FormsResources.Activate</button>
+                }
+                @Html.ActionLink(@Resources.Menu.ChangeUserPassword, "ChangePassword", "User", new { UserName = Model.UserName}, new { @class = "btn btn-default", @id = "Cancel" })
+                <button type="button" class="btn btn-danger" id="Delete" data-url="@Url.Action("Delete", "User", new { UserID = Model.FileNumber })">@Resources.FormsResources.Delete</button>
+                @Html.ActionLink(@Resources.Menu.AssignRoles, "AssignRoles", "User", new { FileNumber = Model.FileNumber }, new { @class = "btn btn-info" })
+                @Html.ActionLink(@Resources.Menu.AssignToDistributionCenter, "AssignDC", "User", new { FileNumber = Model.FileNumber }, new { @class = "btn btn-info" })
+            </div>
+        }
+    </div>
+</body>
